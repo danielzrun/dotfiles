@@ -1,0 +1,20 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# Brewfile hash: {{ include "dot_config/brew/Brewfile" | sha256sum }}
+
+if command -v brew >/dev/null 2>&1; then
+    echo "📲 Brewfile changed. Syncing Homebrew packages..."
+    brew bundle --file={{ .chezmoi.sourceDir }}/dot_config/brew/Brewfile 
+else
+    echo "❌ Homebrew not found. Skipping package installation."
+fi
+
+# 检查是否安装了 Oh My Zsh
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  echo "Installing Oh My Zsh..."
+  # 使用 --unattended 避免安装完成后直接进入 zsh 导致脚本中断
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+{{- end -}}

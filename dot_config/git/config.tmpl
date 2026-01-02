@@ -1,0 +1,44 @@
+# ~/.local/share/chezmoi/dot_config/git/config.tmpl
+
+[user]
+    name = "Daniel" # 替换为你的名字
+
+    # 逻辑判断：如果是公司电脑，用工作邮箱；否则用个人邮箱
+    # 这里我们用 hostname 来判断，你需要把 "work-laptop" 换成你公司电脑的主机名
+    {{- if eq .chezmoi.hostname "work-laptop" }}
+    email = "daniel.zrun@gmail.com"
+    {{- else }}
+    email = "daniel123.xiang@gmail.com"
+    {{- end }}
+
+[core]
+    # 使用 vim 或 nvim 作为编辑器
+    editor = vim
+    # 全局忽略文件 (下面会创建)
+    excludesfile = ~/.config/git/ignore
+    # 解决 macOS 下文件名大小写不敏感的问题
+    ignorecase = false
+
+[init]
+    # 新建仓库默认分支叫 main
+    defaultBranch = main
+
+[color]
+    ui = true
+
+[alias]
+    # 常用缩写，提升效率
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[pull]
+    rebase = true
+
+# macOS 凭证助手 (不用每次输 GitHub 密码)
+{{- if eq .chezmoi.os "darwin" }}
+[credential]
+    helper = osxkeychain
+{{- end }}

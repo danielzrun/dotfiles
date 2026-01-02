@@ -1,0 +1,55 @@
+# ~/.config/starship.toml
+
+# 超时设置 (避免卡顿)
+command_timeout = 1000
+
+# 提示符格式
+format = """
+$directory\
+$git_branch\
+$git_status\
+$python\
+$golang\
+$docker_context\
+$cmd_duration\
+$line_break\
+$character"""
+
+# 目录截断 (只显示最后 3 层，避免路径过长)
+[directory]
+truncation_length = 3
+style = "bold blue"
+
+# Git 设置
+[git_branch]
+style = "bold purple"
+symbol = " "
+
+[git_status]
+style = "red"
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+up_to_date = "✓"
+untracked = "🤷"
+stashed = "📦"
+modified = "📝"
+
+# 语言环境 (只在对应项目目录下显示)
+[python]
+symbol = "🐍 "
+style = "yellow"
+
+[golang]
+symbol = "🐹 "
+style = "cyan"
+
+[docker_context]
+symbol = "🐳 "
+style = "blue dimmed"
+
+# 命令执行时间 (超过 2秒 显示)
+[cmd_duration]
+min_time = 2000
+style = "yellow"

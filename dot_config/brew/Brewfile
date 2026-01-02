@@ -1,0 +1,22 @@
+# ~/.local/share/chezmoi/dot_config/brew/Brewfile
+
+# 声明 Taps
+tap "homebrew/cask-fonts"
+
+# 核心工具 (Modern Unix)
+brew "ripgrep"
+brew "zoxide"
+brew "starship"
+brew "bat"
+brew "eza"
+brew "fd"
+brew "fzf"
+brew "git"
+brew "age"
+
+# macOS App / 字体
+cask "font-jetbrains-mono-nerd-font"
+
+# 你还可以加其他的，比如:
+# cask "visual-studio-code"
+# cask "iterm2"
