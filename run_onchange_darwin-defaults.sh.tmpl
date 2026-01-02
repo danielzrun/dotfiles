@@ -1,0 +1,86 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+
+# ==============================================
+# macOS Defaults for Developers
+# ==============================================
+
+# 这一行是哈希校验：只有当你修改了这个文件，Chezmoi 才会重新运行这些命令
+# hash: {{ include (joinPath .chezmoi.sourceDir "run_onchange_darwin-defaults.sh.tmpl") | sha256sum }}
+
+echo "🔧 Setting macOS defaults..."
+
+# Close any open System Preferences panes, to prevent them from overriding settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# ------------------------------------------------------------------------------
+# 1. 键盘与输入 (提升代码输入效率)
+# ------------------------------------------------------------------------------
+
+# 按键重复速度：设置到最快 (普通设置里拖不到这么快)
+# 这对 Vim/移动光标非常重要
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+# 禁用自动更正 (写代码时不需要它自作聪明)
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# ------------------------------------------------------------------------------
+# 2. Finder (文件管理)
+# ------------------------------------------------------------------------------
+
+# 总是显示文件扩展名 (后端开发必须，分清 .ts 和 .tsx)
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# 总是显示隐藏文件 (可选，如果你经常操作 .git 或 .config 目录建议开启)
+# defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# 在标题栏显示完整路径
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# 默认搜索范围：当前文件夹 (而不是搜索这台 Mac)
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# 禁用 .DS_Store 在网络盘(SMB/CIFS)生成 (特别是连公司 NAS 时)
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# ------------------------------------------------------------------------------
+# 3. Dock (桌面空间优化)
+# ------------------------------------------------------------------------------
+
+# 自动隐藏 Dock (增加屏幕纵向代码阅读空间)
+defaults write com.apple.dock autohide -bool true
+
+# 移除自动隐藏的动画延迟 (光标碰到边缘瞬间显示，零等待)
+defaults write com.apple.dock autohide-delay -float 0
+
+# 最小化效果：缩放 (Scale) 比 神奇效果 (Genie) 更快且不占用 CPU
+defaults write com.apple.dock mineffect -string "scale"
+
+# ------------------------------------------------------------------------------
+# 4. 其他细节
+# ------------------------------------------------------------------------------
+
+# 截图默认保存为 PNG (高质量)
+defaults write com.apple.screencapture type -string "png"
+
+# 禁用“你确定要打开这个应用吗？”的隔离提示 (自行斟酌，对下载的工具很有用)
+# defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# 避免在网络卷上创建 .DS_Store 文件
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# ------------------------------------------------------------------------------
+# 5. 重启相关服务让设置生效
+# ------------------------------------------------------------------------------
+
+echo "🔄 Restarting apps to apply changes..."
+for app in "Dock" "Finder" "SystemUIServer"; do
+    killall "${app}" > /dev/null 2>&1
+done
+
+echo "✅ macOS settings applied!"
+
+{{- end -}}
