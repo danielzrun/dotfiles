@@ -1,0 +1,10 @@
+gui:
+  theme:
+    activeBorderColor:
+      - cyan
+      - bold
+
+git:
+  pagers:
+    - pager: delta --dark --paging=never
+      colorArg: always

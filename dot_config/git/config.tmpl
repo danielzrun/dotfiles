@@ -1,10 +1,9 @@
-# ~/.local/share/chezmoi/dot_config/git/config.tmpl
+# =============================================================================
+# Git Configuration
+# =============================================================================
 
 [user]
-    name = "Daniel" # 替换为你的名字
-
-    # 逻辑判断：如果是公司电脑，用工作邮箱；否则用个人邮箱
-    # 这里我们用 hostname 来判断，你需要把 "work-laptop" 换成你公司电脑的主机名
+    name = "Daniel"
     {{- if eq .chezmoi.hostname "work-laptop" }}
     email = "daniel.zrun@gmail.com"
     {{- else }}
@@ -12,32 +11,90 @@
     {{- end }}
 
 [core]
-    # 使用 vim 或 nvim 作为编辑器
-    editor = vim
-    # 全局忽略文件 (下面会创建)
+    editor = nvim
     excludesfile = ~/.config/git/ignore
-    # 解决 macOS 下文件名大小写不敏感的问题
     ignorecase = false
+    pager = delta
 
 [init]
-    # 新建仓库默认分支叫 main
     defaultBranch = main
 
 [color]
     ui = true
 
 [alias]
-    # 常用缩写，提升效率
+    # Basic shortcuts
     co = checkout
     br = branch
     ci = commit
     st = status
+
+    # Enhanced log
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+
+    # Quick actions
+    aa = add --all
+    cm = commit -m
+    cam = commit -am
+    amend = commit --amend --no-edit
+    undo = reset --soft HEAD~1
+
+    # Branch management
+    branches = branch -a
+    tags = tag -l
+    remotes = remote -v
+
+    # Status and diff
+    s = status -s
+    d = diff
+    dc = diff --cached
+
+    # Push/pull
+    p = pull
+    ps = push
+    pf = push --force-with-lease
+
+    # Stash
+    stash-all = stash save --include-untracked
+    unstash = stash pop
+
+    # Cleanup
+    clean-branches = "!git branch --merged | grep -v '\\*\\|main\\|master\\|develop' | xargs -n 1 git branch -d"
+
+    # Search
+    find = "!git ls-files | grep -i"
+    grep = grep -Ii
+
+    # History
+    history = log --follow -p --
+    contributors = shortlog --summary --numbered
 
 [pull]
     rebase = true
 
-# macOS 凭证助手 (不用每次输 GitHub 密码)
+[delta]
+    navigate = true
+    light = false
+    line-numbers = true
+    side-by-side = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+    tool = difftastic
+
+[difftool]
+    prompt = false
+
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
+
+[interactive]
+    diffFilter = delta --color-only
+
 {{- if eq .chezmoi.os "darwin" }}
 [credential]
     helper = osxkeychain

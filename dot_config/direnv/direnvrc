@@ -1,0 +1,97 @@
+# =============================================================================
+# Direnv Global Configuration
+# =============================================================================
+# This file is loaded before .envrc files
+# Docs: https://direnv.net/man/direnv.toml.1.html
+
+# =============================================================================
+# Python Environment
+# =============================================================================
+# Auto-detect and activate Python virtual environments
+layout_python() {
+    local python=${1:-python3}
+
+    # Check for uv project (pyproject.toml with uv)
+    if [[ -f "pyproject.toml" ]] && grep -q 'requires-python' pyproject.toml; then
+        log_status "Using uv environment"
+        export VIRTUAL_ENV=$(uv venv --quiet --python "$python" 2>/dev/null || echo ".venv")
+        export UV_PROJECT_ENVIRONMENT="$VIRTUAL_ENV"
+        PATH_add "$VIRTUAL_ENV/bin"
+        return
+    fi
+
+    # Fallback to standard venv
+    if [[ ! -d ".venv" ]]; then
+        log_status "Creating Python virtual environment"
+        $python -m venv .venv
+    fi
+
+    log_status "Activating Python virtual environment"
+    source .venv/bin/activate
+}
+
+# Alias for convenience
+layout_uv() {
+    layout_python "$@"
+}
+
+# =============================================================================
+# Node.js / React Environment
+# =============================================================================
+# Auto-detect and use Node.js versions
+layout_node() {
+    local node_version=${1:-}
+
+    # Check for .node-version file
+    if [[ -z "$node_version" ]] && [[ -f ".node-version" ]]; then
+        node_version=$(cat .node-version)
+    fi
+
+    # Check for .nvmrc file
+    if [[ -z "$node_version" ]] && [[ -f ".nvmrc" ]]; then
+        node_version=$(cat .nvmrc)
+    fi
+
+    # Check for package.json engines.node
+    if [[ -z "$node_version" ]] && [[ -f "package.json" ]]; then
+        node_version=$(jq -r '.engines.node // empty' package.json 2>/dev/null)
+    fi
+
+    # Use system Node.js if no version specified
+    if [[ -z "$node_version" ]]; then
+        log_status "Using system Node.js"
+        return
+    fi
+
+    # Use mise/rtx or asdf if available
+    if command -v mise >/dev/null 2>&1; then
+        log_status "Using mise to manage Node.js $node_version"
+        mise use "node@$node_version"
+    elif command -v asdf >/dev/null 2>&1; then
+        log_status "Using asdf to manage Node.js $node_version"
+        asdf local nodejs "$node_version"
+    else
+        log_status "Node.js version manager not found, using system Node.js"
+    fi
+
+    # Add node_modules/.bin to PATH
+    PATH_add node_modules/.bin
+}
+
+# =============================================================================
+# Global Environment Variables
+# =============================================================================
+# Set common environment variables for all projects
+
+# Python
+export UV_PYTHON_PREFERENCE="only-managed"
+export PYTHON_CONFIGURE_OPTS="--enable-optimizations"
+
+# Node.js
+export NODE_ENV="${NODE_ENV:-development}"
+export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+PATH_add "$NPM_CONFIG_PREFIX/bin"
+
+# React / JavaScript
+export BROWSER="none"  # Prevent auto-opening browser in dev servers
+export FORCE_COLOR=1   # Enable colors in terminals

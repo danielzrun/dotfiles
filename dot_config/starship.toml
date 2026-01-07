@@ -1,55 +1,75 @@
-# ~/.config/starship.toml
+# =============================================================================
+# Starship Prompt Configuration
+# =============================================================================
 
-# 超时设置 (避免卡顿)
-command_timeout = 1000
-
-# 提示符格式
+# Prompt format
 format = """
+$username\
+$hostname\
 $directory\
 $git_branch\
 $git_status\
 $python\
-$golang\
-$docker_context\
 $cmd_duration\
 $line_break\
 $character"""
 
-# 目录截断 (只显示最后 3 层，避免路径过长)
+# Username (only in SSH)
+[username]
+show_always = false
+style_user = "bold yellow"
+format = "[$user]($style) "
+
+# Hostname (only in SSH)
+[hostname]
+ssh_only = true
+style = "bold green"
+format = "on [$hostname]($style) "
+
+# Directory (show last 3 levels)
 [directory]
 truncation_length = 3
-style = "bold blue"
+truncate_to_repo = true
+style = "bold cyan"
+format = "[$path]($style)[$read_only]($read_only_style) "
 
-# Git 设置
+# Git branch
 [git_branch]
 style = "bold purple"
-symbol = " "
+symbol = " "
+format = "on [$symbol$branch]($style) "
 
+# Git status
 [git_status]
 style = "red"
 conflicted = "🏳"
-ahead = "🏎💨"
-behind = "😰"
-diverged = "😵"
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
 up_to_date = "✓"
-untracked = "🤷"
+untracked = "?${count}"
 stashed = "📦"
-modified = "📝"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+format = '([$all_status$ahead_behind]($style) )'
 
-# 语言环境 (只在对应项目目录下显示)
+# Python environment (only shows when .venv directory exists)
 [python]
 symbol = "🐍 "
-style = "yellow"
+style = "yellow bold"
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+detect_folders = [".venv"]
 
-[golang]
-symbol = "🐹 "
-style = "cyan"
-
-[docker_context]
-symbol = "🐳 "
-style = "blue dimmed"
-
-# 命令执行时间 (超过 2秒 显示)
+# Command duration (show if > 2s)
 [cmd_duration]
 min_time = 2000
-style = "yellow"
+style = "bold yellow"
+format = "took [$duration]($style) "
+
+# Prompt character
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+vicmd_symbol = "[←](bold green)"  # Vim normal mode indicator

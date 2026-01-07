@@ -1,0 +1,102 @@
+# =============================================================================
+# .zshrc - Interactive shell configuration
+# =============================================================================
+# Executed for each new interactive shell
+# Used for: aliases, plugins, prompts, key bindings
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Oh My Zsh Configuration
+# -----------------------------------------------------------------------------
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME=""  # Using Starship instead
+
+# Custom completion paths
+if [[ -d "$HOME/.docker/completions" ]]; then
+  fpath=("$HOME/.docker/completions" $fpath)
+fi
+
+# Plugins (order matters!)
+plugins=(
+  git                      # Git aliases and completion
+  vi-mode                  # Vim mode (better than bindkey -v)
+  uv                       # uv completion
+  direnv                   # Per-directory environment variables
+  zoxide                   # Smart directory jumper
+  fzf                      # Fuzzy finder integration
+  zsh-completions          # Additional completions (must be before compinit)
+  zsh-autosuggestions      # Command suggestions
+  fzf-tab                  # FZF integration (must be after compinit, before highlighting)
+  zsh-syntax-highlighting  # Syntax highlighting (MUST be last)
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# -----------------------------------------------------------------------------
+# Shell Options
+# -----------------------------------------------------------------------------
+# History
+HISTSIZE=50000
+SAVEHIST=50000
+HISTFILE="$HOME/.zsh_history"
+
+# Deduplication (keeps .zsh_history text file clean)
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+
+# Write after each command (prevents loss on terminal crash)
+setopt INC_APPEND_HISTORY
+
+# Share history across terminal tabs (works alongside Atuin)
+setopt SHARE_HISTORY
+
+# -----------------------------------------------------------------------------
+# Key Bindings
+# -----------------------------------------------------------------------------
+# Reduce ESC delay for vi-mode (default 0.4s is too slow)
+export KEYTIMEOUT=1
+
+# Keep useful Emacs-style bindings in vi-mode
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-line
+bindkey '^K' kill-line
+bindkey '^U' backward-kill-line
+bindkey '^W' backward-kill-word
+
+# Word navigation with Ctrl + Arrow keys
+bindkey '^[[1;5C' forward-word       # Ctrl + Right Arrow
+bindkey '^[[1;5D' backward-word      # Ctrl + Left Arrow
+
+# Alternative bindings for different terminals
+bindkey '^[^[[C' forward-word        # Alt + Right Arrow
+bindkey '^[^[[D' backward-word       # Alt + Left Arrow
+
+# Option + Arrow keys (macOS Terminal)
+bindkey '^[f' forward-word           # Option + Right Arrow
+bindkey '^[b' backward-word          # Option + Left Arrow
+
+# -----------------------------------------------------------------------------
+# Core Aliases
+# -----------------------------------------------------------------------------
+# Editor
+alias vim="nvim"
+alias vi="nvim"
+alias v="nvim"
+
+# Utils
+alias c="clear"
+alias h="history"
+
+# Git (supplement to Oh My Zsh git plugin)
+alias lg="lazygit"
+
+# -----------------------------------------------------------------------------
+# Module: Python Development
+# -----------------------------------------------------------------------------
+{{ template "zsh/python.zsh" . }}
+
+# -----------------------------------------------------------------------------
+# Module: Modern Unix Tools
+# -----------------------------------------------------------------------------
+{{ template "zsh/modern-tools.zsh" . }}

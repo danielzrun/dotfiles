@@ -1,8 +1,24 @@
+# =============================================================================
+# Global Git Ignore
+# =============================================================================
+
+# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
 ._*
+
+# IDE
 .idea/
 .vscode/
+
+# Editor
 *.swp
+*.swo
+*~
+
+# Secrets
 key.txt
+*.key
+*.pem
+.env.local

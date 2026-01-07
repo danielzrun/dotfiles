@@ -1,22 +1,107 @@
-# ~/.local/share/chezmoi/dot_config/brew/Brewfile
+# =============================================================================
+# Homebrew Bundle - Development Tools
+# =============================================================================
 
-# 声明 Taps
-tap "homebrew/cask-fonts"
+# -----------------------------------------------------------------------------
+# Shell & Prompt
+# -----------------------------------------------------------------------------
+brew "starship"      # Modern prompt
+brew "atuin"         # Shell history sync & search
+brew "carapace"      # Advanced shell completions
+brew "zoxide"        # Smart directory jumper
+brew "fzf"           # Fuzzy finder
+brew "direnv"        # Per-directory environment variables
 
-# 核心工具 (Modern Unix)
-brew "ripgrep"
-brew "zoxide"
-brew "starship"
-brew "bat"
-brew "eza"
-brew "fd"
-brew "fzf"
-brew "git"
-brew "age"
+# -----------------------------------------------------------------------------
+# Modern Unix Replacements
+# -----------------------------------------------------------------------------
+brew "ripgrep"       # Fast code search (grep)
+brew "fd"            # Fast file finder (find)
+brew "bat"           # Syntax-highlighted cat
+brew "eza"           # Modern ls
+brew "sd"            # Modern sed
+brew "procs"         # Modern ps with colors
 
-# macOS App / 字体
-cask "font-jetbrains-mono-nerd-font"
+# -----------------------------------------------------------------------------
+# Git Tools
+# -----------------------------------------------------------------------------
+brew "git"           # Version control
+brew "git-delta"     # Better git diff viewer
+brew "difftastic"    # Structural diff tool (for lazygit)
+brew "gh"            # GitHub CLI
+brew "lazygit"       # Git TUI (Vim keybindings)
 
-# 你还可以加其他的，比如:
-# cask "visual-studio-code"
-# cask "iterm2"
+# -----------------------------------------------------------------------------
+# Docker Tools
+# -----------------------------------------------------------------------------
+brew "lazydocker"    # Docker TUI
+cask "orbstack"      # Fast Docker Desktop alternative
+
+# -----------------------------------------------------------------------------
+# JSON Tools
+# -----------------------------------------------------------------------------
+brew "jaq"           # jq clone in Rust (faster)
+brew "fx"            # Interactive JSON viewer
+brew "jless"         # JSON pager with vim keybindings
+brew "jnv"           # Interactive JSON filter
+
+# -----------------------------------------------------------------------------
+# Data Tools
+# -----------------------------------------------------------------------------
+brew "visidata"      # Terminal spreadsheet viewer
+brew "qsv"           # Fast CSV toolkit
+brew "lnav"          # Log file navigator
+
+# -----------------------------------------------------------------------------
+# HTTP/Network Tools
+# -----------------------------------------------------------------------------
+brew "xh"            # httpie clone in Rust (faster)
+brew "gping"         # Ping with graph
+brew "bore-cli"      # Tunnel localhost to public URL
+
+# -----------------------------------------------------------------------------
+# Development Tools
+# -----------------------------------------------------------------------------
+brew "ast-grep"      # Code search/rewrite by AST
+brew "hyperfine"     # Command-line benchmarking
+brew "tldr"          # Simplified man pages
+
+# -----------------------------------------------------------------------------
+# System Monitoring
+# -----------------------------------------------------------------------------
+brew "btop"          # Modern system monitor
+
+# -----------------------------------------------------------------------------
+# Security
+# -----------------------------------------------------------------------------
+brew "age"           # File encryption
+
+# -----------------------------------------------------------------------------
+# Python Development (uv + FastAPI)
+# -----------------------------------------------------------------------------
+brew "python@3.12"
+brew "uv"            # Fast Python package/project manager (replaces pip/poetry/pyenv)
+brew "ruff"          # Fast Python linter/formatter
+
+# -----------------------------------------------------------------------------
+# Editor / IDE
+# -----------------------------------------------------------------------------
+brew "neovim"        # Modern Vim
+cask "zed"           # Modern high-performance editor
+cask "bruno"         # API testing client (Postman alternative)
+
+# -----------------------------------------------------------------------------
+# Terminal
+# -----------------------------------------------------------------------------
+cask "ghostty"       # GPU-accelerated terminal
+brew "zellij"        # Modern terminal multiplexer (Rust, better UX than tmux)
+
+# -----------------------------------------------------------------------------
+# Fonts
+# -----------------------------------------------------------------------------
+cask "font-lilex-nerd-font"
+
+# -----------------------------------------------------------------------------
+# Productivity Tools
+# -----------------------------------------------------------------------------
+cask "snipaste"      # Screenshot & annotation tool

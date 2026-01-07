@@ -1,0 +1,29 @@
+## Atuin Configuration
+## Docs: https://atuin.sh/docs/config/
+
+## Search
+search_mode = "skim"   # Use skim (fzf-like) search mode
+inline_height = 20     # Lower than default 40 for compact interface
+
+## History
+history_filter = [
+    "^ls.*",
+    "^cd.*",
+    "^clear",
+    "^exit",
+]
+
+## Shell behavior
+exit_mode = "return-query"  # return-original, return-query
+
+## Stats
+stats.common_subcommands = [
+    "cargo",
+    "git",
+    "npm",
+    "yarn",
+    "pnpm",
+    "uv",
+    "kubectl",
+    "docker",
+]
