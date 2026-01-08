@@ -1,7 +1,13 @@
 # ~/.config/chezmoi/chezmoi.toml
+{{- $name := promptStringOnce . "name" "Your name" "daniel" }}
+{{- $email := promptStringOnce . "email" "Email address" "daniel123.xiang@gmail.com" -}}
 
 # Enable age encryption
 encryption = "age"
+
+[data]
+    email = {{ $email | quote }}
+    name = {{ $name | quote }}
 
 [age]
     # Private key file location (for decryption)

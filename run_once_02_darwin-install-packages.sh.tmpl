@@ -3,8 +3,7 @@
 # =============================================================================
 # Homebrew Package Installation
 # =============================================================================
-# Hash check: only runs when Brewfile changes
-# Brewfile hash: {{ include "dot_config/brew/Brewfile" | sha256sum }}
+# This script runs only once on first chezmoi apply
 
 # Sync packages from Brewfile
 echo "📦 Syncing Homebrew packages from Brewfile..."

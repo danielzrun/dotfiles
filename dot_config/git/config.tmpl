@@ -3,12 +3,8 @@
 # =============================================================================
 
 [user]
-    name = "Daniel"
-    {{- if eq .chezmoi.hostname "work-laptop" }}
-    email = "daniel.zrun@gmail.com"
-    {{- else }}
-    email = "daniel123.xiang@gmail.com"
-    {{- end }}
+    name = {{ .name }}
+    email = {{ .email }}
 
 [core]
     editor = nvim

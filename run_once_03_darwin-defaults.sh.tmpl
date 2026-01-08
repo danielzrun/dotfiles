@@ -3,8 +3,7 @@
 # =============================================================================
 # macOS System Defaults for Development
 # =============================================================================
-# Hash check: only runs when this file is modified
-# hash: {{ include (joinPath .chezmoi.sourceDir "run_onchange_darwin-defaults.sh.tmpl") | sha256sum }}
+# This script runs only once on first chezmoi apply
 
 echo "🔧 Configuring macOS defaults..."
 
