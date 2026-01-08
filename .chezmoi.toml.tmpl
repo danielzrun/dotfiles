@@ -1,0 +1,15 @@
+# ~/.config/chezmoi/chezmoi.toml
+
+# Enable age encryption
+encryption = "age"
+
+[age]
+    # Private key file location (for decryption)
+    identity = "~/.config/chezmoi/key.txt"
+
+    # Public key (for encryption)
+    # Replace with your age1... public key
+    recipient = "age1y284j8m6egd4ft55qxna9t0g747htddwepxqhhtfgq7hczq5tvtqwkvt4s"
+
+    # Automatically recognize .age suffix as encrypted files
+    suffix = ".age"
