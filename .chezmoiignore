@@ -1,1 +1,4 @@
 .config/chezmoi/*
+install.sh
+README.md
+CLAUDE.md
