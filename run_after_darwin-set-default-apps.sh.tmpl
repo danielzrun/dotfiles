@@ -1,0 +1,55 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# =============================================================================
+# Set Default File Associations with duti
+# =============================================================================
+# This script runs only once on first chezmoi apply
+# Configures Zed as the default editor for common development file types
+
+set -euo pipefail
+
+EDITOR_BUNDLE_ID="dev.zed.Zed"
+
+echo "🔧 Configuring Zed as default editor via duti..."
+
+# Define file extensions to associate with Zed
+# Organized by category for easy maintenance
+EXTENSIONS=(
+    # Documentation & Text
+    txt md markdown log rst
+
+    # Configuration Files
+    json yaml yml toml xml conf config ini env
+
+    # Shell & System
+    sh zsh bash zshrc bashrc profile
+
+    # Programming Languages - Core
+    rs py pyi go c cpp h hpp java kt kts scala cs
+
+    # Programming Languages - Web
+    js jsx ts tsx html css scss less vue svelte astro
+
+    # Markup & Data
+    xml html htm css scss less svg
+
+    # Scripting & Automation
+    lua sql lock
+
+    # Build & Config
+    makefile dockerfile Dockerfile Makefile gemfile rakefile
+
+    # Other
+    tml tmpl graphql gql
+)
+
+for ext in "${EXTENSIONS[@]}"; do
+    # duti -s: set default application
+
+    # Args: bundle_id extension role (all/editor/viewer)
+    duti -s "$EDITOR_BUNDLE_ID" ".$ext" all 2>/dev/null || true
+done
+
+echo "✅ Default file associations configured for Zed!"
+
+{{- end -}}

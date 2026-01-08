@@ -2,11 +2,12 @@
 # Only non-default settings
 
 # Font
-font-family = "Lilex Nerd Font"
+font-family = "Lilex Nerd Font Mono"
+font-family = "PingFang SC"
 font-size = 16
 
 # Theme
-theme = catppuccin-mocha
+theme = Catppuccin Mocha
 
 # Window
 window-padding-x = 8

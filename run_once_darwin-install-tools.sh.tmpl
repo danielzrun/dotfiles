@@ -1,0 +1,62 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# =============================================================================
+# One-Time Tool Installation
+# =============================================================================
+# This script runs only once on first chezmoi apply
+# Use this for tools that don't need frequent re-installation
+
+# Install Homebrew if not present
+if ! command -v brew >/dev/null 2>&1; then
+    echo "⚠️  Homebrew not found. Installing Homebrew first..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    # Add Homebrew to PATH for Apple Silicon
+    if [[ -d "/opt/homebrew" ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+fi
+
+# Install Oh My Zsh if not present
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "📥 Installing Oh My Zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    echo "✅ Oh My Zsh installed"
+fi
+
+# Install Oh My Zsh plugins
+PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
+
+install_plugin() {
+    local name=$1
+    local repo=$2
+    local target="$PLUGINS_DIR/$name"
+
+    if [ ! -d "$target" ]; then
+        echo "📥 Installing plugin: $name..."
+        git clone --depth=1 "$repo" "$target"
+    else
+        echo "✓ Plugin already installed: $name"
+    fi
+}
+
+echo ""
+echo "📦 Installing Oh My Zsh plugins..."
+install_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
+install_plugin "zsh-completions" "https://github.com/zsh-users/zsh-completions"
+install_plugin "fzf-tab" "https://github.com/Aloxaf/fzf-tab"
+install_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
+
+# Install Claude Code via native script
+if ! command -v claude >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing Claude Code via native installer..."
+    curl -fsSL https://claude.ai/install.sh | bash
+else
+    echo "✓ Claude Code already installed"
+fi
+
+echo ""
+echo "✅ One-time tools installed!"
+
+{{- end -}}

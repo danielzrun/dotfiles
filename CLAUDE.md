@@ -1,0 +1,127 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
+
+This is a [chezmoi](https://www.chezmoi.io/)-managed dotfiles repository for macOS development, optimized for Python/FastAPI development, modern CLI tools, and Vim workflows. The repository follows chezmoi's template-based structure where `.tmpl` files contain dynamic configuration using Go templating syntax.
+
+## Common Commands
+
+```bash
+# Apply changes from source to home directory
+chezmoi apply
+
+# Preview what would change
+chezmoi diff
+
+# Edit a managed file (decrypts, opens in $EDITOR, re-encrypts on save)
+chezmoi edit ~/.config/secrets.sh
+
+# Add a new file to chezmoi management
+chezmoi add ~/.path/to/file
+
+# Update from remote git repository
+chezmoi update
+
+# Verify state without making changes
+chezmoi verify
+```
+
+## Architecture
+
+### Template System
+
+ chezmoi uses Go templates (`{{ ... }}`) for dynamic configuration:
+
+- **`dot_*.tmpl`** files become dotfiles in `$HOME` (e.g., `dot_zshrc.tmpl` → `~/.zshrc`)
+- **`dot_config/**/*.tmpl`** files go to `~/.config/` (e.g., `dot_config/git/config.tmpl` → `~/.config/git/config`)
+- **`run_onchange_*.sh.tmpl`** scripts execute automatically when their target file changes (hash-checked)
+
+Key template variables:
+- `{{ .chezmoi.hostname }}` - Machine hostname (used for conditional git email)
+- `{{ .chezmoi.os }}` - Operating system (darwin/linux)
+- `{{ .chezmoi.sourceDir }}` - Path to this repository
+- `{{ template "name" . }}` - Include reusable templates from `.chezmoitemplates/`
+
+### Directory Structure
+
+```
+├── .chezmoitemplates/     # Reusable template snippets
+│   ├── zsh/              # Shell configuration modules (python.zsh, modern-tools.zsh)
+│   └── envrc/            # direnv layouts (python.envrc, react.envrc)
+├── dot_config/           # XDG config directory structure
+│   ├── brew/Brewfile     # Homebrew package definitions
+│   ├── git/              # Git configuration
+│   ├── nvim/             # Neovim (LazyVim) configuration
+│   ├── ghostty/config    # Terminal emulator settings
+│   ├── starship.toml     # Shell prompt configuration
+│   └── ...
+├── dot_zshrc.tmpl        # Main shell configuration
+├── run_onchange_darwin-install-packages.sh.tmpl  # macOS package automation
+└── install.sh            # Initial installation script
+```
+
+### Automation Pattern
+
+The `run_onchange_darwin-install-packages.sh.tmpl` script demonstrates the automation pattern:
+
+1. **Hash-based triggering**: Only runs when `Brewfile` changes (via `{{ include "dot_config/brew/Brewfile" | sha256sum }}`)
+2. **Idempotent operations**: Checks for existing installations before acting
+3. **Platform-specific**: Uses `{{ if eq .chezmoi.os "darwin" }}` for macOS-only logic
+
+### Python Development Workflow
+
+This dotfiles setup is opinionated toward **uv** (replacing pip/poetry/pyenv):
+
+- `uvs` / `uvr` / `uva` / `uvd` - Sync, run, add, remove dependencies
+- `uvdev` / `uvdevh` - Run FastAPI dev server
+- `uvtest` / `uvshell` - Run tests or ipython shell
+
+Shell modules in `.chezmoitemplates/zsh/` keep the main `dot_zshrc.tmpl` clean and modular.
+
+### Git Configuration Pattern
+
+Conditional git email based on hostname (`dot_config/git/config.tmpl`):
+
+```go
+{{- if eq .chezmoi.hostname "work-laptop" }}
+email = "work@example.com"
+{{- else }}
+email = "personal@example.com"
+{{- end }}
+```
+
+### Neovim Configuration
+
+Uses **LazyVim** with:
+- `lua/config/lazy.lua` - Lazy.nvim bootstrap
+- `lua/plugins/init.lua` - Plugin overrides (Catppuccin theme)
+- LazyVim plugins are imported; customizations go in `lua/plugins/`
+
+### Key Tooling Decisions
+
+| Category | Tool | Why |
+|----------|------|-----|
+| Package Manager | Homebrew | macOS standard, declarative via Brewfile |
+| Python | uv | Faster than pip/poetry/pyenv, unified toolchain |
+| Shell History | Atuin | Sync across machines, better search than ctrl+r |
+| Directory Jumping | Zoxide | Smart ranking (frecency) vs cd |
+| Git Diff | Delta + difftastic | Side-by-side view + structural diffs |
+| Terminal | Ghostty | GPU-accelerated, modern vs iTerm2 |
+
+## Making Changes
+
+1. **Edit files in this repo** (not your home directory) - they're the source of truth
+2. **Use `chezmoi edit`** for encrypted files - it handles decryption/encryption automatically
+3. **Test with `chezmoi diff`** before applying
+4. **Commit to git** to persist changes across machines
+5. **Run `chezmoi apply`** on target machines to pull updates
+
+## Adding New Packages
+
+Edit `dot_config/brew/Brewfile` (organized by category). The `run_onchange` script will install on next `chezmoi apply`.
+
+## Platform-Specific Configuration
+
+Use `{{ if eq .chezmoi.os "darwin" }}` for macOS-only blocks (see `dot_config/git/config.tmpl` for osxkeychain credential helper example).

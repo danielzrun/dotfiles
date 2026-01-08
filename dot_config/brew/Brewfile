@@ -60,6 +60,11 @@ brew "gping"         # Ping with graph
 brew "bore-cli"      # Tunnel localhost to public URL
 
 # -----------------------------------------------------------------------------
+# Clean Tools
+# -----------------------------------------------------------------------------
+brew "mole"          # Clean tool
+
+# -----------------------------------------------------------------------------
 # Development Tools
 # -----------------------------------------------------------------------------
 brew "ast-grep"      # Code search/rewrite by AST
@@ -87,6 +92,7 @@ brew "ruff"          # Fast Python linter/formatter
 # Editor / IDE
 # -----------------------------------------------------------------------------
 brew "neovim"        # Modern Vim
+brew "duti"          # Set default file associations
 cask "zed"           # Modern high-performance editor
 cask "bruno"         # API testing client (Postman alternative)
 
@@ -105,3 +111,9 @@ cask "font-lilex-nerd-font"
 # Productivity Tools
 # -----------------------------------------------------------------------------
 cask "snipaste"      # Screenshot & annotation tool
+
+# -----------------------------------------------------------------------------
+# AI Tools
+# -----------------------------------------------------------------------------
+# tap "farion1231/ccswitch"
+# cask "cc-switch"     # Claude Code model switcher
