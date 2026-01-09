@@ -5,10 +5,6 @@
 # =============================================================================
 # Runs only once on first chezmoi apply (via run_once_ prefix)
 
-# Maintain sudo privileges for the duration of the script
-sudo -v
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 echo "🔧 Configuring macOS defaults..."
 
 # Prevent System Preferences from overriding our changes
@@ -32,9 +28,6 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 # Instant window resizing (eliminates lag)
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
-# Disable boot chime
-sudo nvram SystemAudioVolume=" "
-
 # -----------------------------------------------------------------------------
 # Keyboard & Input
 # -----------------------------------------------------------------------------
@@ -45,8 +38,8 @@ echo "--- Optimizing keyboard response..."
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Fastest possible key repeat rate (essential for Vim)
-defaults write NSGlobalDomain KeyRepeat -int 1
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 # Disable "smart" auto-correction (interferes with code)
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
