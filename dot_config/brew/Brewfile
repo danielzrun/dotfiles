@@ -89,6 +89,12 @@ brew "uv"            # Fast Python package/project manager (replaces pip/poetry/
 brew "ruff"          # Fast Python linter/formatter
 
 # -----------------------------------------------------------------------------
+# Node.js Development
+# -----------------------------------------------------------------------------
+brew "node"          # Node.js runtime
+brew "pnpm"          # Fast, disk space efficient package manager
+
+# -----------------------------------------------------------------------------
 # Editor / IDE
 # -----------------------------------------------------------------------------
 brew "neovim"        # Modern Vim

@@ -7,10 +7,22 @@ inline_height = 20     # Lower than default 40 for compact interface
 
 ## History
 history_filter = [
+    # Simple commands
     "^ls.*",
     "^cd.*",
     "^clear",
     "^exit",
+
+    # Sensitive data (passwords, secrets, keys)
+    "^export .*PASSWORD",
+    "^export .*SECRET",
+    "^export .*KEY",
+    "^export .*TOKEN",
+    ".*-p.*",
+    ".*password.*",
+    ".*secret.*",
+    ".*api_key.*",
+    ".*apikey.*",
 ]
 
 ## Shell behavior

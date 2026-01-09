@@ -1,0 +1,137 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# =============================================================================
+# macOS System Defaults for Development
+# =============================================================================
+# Runs only once on first chezmoi apply (via run_once_ prefix)
+
+# Maintain sudo privileges for the duration of the script
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+echo "🔧 Configuring macOS defaults..."
+
+# Prevent System Preferences from overriding our changes
+osascript -e 'tell application "System Preferences" to quit'
+
+# -----------------------------------------------------------------------------
+# System UI/UX
+# -----------------------------------------------------------------------------
+
+echo "--- Optimizing system interaction..."
+
+# Remove "Are you sure?" warnings for downloaded apps
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# Expand save/print panels by default (less clicking)
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# Instant window resizing (eliminates lag)
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+# Disable boot chime
+sudo nvram SystemAudioVolume=" "
+
+# -----------------------------------------------------------------------------
+# Keyboard & Input
+# -----------------------------------------------------------------------------
+
+echo "--- Optimizing keyboard response..."
+
+# Enable key repeat (disable accent character popup)
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+# Fastest possible key repeat rate (essential for Vim)
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+
+# Disable "smart" auto-correction (interferes with code)
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# -----------------------------------------------------------------------------
+# Finder
+# -----------------------------------------------------------------------------
+
+echo "--- Optimizing Finder..."
+
+# Always show file extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Show path bar, status bar, and full path in title
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# Search current folder by default (not This Mac)
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# Keep folders sorted above files
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+
+# Prevent .DS_Store litter on network/USB drives
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# -----------------------------------------------------------------------------
+# Dock
+# -----------------------------------------------------------------------------
+
+echo "--- Optimizing Dock..."
+
+# Auto-hide instantly with no delay
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0
+
+# Remove recent apps section
+defaults write com.apple.dock show-recents -bool false
+
+# Disable automatic space reordering
+defaults write com.apple.dock mru-spaces -bool false
+
+# Minimize into app icon (cleaner Dock)
+defaults write com.apple.dock minimize-to-application -bool true
+
+# Dim hidden apps
+defaults write com.apple.dock showhidden -bool true
+
+# Use scale effect (faster than genie)
+defaults write com.apple.dock mineffect -string "scale"
+
+# -----------------------------------------------------------------------------
+# Chrome
+# -----------------------------------------------------------------------------
+
+echo "--- Optimizing Chrome..."
+
+# Disable two-finger back/forward (prevents accidental navigation)
+defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
+
+# Skip print preview, go straight to print dialog
+defaults write com.google.Chrome DisablePrintPreview -bool true
+
+# -----------------------------------------------------------------------------
+# Screenshots
+# -----------------------------------------------------------------------------
+
+# Save screenshots as PNG (lossless quality)
+defaults write com.apple.screencapture type -string "png"
+
+# -----------------------------------------------------------------------------
+# Apply Changes
+# -----------------------------------------------------------------------------
+
+echo "🔄 Restarting affected services..."
+for app in "Dock" "Finder" "SystemUIServer"; do
+    killall "${app}" > /dev/null 2>&1
+done
+
+echo "✅ macOS defaults configured!"
+
+{{- end -}}

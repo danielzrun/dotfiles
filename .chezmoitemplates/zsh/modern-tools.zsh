@@ -7,8 +7,6 @@ if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
 fi
 
-# Zoxide and FZF are handled by Oh My Zsh plugins
-
 # Eza (modern ls replacement)
 if command -v eza >/dev/null 2>&1; then
     alias ls="eza --icons --git"
@@ -32,5 +30,3 @@ fi
 if command -v atuin >/dev/null 2>&1; then
     eval "$(atuin init zsh)"
 fi
-
-# Direnv is handled by Oh My Zsh plugin

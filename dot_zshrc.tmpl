@@ -77,26 +77,10 @@ bindkey '^[f' forward-word           # Option + Right Arrow
 bindkey '^[b' backward-word          # Option + Left Arrow
 
 # -----------------------------------------------------------------------------
-# Core Aliases
+# Modules & Functions
 # -----------------------------------------------------------------------------
-# Editor
-alias vim="nvim"
-alias vi="nvim"
-alias v="nvim"
-
-# Utils
-alias c="clear"
-alias h="history"
-
-# Git (supplement to Oh My Zsh git plugin)
-alias lg="lazygit"
-
-# -----------------------------------------------------------------------------
-# Module: Python Development
-# -----------------------------------------------------------------------------
+{{ template "zsh/aliases.zsh" . }}
+{{ template "zsh/functions.zsh" . }}
 {{ template "zsh/python.zsh" . }}
-
-# -----------------------------------------------------------------------------
-# Module: Modern Unix Tools
-# -----------------------------------------------------------------------------
 {{ template "zsh/modern-tools.zsh" . }}
+{{ template "zsh/node.zsh" . }}

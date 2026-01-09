@@ -47,6 +47,16 @@ install_plugin "zsh-completions" "https://github.com/zsh-users/zsh-completions"
 install_plugin "fzf-tab" "https://github.com/Aloxaf/fzf-tab"
 install_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
 
+# Install Bun if not present
+if ! command -v bun >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing Bun..."
+    curl -fsSL https://bun.sh/install | bash
+    echo "✅ Bun installed"
+else
+    echo "✓ Bun already installed"
+fi
+
 # Install Claude Code via native script
 if ! command -v claude >/dev/null 2>&1; then
     echo ""

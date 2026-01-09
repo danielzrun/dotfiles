@@ -1,0 +1,35 @@
+# =============================================================================
+# Environment Variables
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# XDG Base Directory Specification
+# -----------------------------------------------------------------------------
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# -----------------------------------------------------------------------------
+# Homebrew
+# -----------------------------------------------------------------------------
+# Initialize Homebrew environment (sets HOMEBREW_PREFIX, PATH, MANPATH, etc.)
+if [[ -d "/opt/homebrew" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+export HOMEBREW_NO_AUTO_UPDATE=1      # Disable auto-update (update manually with `brew update`)
+export HOMEBREW_NO_ENV_HINTS=1        # Hide environment hints
+
+# -----------------------------------------------------------------------------
+# Core Environment
+# -----------------------------------------------------------------------------
+export LANG=en_US.UTF-8
+export EDITOR="nvim"
+export VISUAL="$EDITOR"
+
+# -----------------------------------------------------------------------------
+# Tools
+# -----------------------------------------------------------------------------
+# Carapace completion engine
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'

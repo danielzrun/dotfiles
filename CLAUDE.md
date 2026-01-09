@@ -48,8 +48,7 @@ Key template variables:
 
 ```
 ├── .chezmoitemplates/     # Reusable template snippets
-│   ├── zsh/              # Shell configuration modules (python.zsh, modern-tools.zsh)
-│   └── envrc/            # direnv layouts (python.envrc, react.envrc)
+│   └── zsh/              # Shell configuration modules (python.zsh, modern-tools.zsh)
 ├── dot_config/           # XDG config directory structure
 │   ├── brew/Brewfile     # Homebrew package definitions
 │   ├── git/              # Git configuration

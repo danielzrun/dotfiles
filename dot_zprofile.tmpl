@@ -5,49 +5,11 @@
 # Used for: environment variables, PATH, one-time initializations
 # =============================================================================
 
-# -----------------------------------------------------------------------------
-# Core Environment
-# -----------------------------------------------------------------------------
-export LANG=en_US.UTF-8
-export EDITOR="nvim"
-export VISUAL="$EDITOR"
-
-# XDG Base Directory Specification
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-export XDG_STATE_HOME="$HOME/.local/state"
+# Environment variables (LANG, EDITOR, XDG, Homebrew, etc.)
+{{ template "zsh/env.zsh" . }}
 
 # -----------------------------------------------------------------------------
 # PATH Configuration
 # -----------------------------------------------------------------------------
-# Local binaries
-export PATH="$HOME/.local/bin:$PATH"
-
-# pnpm (if needed in future)
-export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"
-
-# -----------------------------------------------------------------------------
-# Python Development (uv)
-# -----------------------------------------------------------------------------
-# uv manages Python versions automatically
-# Usage:
-#   uv python install 3.12
-#   uv python pin 3.12
-#   uv venv && uv sync
-
-# -----------------------------------------------------------------------------
-# Tools
-# -----------------------------------------------------------------------------
-# Homebrew (Apple Silicon)
-if [[ -d "/opt/homebrew" ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-# Homebrew configuration
-export HOMEBREW_NO_AUTO_UPDATE=1      # Disable auto-update (update manually with `brew update`)
-export HOMEBREW_NO_ENV_HINTS=1        # Hide environment hints
-
-# Carapace completion engine
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+# Local binaries, pnpm, and other PATH additions
+{{ template "zsh/path.zsh" . }}
