@@ -5,7 +5,8 @@
 // Core Settings
 theme "catppuccin-mocha"           // Color scheme matching Ghostty/LazyVim
 copy_command "pbcopy"              // macOS clipboard integration
-default_layout "clean"             // Use clean layout (no status bar, better for Neovim)
+default_layout "default"           // Use clean layout (no status bar, better for Neovim)
+attach_to_session true             // Auto-attach to existing session
 pane_frames false                  // Hide frames by default
 show_tips false                    // Disable startup tips
 show_release_notes false           // Disable release notes
@@ -15,7 +16,7 @@ themes {
         bg "#1e1e2e"
         fg "#cdd6f4"
         red "#f38ba8"
-        green "#a6e22e"  // 或 #a6e3a1
+        green "#a6e22e"
         yellow "#f9e2af"
         blue "#89b4fa"
         magenta "#cba6f7"

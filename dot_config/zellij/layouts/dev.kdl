@@ -6,7 +6,7 @@ layout {
             plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
                 format_left   ""
                 format_center ""
-                format_right  "{mode}"
+                format_right  "[{session}] {mode}"
                 format_space  ""
 
                 // Mode indicators - Only show mode name with color
@@ -17,6 +17,7 @@ layout {
                 mode_tab           "#[bg=#fab387,fg=#1e1e2e] 󰓩 "
                 mode_scroll        "#[bg=#f38ba8,fg=#1e1e2e] 󰦨 "
                 mode_search        "#[bg=#cba6f7,fg=#1e1e2e] 󰱼 "
+                mode_session       "#[bg=#94e2d5,fg=#1e1e2e] 󰒋 "
 
                 border_enabled "false"
             }
