@@ -1,0 +1,62 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# =============================================================================
+# Install Large GUI Applications
+# =============================================================================
+# This script runs when Brewfile.casks changes (via run_onchange_ prefix)
+# Hash: {{ include "dot_config/brew/Brewfile.casks" | sha256sum }}
+#
+# These are separated from the main Brewfile to:
+# - Speed up daily package syncing
+# - Allow selective installation on new machines
+# - Reduce bandwidth usage during automated syncs
+# =============================================================================
+
+CASKS_FILE="{{ .chezmoi.sourceDir }}/dot_config/brew/Brewfile.casks"
+
+echo "🖥️  Syncing Large GUI Applications"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "This will sync from Brewfile.casks:"
+echo "  • Ghostty (Terminal)"
+echo "  • Zed (Editor)"
+echo "  • Snipaste (Screenshot tool)"
+echo "  • Glance (Calendar)"
+echo ""
+read -p "Continue? [y/N] " -n 1 -r
+echo ""
+
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    brew bundle --file="$CASKS_FILE" --verbose
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+
+    # Remove quarantine attributes to prevent Gatekeeper warnings
+    echo "🔓 Removing quarantine attributes from installed applications..."
+
+    APPS=(
+        "/Applications/Ghostty.app"
+        "/Applications/Zed.app"
+        "/Applications/Snipaste.app"
+        "/Applications/Glance.app"
+    )
+
+    for app in "${APPS[@]}"; do
+        if [ -d "$app" ]; then
+            xattr -dr com.apple.quarantine "$app" 2>/dev/null && \
+                echo "  ✓ Cleared: $(basename "$app")" || \
+                echo "  ℹ️  Already clear: $(basename "$app")"
+        fi
+    done
+
+    echo ""
+    echo "✅ Large applications synced!"
+else
+    echo "❌ Installation cancelled."
+    echo ""
+    echo "💡 To install later, run:"
+    echo "   brew bundle --file=~/.config/brew/Brewfile.casks"
+fi
+
+{{- end -}}

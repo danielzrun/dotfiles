@@ -1,10 +1,11 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 # =============================================================================
-# One-Time Tool Installation
+# Essential Tools Installation
 # =============================================================================
-# This script runs only once on first chezmoi apply
-# Use this for tools that don't need frequent re-installation
+# This script runs when its content changes (via run_onchange_ prefix)
+# Use this for tools that should be kept up-to-date with config changes
+# Hash: {{ include ".chezmoiscripts/run_onchange_after_darwin-01-install-tools.sh.tmpl" | sha256sum }}
 
 # Install Homebrew if not present
 if ! command -v brew >/dev/null 2>&1; then
@@ -47,16 +48,6 @@ install_plugin "zsh-completions" "https://github.com/zsh-users/zsh-completions"
 install_plugin "fzf-tab" "https://github.com/Aloxaf/fzf-tab"
 install_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
 
-# Install Bun if not present
-if ! command -v bun >/dev/null 2>&1; then
-    echo ""
-    echo "📦 Installing Bun..."
-    curl -fsSL https://bun.sh/install | bash
-    echo "✅ Bun installed"
-else
-    echo "✓ Bun already installed"
-fi
-
 # Install Claude Code via native script
 if ! command -v claude >/dev/null 2>&1; then
     echo ""
@@ -67,6 +58,6 @@ else
 fi
 
 echo ""
-echo "✅ One-time tools installed!"
+echo "✅ Essential tools synced!"
 
 {{- end -}}

@@ -10,6 +10,8 @@ $directory\
 $git_branch\
 $git_status\
 $python\
+$env_var\
+$custom\
 $cmd_duration\
 $line_break\
 $character"""
@@ -68,8 +70,21 @@ min_time = 2000
 style = "bold yellow"
 format = "took [$duration]($style) "
 
+# Direnv status indicator
+[env_var.DIRENV_DIR]
+symbol = "⚡ "
+style = "bold yellow"
+format = "[$symbol$env_value]($style) "
+
 # Prompt character
 [character]
 success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
 vicmd_symbol = "[←](bold green)"  # Vim normal mode indicator
+
+# Zellij session indicator
+[custom.zellij]
+command = "echo '[ Zellij ]'"
+when = "[[ -n $ZELLIJ ]]"
+format = "[$output](bold blue italic) "
+description = "Zellij session indicator"

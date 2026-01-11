@@ -49,19 +49,37 @@ Key template variables:
 ```
 ├── .chezmoitemplates/     # Reusable template snippets
 │   └── zsh/              # Shell configuration modules (python.zsh, modern-tools.zsh)
+├── .chezmoiscripts/      # Installation and setup scripts
+│   ├── run_onchange_after_darwin-install-packages.sh.tmpl  # Auto-installs CLI tools
+│   └── run_once_darwin-install-casks.sh.tmpl              # Optional GUI apps installer
 ├── dot_config/           # XDG config directory structure
-│   ├── brew/Brewfile     # Homebrew package definitions
+│   ├── brew/
+│   │   ├── Brewfile       # Core CLI tools and lightweight utilities
+│   │   └── Brewfile.casks # Large GUI applications (Ghostty, Zed, etc.)
 │   ├── git/              # Git configuration
 │   ├── nvim/             # Neovim (LazyVim) configuration
 │   ├── ghostty/config    # Terminal emulator settings
 │   ├── starship.toml     # Shell prompt configuration
 │   └── ...
 ├── dot_zshrc.tmpl        # Main shell configuration
-├── run_onchange_darwin-install-packages.sh.tmpl  # macOS package automation
 └── install.sh            # Initial installation script
 ```
 
 ### Automation Pattern
+
+**Two-tier Brewfile system** for efficient package management:
+
+1. **`Brewfile`** (auto-installed via `run_onchange_after_*` script):
+   - Contains lightweight CLI tools and essential utilities
+   - Automatically syncs when file hash changes
+   - Fast installation for daily development work
+   - Runs automatically on `chezmoi apply` when Brewfile changes
+
+2. **`Brewfile.casks`** (manual installation):
+   - Contains large GUI applications (Ghostty, Zed, Snipaste, etc.)
+   - Install manually: `brew bundle --file=~/.config/brew/Brewfile.casks`
+   - Or use: `chezmoi apply` (runs once via `run_once_*` script with interactive prompt)
+   - Separated to reduce bandwidth and speed up automated syncs
 
 The `run_onchange_darwin-install-packages.sh.tmpl` script demonstrates the automation pattern:
 
@@ -119,7 +137,14 @@ Uses **LazyVim** with:
 
 ## Adding New Packages
 
-Edit `dot_config/brew/Brewfile` (organized by category). The `run_onchange` script will install on next `chezmoi apply`.
+**For lightweight CLI tools:**
+- Edit `dot_config/brew/Brewfile` (organized by category)
+- The `run_onchange_after_*` script will auto-install on next `chezmoi apply`
+
+**For large GUI applications:**
+- Edit `dot_config/brew/Brewfile.casks`
+- Install manually: `brew bundle --file=~/.config/brew/Brewfile.casks`
+- Or wait for next `chezmoi apply` (interactive prompt via `run_once_*` script)
 
 ## Platform-Specific Configuration
 

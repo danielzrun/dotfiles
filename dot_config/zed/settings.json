@@ -5,6 +5,13 @@
     "use_system_clipboard": "on_yank",
     "toggle_relative_line_numbers": true
   },
+  "terminal": {
+    "font_family": "Lilex Nerd Font Mono",
+    "font_size": 16,
+    "font_fallbacks": [
+      "PingFang SC"
+    ]
+  },
   "theme": {
     "mode": "dark",
     "light": "Catppuccin Latte",
@@ -17,20 +24,15 @@
   },
   "ui_font_size": 16,
   "ui_font_fallbacks": [
+    "Lilex Nerd Font",
     "PingFang SC"
   ],
   "buffer_font_size": 16,
   "buffer_font_family": ".ZedMono",
   "buffer_font_fallbacks": [
+    "Lilex Nerd Font",
     "PingFang SC"
   ],
-  "terminal": {
-    "font_family": "Lilex Nerd Font Mono",
-    "font_size": 16,
-    "font_fallbacks": [
-      "PingFang SC"
-    ]
-  },
   "telemetry": {
     "diagnostics": false,
     "metrics": false

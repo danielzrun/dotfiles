@@ -6,12 +6,8 @@
 # Local binaries (highest priority)
 export PATH="$HOME/.local/bin:$PATH"
 
-# Bun
-if command -v bun >/dev/null 2>&1; then
+# Bun (only add if installed)
+if [ -d "$HOME/.bun" ]; then
     export BUN_INSTALL="$HOME/.bun"
     export PATH="$BUN_INSTALL/bin:$PATH"
 fi
-
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-export PATH="$PNPM_HOME:$PATH"

@@ -57,6 +57,33 @@ setopt SHARE_HISTORY
 # Reduce ESC delay for vi-mode (default 0.4s is too slow)
 export KEYTIMEOUT=1
 
+# Vi-mode cursor shape changes
+VI_MODE_SET_CURSOR=true
+
+# Cursor shape for different vi modes (works in Zellij/Ghostty)
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    # Normal mode: block cursor
+    echo -ne '\e[2 q'
+  elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
+    # Insert mode: beam cursor
+    echo -ne '\e[6 q'
+  fi
+}
+zle -N zle-keymap-select
+
+# Set beam cursor on startup
+function zle-line-init {
+  echo -ne '\e[6 q'
+}
+zle -N zle-line-init
+
+# Reset cursor to beam on each prompt (prevents block cursor from persisting)
+function reset_cursor {
+  echo -ne '\e[6 q'
+}
+precmd_functions+=(reset_cursor)
+
 # Keep useful Emacs-style bindings in vi-mode
 bindkey '^A' beginning-of-line
 bindkey '^E' end-of-line
@@ -75,6 +102,14 @@ bindkey '^[^[[D' backward-word       # Alt + Left Arrow
 # Option + Arrow keys (macOS Terminal)
 bindkey '^[f' forward-word           # Option + Right Arrow
 bindkey '^[b' backward-word          # Option + Left Arrow
+
+# -----------------------------------------------------------------------------
+# Zellij Auto-start
+# -----------------------------------------------------------------------------
+# Auto-start Zellij in Ghostty, but only if not already in a Zellij session
+if [[ "$TERM" == "xterm-ghostty" ]] && [[ -z "$ZELLIJ" ]]; then
+  zellij attach -c default 2>/dev/null || zellij
+fi
 
 # -----------------------------------------------------------------------------
 # Modules & Functions

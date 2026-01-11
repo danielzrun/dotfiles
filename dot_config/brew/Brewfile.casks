@@ -1,0 +1,36 @@
+# =============================================================================
+# Homebrew Bundle - Large GUI Applications (Optional)
+# =============================================================================
+# This file contains larger cask applications that can be installed separately.
+# To install: brew bundle --file=~/.config/brew/Brewfile.casks
+#
+# Separated from main Brewfile for faster syncing and optional installation.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Editor / IDE
+# -----------------------------------------------------------------------------
+cask "zed"           # Modern high-performance editor (~200MB)
+#cask "bruno"         # API testing client (Postman alternative)
+
+# -----------------------------------------------------------------------------
+# Terminal
+# -----------------------------------------------------------------------------
+cask "ghostty"       # GPU-accelerated terminal (~50MB)
+
+# -----------------------------------------------------------------------------
+# Docker Tools
+# -----------------------------------------------------------------------------
+#cask "orbstack"      # Fast Docker Desktop alternative (~400MB+)
+
+# -----------------------------------------------------------------------------
+# Productivity Tools
+# -----------------------------------------------------------------------------
+cask "snipaste"      # Screenshot & annotation tool
+cask "glance-chamburr"  # Calendar & menu bar utility
+
+# -----------------------------------------------------------------------------
+# AI Tools
+# -----------------------------------------------------------------------------
+# tap "farion1231/ccswitch"
+# cask "cc-switch"     # Claude Code model switcher

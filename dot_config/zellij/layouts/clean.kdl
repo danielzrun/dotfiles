@@ -1,0 +1,28 @@
+layout {
+    default_tab_template {
+        children
+        // Minimal mode indicator in bottom-right corner
+        pane size=1 borderless=true {
+            plugin location="file:~/.config/zellij/plugins/zjstatus.wasm" {
+                format_left   ""
+                format_center ""
+                format_right  "{mode}"
+                format_space  ""
+
+                // Mode indicators - Only show mode name with color
+                mode_normal        "#[bg=#89b4fa,fg=#1e1e2e] 󰘧 "
+                mode_locked        "#[bg=#585b70,fg=#cdd6f4] 󰌾 "
+                mode_resize        "#[bg=#f9e2af,fg=#1e1e2e] 󰩨 "
+                mode_pane          "#[bg=#a6e3a1,fg=#1e1e2e] 󰇘 "
+                mode_tab           "#[bg=#fab387,fg=#1e1e2e] 󰓩 "
+                mode_scroll        "#[bg=#f38ba8,fg=#1e1e2e] 󰦨 "
+                mode_search        "#[bg=#cba6f7,fg=#1e1e2e] 󰱼 "
+
+                border_enabled "false"
+            }
+        }
+    }
+}
+
+// Start in locked mode for Neovim (avoid keybinding conflicts)
+default_mode "locked"

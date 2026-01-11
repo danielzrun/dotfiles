@@ -1,5 +1,8 @@
 # =============================================================================
-# Homebrew Bundle - Development Tools
+# Homebrew Bundle - Core Development Tools
+# =============================================================================
+# This Brewfile contains lightweight CLI tools and essential utilities.
+# Large GUI applications are in Brewfile.casks (install separately).
 # =============================================================================
 
 # -----------------------------------------------------------------------------
@@ -35,7 +38,6 @@ brew "lazygit"       # Git TUI (Vim keybindings)
 # Docker Tools
 # -----------------------------------------------------------------------------
 brew "lazydocker"    # Docker TUI
-cask "orbstack"      # Fast Docker Desktop alternative
 
 # -----------------------------------------------------------------------------
 # JSON Tools
@@ -99,13 +101,10 @@ brew "pnpm"          # Fast, disk space efficient package manager
 # -----------------------------------------------------------------------------
 brew "neovim"        # Modern Vim
 brew "duti"          # Set default file associations
-cask "zed"           # Modern high-performance editor
-cask "bruno"         # API testing client (Postman alternative)
 
 # -----------------------------------------------------------------------------
 # Terminal
 # -----------------------------------------------------------------------------
-cask "ghostty"       # GPU-accelerated terminal
 brew "zellij"        # Modern terminal multiplexer (Rust, better UX than tmux)
 
 # -----------------------------------------------------------------------------
@@ -113,13 +112,7 @@ brew "zellij"        # Modern terminal multiplexer (Rust, better UX than tmux)
 # -----------------------------------------------------------------------------
 cask "font-lilex-nerd-font"
 
-# -----------------------------------------------------------------------------
-# Productivity Tools
-# -----------------------------------------------------------------------------
-cask "snipaste"      # Screenshot & annotation tool
-
-# -----------------------------------------------------------------------------
-# AI Tools
-# -----------------------------------------------------------------------------
-# tap "farion1231/ccswitch"
-# cask "cc-switch"     # Claude Code model switcher
+# =============================================================================
+# NOTE: Large GUI applications (Ghostty, Zed, etc.) are in Brewfile.casks
+# To install: brew bundle --file=~/.config/brew/Brewfile.casks
+# =============================================================================

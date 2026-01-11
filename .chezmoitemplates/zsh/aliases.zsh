@@ -10,6 +10,16 @@ alias vi="nvim"
 alias v="nvim"
 
 # -----------------------------------------------------------------------------
+# Zellij - Terminal Multiplexer
+# -----------------------------------------------------------------------------
+# Smart attach: attach to last session or create new one
+alias zj='zellij attach --index 0 --create'
+# List sessions
+alias zjl='zellij list-sessions'
+# Kill all sessions
+alias zjk='zellij kill-all-sessions'
+
+# -----------------------------------------------------------------------------
 # Utils
 # -----------------------------------------------------------------------------
 alias c="clear"

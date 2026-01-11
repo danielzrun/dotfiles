@@ -3,12 +3,18 @@
 # =============================================================================
 # Set Default File Associations with duti
 # =============================================================================
-# This script runs only once on first chezmoi apply
+# This script runs after all other scripts on every chezmoi apply
 # Configures Zed as the default editor for common development file types
 
 set -euo pipefail
 
 EDITOR_BUNDLE_ID="dev.zed.Zed"
+
+# Check if Zed is installed before proceeding
+if ! [ -d "/Applications/Zed.app" ]; then
+    echo "ℹ️  Zed not installed, skipping file association configuration."
+    exit 0
+fi
 
 echo "🔧 Configuring Zed as default editor via duti..."
 
@@ -45,7 +51,6 @@ EXTENSIONS=(
 
 for ext in "${EXTENSIONS[@]}"; do
     # duti -s: set default application
-
     # Args: bundle_id extension role (all/editor/viewer)
     duti -s "$EDITOR_BUNDLE_ID" ".$ext" all 2>/dev/null || true
 done
