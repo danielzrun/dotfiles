@@ -1,4 +1,5 @@
 .config/chezmoi/*
+.claude/
 install.sh
 README.md
 CLAUDE.md

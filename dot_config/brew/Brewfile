@@ -72,6 +72,7 @@ brew "mole"          # Clean tool
 brew "ast-grep"      # Code search/rewrite by AST
 brew "hyperfine"     # Command-line benchmarking
 brew "tldr"          # Simplified man pages
+brew "claude-notify" # Claude Code notification support
 
 # -----------------------------------------------------------------------------
 # System Monitoring
