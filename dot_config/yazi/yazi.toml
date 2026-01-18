@@ -1,0 +1,30 @@
+# Yazi Configuration
+# Documentation: https://yazi-rs.github.io/docs/configuration/yazi
+
+[mgr]
+# Column width ratio for [parent, current, preview]
+# A ratio of [1, 1, 2] makes the preview pane twice as wide as the others
+ratio = [2,3,5]
+# Sort directories before files
+sort_dir_first = true
+# Display file size in the status column
+linemode = "size"
+# Show hidden files
+show_hidden = false
+# Natural sorting (e.g., file2 before file10)
+sort_by = "natural"
+# Scroll offset (number of lines to keep visible around cursor)
+scrolloff = 5
+
+[preview]
+# Wrap long lines in text preview
+wrap = "no"
+# Tab width in spaces
+tab_size = 2
+# Maximum image preview dimensions
+max_width = 1920
+max_height = 1080
+# Image downscaling filter (lanczos3 is highest quality)
+image_filter = "lanczos3"
+# Cache quality for images (50-90)
+image_quality = 80

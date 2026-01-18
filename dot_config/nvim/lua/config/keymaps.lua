@@ -2,6 +2,8 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+--vim.keymap.set("i", "jk", "<Esc>", { desc = "Escape to Normal Mode" })
+
 -- Copy to system clipboard in visual mode using Cmd+C
 vim.keymap.set("v", "<D-c>", '"+y', { desc = "Copy to system clipboard" })
 vim.keymap.set("n", "y", '"+y', { desc = "Yank to system clipboard" })

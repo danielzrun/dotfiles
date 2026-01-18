@@ -34,3 +34,5 @@ cask "glance-chamburr"  # Calendar & menu bar utility
 # -----------------------------------------------------------------------------
 # tap "farion1231/ccswitch"
 # cask "cc-switch"     # Claude Code model switcher
+
+brew "ghostscript"

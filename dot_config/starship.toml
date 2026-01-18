@@ -1,74 +1,58 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 # =============================================================================
 # Starship Prompt Configuration
 # =============================================================================
 
-# Prompt format
+# Global command timeout
+command_timeout = 500
+
+# Custom prompt format
 format = """
+$os\
 $username\
 $hostname\
 $directory\
 $git_branch\
 $git_status\
 $python\
+$nodejs\
+$bun\
+$rust\
+$golang\
+$java\
+$lua\
+$docker_context\
+$aws\
 $env_var\
 $custom\
 $cmd_duration\
 $line_break\
 $character"""
 
-# Username (only in SSH)
-[username]
-show_always = false
-style_user = "bold yellow"
-format = "[$user]($style) "
-
-# Hostname (only in SSH)
-[hostname]
-ssh_only = true
-style = "bold green"
-format = "on [$hostname]($style) "
-
-# Directory (show last 3 levels)
+# Directory
 [directory]
+read_only = " 󰌾"
 truncation_length = 3
-truncate_to_repo = true
 style = "bold cyan"
-format = "[$path]($style)[$read_only]($read_only_style) "
 
 # Git branch
 [git_branch]
 style = "bold purple"
-symbol = " "
-format = "on [$symbol$branch]($style) "
+symbol = " "
 
 # Git status
 [git_status]
-style = "red"
-conflicted = "🏳"
-ahead = "⇡${count}"
-diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-behind = "⇣${count}"
 up_to_date = "✓"
-untracked = "?${count}"
-stashed = "📦"
-modified = "!${count}"
-staged = "+${count}"
-renamed = "»${count}"
-deleted = "✘${count}"
-format = '([$all_status$ahead_behind]($style) )'
 
-# Python environment (only shows when .venv directory exists)
+# Python (only show when .venv exists)
 [python]
-symbol = "🐍 "
-style = "yellow bold"
-format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = " "
 detect_folders = [".venv"]
 
 # Command duration (show if > 2s)
 [cmd_duration]
 min_time = 2000
-style = "bold yellow"
-format = "took [$duration]($style) "
 
 # Direnv status indicator
 [env_var.DIRENV_DIR]
@@ -80,11 +64,205 @@ format = "[$symbol$env_value]($style) "
 [character]
 success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
-vicmd_symbol = "[←](bold green)"  # Vim normal mode indicator
+vicmd_symbol = "[←](bold green)"
 
 # Zellij session indicator
 [custom.zellij]
 command = "echo '[ Zellij ]'"
 when = "[[ -n $ZELLIJ ]]"
 format = "[$output](bold blue italic) "
-description = "Zellij session indicator"
+
+[aws]
+symbol = " "
+
+[buf]
+symbol = " "
+
+[bun]
+symbol = " "
+
+[c]
+symbol = " "
+
+[cpp]
+symbol = " "
+
+[cmake]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[deno]
+symbol = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fennel]
+symbol = " "
+
+[fortran]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[gcloud]
+symbol = " "
+
+[git_commit]
+tag_symbol = '  '
+
+[golang]
+symbol = " "
+
+[gradle]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[hostname]
+ssh_symbol = "  "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[kotlin]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " "
+
+[ocaml]
+symbol = " "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+AOSC = " "
+Arch = " "
+Artix = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Elementary = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Ios = "󰀷 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+Zorin = " "
+
+[package]
+symbol = "󰏗 "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+
+[pixi]
+symbol = "󰏗 "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = "󱘗 "
+
+[scala]
+symbol = " "
+
+[status]
+symbol = " "
+
+[swift]
+symbol = " "
+
+[xmake]
+symbol = " "
+
+[zig]
+symbol = " "

@@ -42,6 +42,7 @@ brew "lazydocker"    # Docker TUI
 # -----------------------------------------------------------------------------
 # JSON Tools
 # -----------------------------------------------------------------------------
+brew "jq"            # JSON processor
 brew "jaq"           # jq clone in Rust (faster)
 brew "fx"            # Interactive JSON viewer
 brew "jless"         # JSON pager with vim keybindings
@@ -53,6 +54,16 @@ brew "jnv"           # Interactive JSON filter
 brew "visidata"      # Terminal spreadsheet viewer
 brew "qsv"           # Fast CSV toolkit
 brew "lnav"          # Log file navigator
+
+# -----------------------------------------------------------------------------
+# File & Media Tools
+# -----------------------------------------------------------------------------
+brew "yazi"          # Terminal file manager
+brew "ffmpeg"        # Video/audio processing
+brew "sevenzip"      # 7z archive tool
+brew "poppler"       # PDF rendering library
+brew "imagemagick"   # Image processing
+brew "resvg"         # SVG renderer
 
 # -----------------------------------------------------------------------------
 # HTTP/Network Tools
@@ -72,7 +83,6 @@ brew "mole"          # Clean tool
 brew "ast-grep"      # Code search/rewrite by AST
 brew "hyperfine"     # Command-line benchmarking
 brew "tldr"          # Simplified man pages
-brew "claude-notify" # Claude Code notification support
 
 # -----------------------------------------------------------------------------
 # System Monitoring

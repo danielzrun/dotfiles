@@ -1,0 +1,8 @@
+# Yazi Keymap Configuration
+# Documentation: https://yazi-rs.github.io/docs/configuration/keymap
+
+[mgr]
+prepend_keymap = [
+	# Navigate to workspace directory with g+w
+	{ on = ["g", "w"], run = "cd ~/workspace", desc = "Go to workspace" },
+]

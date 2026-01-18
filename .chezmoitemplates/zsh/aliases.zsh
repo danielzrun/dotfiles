@@ -18,14 +18,11 @@ alias zj='zellij attach --index 0 --create'
 alias zjl='zellij list-sessions'
 # Kill all sessions
 alias zjk='zellij kill-all-sessions'
+# Launch with Claude Code layout (5 tabs with claude command)
+alias zjcc='zellij --layout ~/.config/zellij/layouts/cc.kdl --session claude'
 
 # -----------------------------------------------------------------------------
 # Utils
 # -----------------------------------------------------------------------------
 alias c="clear"
 alias h="history"
-
-# -----------------------------------------------------------------------------
-# Git (supplement to Oh My Zsh git plugin)
-# -----------------------------------------------------------------------------
-alias lg="lazygit"

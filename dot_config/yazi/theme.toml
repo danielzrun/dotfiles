@@ -1,0 +1,5 @@
+# Yazi Theme - Catppuccin Mocha
+# Install: ya pack -a yazi-rs/flavors:catppuccin-mocha
+
+[flavor]
+dark = "catppuccin-mocha"
