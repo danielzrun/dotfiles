@@ -30,9 +30,14 @@ cask "snipaste"      # Screenshot & annotation tool
 cask "glance-chamburr"  # Calendar & menu bar utility
 
 # -----------------------------------------------------------------------------
+# Development Tools
+# -----------------------------------------------------------------------------
+cask "hex-fiend"     # Fast hex editor for macOS
+# cask "imhex"         # Advanced hex editor with pattern language
+brew "ghostscript"   # PostScript/PDF interpreter (required by some PDF tools)
+
+# -----------------------------------------------------------------------------
 # AI Tools
 # -----------------------------------------------------------------------------
 # tap "farion1231/ccswitch"
 # cask "cc-switch"     # Claude Code model switcher
-
-brew "ghostscript"

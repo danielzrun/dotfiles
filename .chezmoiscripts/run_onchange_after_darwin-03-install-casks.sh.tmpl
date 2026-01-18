@@ -18,10 +18,12 @@ echo "🖥️  Syncing Large GUI Applications"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 echo "This will sync from Brewfile.casks:"
-echo "  • Ghostty (Terminal)"
-echo "  • Zed (Editor)"
-echo "  • Snipaste (Screenshot tool)"
-echo "  • Glance (Calendar)"
+echo "  • Ghostty (GPU-accelerated terminal)"
+echo "  • Zed (Modern high-performance editor)"
+echo "  • Snipaste (Screenshot & annotation tool)"
+echo "  • Glance (Calendar & menu bar utility)"
+echo "  • Hex Fiend (Fast hex editor)"
+echo "  • Ghostscript (PostScript/PDF interpreter)"
 echo ""
 read -p "Continue? [y/N] " -n 1 -r
 echo ""
@@ -40,6 +42,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
         "/Applications/Zed.app"
         "/Applications/Snipaste.app"
         "/Applications/Glance.app"
+        "/Applications/Hex Fiend.app"
     )
 
     for app in "${APPS[@]}"; do
