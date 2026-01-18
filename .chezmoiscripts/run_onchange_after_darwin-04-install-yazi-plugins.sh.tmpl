@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# =============================================================================
+# Install Yazi Plugins and Themes
+# =============================================================================
+# This script automatically installs Yazi flavors and plugins
+# Triggers on changes to yazi config files
+# hash: {{ include "dot_config/yazi/theme.toml" | sha256sum }}
+# hash: {{ include "dot_config/yazi/yazi.toml" | sha256sum }}
+
+set -euo pipefail
+
+echo "🎨 Installing Yazi flavors and plugins..."
+
+# Check if ya command exists
+if ! command -v ya &> /dev/null; then
+    echo "⚠️  'ya' command not found. Install yazi first."
+    exit 0
+fi
+
+# Install catppuccin-mocha flavor
+echo "Installing Catppuccin Mocha theme..."
+ya pkg add yazi-rs/flavors:catppuccin-mocha || true
+
+# Install plugins
+echo "Installing smart-enter plugin..."
+ya pkg add yazi-rs/plugins:smart-enter || true
+
+echo "Installing relative-motions plugin..."
+ya pkg add dedukun/relative-motions || true
+
+echo "✓ Yazi setup complete!"
