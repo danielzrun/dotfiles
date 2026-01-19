@@ -19,41 +19,9 @@
     ui = true
 
 [alias]
-    # Basic shortcuts
-    co = checkout
-    br = branch
-    ci = commit
-    st = status
-
     # Enhanced log
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-
-    # Quick actions
-    aa = add --all
-    cm = commit -m
-    cam = commit -am
-    amend = commit --amend --no-edit
-    undo = reset --soft HEAD~1
-
-    # Branch management
-    branches = branch -a
-    tags = tag -l
-    remotes = remote -v
-
-    # Status and diff
-    s = status -s
-    d = diff
-    dc = diff --cached
-
-    # Push/pull
-    p = pull
-    ps = push
-    pf = push --force-with-lease
-
-    # Stash
-    stash-all = stash save --include-untracked
-    unstash = stash pop
 
     # Cleanup
     clean-branches = "!git branch --merged | grep -v '\\*\\|main\\|master\\|develop' | xargs -n 1 git branch -d"
@@ -64,7 +32,6 @@
 
     # History
     history = log --follow -p --
-    contributors = shortlog --summary --numbered
 
 [pull]
     rebase = true
@@ -73,26 +40,64 @@
     path = ~/.config/git/delta-themes
 
 [delta]
+    # Theme and syntax highlighting
     features = catppuccin-mocha
-    navigate = true
-    line-numbers = true
+    syntax-theme = Catppuccin Mocha
+    # Display settings
     side-by-side = true
+    line-numbers = true
+    # Navigation
+    navigate = true
+    # Hunk styling with subtle background
+    plus-style = "syntax #313244"
+    minus-style = "syntax #313244"
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
+    stat = true
+    # Default merge tool
+    tool = nvimdiff
+
+[mergetool]
+    prompt = false
+    keepBackup = false
+
+# Neovim-based terminal merge tool
+[mergetool "nvimdiff"]
+    cmd = nvim -d "$LOCAL" "$BASE" "$REMOTE" "$MERGED" -c 'wincmd J'
+
+# Difftastic: Syntax-aware merge tool for semantic comparison
+[mergetool "difftastic"]
+    cmd = difft --color=always --display=side-by-side "$LOCAL" "$REMOTE"
+
+[rerere]
+    enabled = true
+    autoupdate = true
 
 [diff]
+    renames = true
     colorMoved = default
-    tool = difftastic
+    # Enable external to use difftastic for default git diff
+    # Comment out to use delta for regular diffs, only use difftastic manually
+    # external = difft
 
 [difftool]
     prompt = false
 
 [difftool "difftastic"]
-    cmd = difft "$LOCAL" "$REMOTE"
+    # Add --color=always for proper colors in terminal and lazygit
+    cmd = difft --color=always "$LOCAL" "$REMOTE"
+
+[pager]
+    # Use delta for log and regular diffs (better line navigation)
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
 
 [interactive]
-    diffFilter = delta --color-only
+    # Delta is the best choice for interactive mode
+    diffFilter = delta --color-only --features=catppuccin-mocha
 
 {{- if eq .chezmoi.os "darwin" }}
 [credential]

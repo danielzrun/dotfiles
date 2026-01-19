@@ -1,10 +1,24 @@
 gui:
+  nerdFontsVersion: "3"
+  sidePanelWidth: 0.333
+  timeFormat: "2006-01-02"
   theme:
+    # Catppuccin Blue for active panel
+    # Bold border for better visual distinction
     activeBorderColor:
-      - cyan
+      - "#89b4fa"
       - bold
+    # Surface2 color for inactive panels
+    inactiveBorderColor:
+      - "#585b70"
 
 git:
   pagers:
-    - pager: delta --dark --paging=never
+    # Delta: Rich syntax highlighting with hyperlinks
+    - pager: delta --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
       colorArg: always
+    # Ydiff: Side-by-side diff view
+    - pager: ydiff -p cat -s --wrap --width={{columnWidth}}
+      colorArg: never
+    # Difftastic: Syntax-aware diff for complex refactoring
+    - externalDiffCommand: difft --color=always --display=inline
