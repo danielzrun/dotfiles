@@ -18,11 +18,12 @@ alias zj='zellij attach --index 0 --create'
 alias zjl='zellij list-sessions'
 # Kill all sessions
 alias zjk='zellij kill-all-sessions'
-# Launch with Claude Code layout (5 tabs with claude command)
-alias zjcc='zellij --layout ~/.config/zellij/layouts/cc.kdl --session claude'
+# Launch with Claude Code layout: attach to "cc" session or create new
+alias zcc='zellij attach cc --create --layout ~/.config/zellij/layouts/cc.kdl'
 
 # -----------------------------------------------------------------------------
 # Utils
 # -----------------------------------------------------------------------------
 alias c="clear"
 alias h="history"
+alias cc="claude"

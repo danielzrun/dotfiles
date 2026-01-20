@@ -11,10 +11,22 @@
 layout_python() {
     local python=${1:-python3}
 
+    # Python-specific environment variables
+    export UV_PYTHON_PREFERENCE="only-managed"
+    export PYTHON_CONFIGURE_OPTS="--enable-optimizations"
+
     # Check for uv project (pyproject.toml with uv)
     if [[ -f "pyproject.toml" ]] && grep -q 'requires-python' pyproject.toml; then
         log_status "Using uv environment"
-        export VIRTUAL_ENV=$(uv venv --quiet --python "$python" 2>/dev/null || echo ".venv")
+        local venv_path="$(pwd)/.venv"
+
+        # Guard clause: ensure variables have values and path exists
+        if [[ ! -d "$venv_path" ]]; then
+            # Create environment using interpreter default
+            uv venv --quiet --python "$python"
+        fi
+
+        export VIRTUAL_ENV="$venv_path"
         export UV_PROJECT_ENVIRONMENT="$VIRTUAL_ENV"
         PATH_add "$VIRTUAL_ENV/bin"
         return
@@ -41,6 +53,14 @@ layout_uv() {
 # Auto-detect and use Node.js versions
 layout_node() {
     local node_version=${1:-}
+
+    # Node.js environment variables
+    export NODE_ENV="${NODE_ENV:-development}"
+    export NPM_CONFIG_PREFIX="$HOME/.npm-global"
+    PATH_add "$NPM_CONFIG_PREFIX/bin"
+
+    # React / JavaScript dev settings
+    export BROWSER="none"  # Prevent auto-opening browser in dev servers
 
     # Check for .node-version file
     if [[ -z "$node_version" ]] && [[ -f ".node-version" ]]; then
@@ -83,15 +103,5 @@ layout_node() {
 # =============================================================================
 # Set common environment variables for all projects
 
-# Python
-export UV_PYTHON_PREFERENCE="only-managed"
-export PYTHON_CONFIGURE_OPTS="--enable-optimizations"
-
-# Node.js
-export NODE_ENV="${NODE_ENV:-development}"
-export NPM_CONFIG_PREFIX="$HOME/.npm-global"
-PATH_add "$NPM_CONFIG_PREFIX/bin"
-
-# React / JavaScript
-export BROWSER="none"  # Prevent auto-opening browser in dev servers
-export FORCE_COLOR=1   # Enable colors in terminals
+# Enable colors in terminals
+export FORCE_COLOR=1

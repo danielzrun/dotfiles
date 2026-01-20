@@ -13,7 +13,7 @@ layout {
                 // Layout: [Left: Mode + Session] [Center: Tabs] [Right: Git + DateTime]
                 format_left   "{mode} #[fg=#89b4fa,bold]{session}"
                 format_center "{tabs}"
-                format_right  "{command_git_branch} {datetime}"
+                format_right  "{datetime}"
                 format_space  ""
 
                 // Border styling (disabled for clean look)
@@ -45,12 +45,6 @@ layout {
                 tab_active              "#[fg=#89b4fa,bold] {index} {name} "
                 tab_active_fullscreen   "#[fg=#89b4fa,bold] {index} {name} [□] "
                 tab_active_sync         "#[fg=#89b4fa,bold] {index} {name} [⚡] "
-
-                // Git branch command
-                command_git_branch_command     "git rev-parse --abbrev-ref HEAD 2>/dev/null || echo ''"
-                command_git_branch_format      "#[fg=#a6e3a1] {stdout}"
-                command_git_branch_interval    "10"
-                command_git_branch_rendermode  "static"
 
                 // DateTime formatting
                 datetime          "#[fg=#bac2de] {format}"

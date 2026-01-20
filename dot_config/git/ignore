@@ -22,3 +22,5 @@ key.txt
 *.key
 *.pem
 .env.local
+
+**/.claude/settings.local.json
