@@ -1,0 +1,9 @@
+{
+  "showInTray": true,
+  "minimizeToTrayOnClose": true,
+  "enableClaudePluginIntegration": false,
+  "skipClaudeOnboarding": true,
+  "launchOnStartup": false,
+  "language": "en",
+  "currentProviderClaude": "18db1b0d-f797-4ef1-8040-775f15d4eb48"
+}

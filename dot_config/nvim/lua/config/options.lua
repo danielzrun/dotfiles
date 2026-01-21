@@ -18,3 +18,6 @@ vim.opt.mouse = "a"
 
 -- Keep 8 lines visible when scrolling
 vim.opt.scrolloff = 8
+
+-- Automatically read file changed outside of Vim
+vim.opt.autoread = true
