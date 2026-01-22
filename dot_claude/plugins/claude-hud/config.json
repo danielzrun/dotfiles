@@ -1,0 +1,22 @@
+{
+  "layout": "default",
+  "pathLevels": 2,
+  "gitStatus": {
+    "enabled": true,
+    "showDirty": true,
+    "showAheadBehind": true,
+    "showFileStats": true
+  },
+  "display": {
+    "showModel": true,
+    "showContextBar": true,
+    "showConfigCounts": true,
+    "showDuration": true,
+    "showUsage": true,
+    "usageBarEnabled": true,
+    "showTokenBreakdown": true,
+    "showTools": true,
+    "showAgents": true,
+    "showTodos": true
+  }
+}
