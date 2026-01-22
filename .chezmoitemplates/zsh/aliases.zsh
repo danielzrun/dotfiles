@@ -24,6 +24,5 @@ alias zcc='zellij attach cc --create --layout ~/.config/zellij/layouts/cc.kdl'
 # -----------------------------------------------------------------------------
 # Utils
 # -----------------------------------------------------------------------------
-alias c="clear"
-alias h="history"
+alias c="claude"
 alias cc="claude"
