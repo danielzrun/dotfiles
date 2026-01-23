@@ -4,7 +4,7 @@
 [mgr]
 # Column width ratio for [parent, current, preview]
 # A ratio of [1, 1, 2] makes the preview pane twice as wide as the others
-ratio = [2,3,5]
+ratio = [1,1,2]
 # Sort directories before files
 sort_dir_first = true
 # Display file size in the status column
