@@ -3,14 +3,16 @@ gui:
   sidePanelWidth: 0.333
   timeFormat: "2006-01-02"
   theme:
-    # Catppuccin Blue for active panel
-    # Bold border for better visual distinction
+    # Catppuccin Blue for active panel border
     activeBorderColor:
       - "#89b4fa"
       - bold
-    # Surface2 color for inactive panels
+    # Surface2 for inactive panels
     inactiveBorderColor:
       - "#585b70"
+    # Surface1 for selected item background (better contrast than bright blue)
+    selectedLineBgColor:
+      - "#45475a"
 
 git:
   pagers:
