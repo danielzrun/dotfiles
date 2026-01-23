@@ -1,6 +1,53 @@
+
 # Global Rules
 
-- **Language**: Be concise. Always respond in Chinese with English in brackets for key terms. Provide a brief English translation of the original prompt at the end.
-- **Git**: Use Gitmoji + Conventional Commits.English commit messages only. Atomic commits only. No AI signatures. NEVER auto-commit or auto-push (local manual commits only).
-- **Comments**: Use English. If >50 chars, must be on a separate line above code.
-- **Code**: Use consistent indentation and formatting. Follow the style guide for the language being used.
+## Speed & Tooling Rules
+
+ALWAYS prioritize performance. Claude Code must use high-performance tools to minimize latency and error rates.
+
+### File Exploration & Search
+
+- **Recursive View:** Use `fd . -t f` (fastest) or `rg --files` (respects .gitignore)
+- **Directory Structure:** Use `fd . -t d`
+- **Content Search:** Use `rg "pattern"`. Use `-i` (case-insensitive) or `-t <type>` (filter)
+
+### JSON & Data Processing
+
+- **Primary Tool:** Use `jq`
+- **Token Efficiency:** ALWAYS use `jq -c` (compact output) to save context tokens
+- **Advanced:** Use `jaq` (Rust version) if available for heavy processing
+
+### Execution Strategy
+
+- **Start Broad:** `rg "partial_term"` to find entry points
+- **Context:** Use `rg -C 5` to understand surrounding logic before editing
+- **Decision:** Use `ls -la` only for single-directory inspection
+
+### Critical Banned List
+
+- **NO** `tree`: Not installed, use `fd . -t d`
+- **NO** `find`: Too slow, use `fd`
+- **NO** `grep`: Too slow, use `rg`
+- **NO** `ls -R`: Inefficient, use `rg --files`
+- **NO** `cat | grep`: Use `rg "pattern" filename`
+
+---
+
+## Global Development Rules
+
+### Language & Response Policy
+
+- **Bilingual:** Chinese responses with English in brackets for key terms
+- **Translation:** ALWAYS provide a brief, idiomatic English rewrite of the user's original prompt at the end of the response for learning purposes
+
+### Git Standards
+
+- **Manual Only:** NEVER auto-commit or auto-push. Local manual commits only
+- **Format:** Use Gitmoji + Conventional Commits
+- **Language:** English commit messages only
+- **Structure:** One commit per logical change. Group related changes from the same session into a single commit. No AI signatures/watermarks
+
+### Code & Comments
+
+- **Comments:** Use English. If >50 chars, place on a separate line above the code
+- **Code Style:** Consistent indentation/formatting following the language style guide
