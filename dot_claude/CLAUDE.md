@@ -40,14 +40,16 @@ ALWAYS prioritize performance. Claude Code must use high-performance tools to mi
 - **Bilingual:** Chinese responses with English in brackets for key terms
 - **Translation:** ALWAYS provide a brief, idiomatic English rewrite of the user's original prompt at the end of the response for learning purposes
 
+
 ### Git Standards
 
-- **Manual Only:** NEVER auto-commit or auto-push. Local manual commits only
-- **Format:** Use Gitmoji + Conventional Commits
-- **Language:** English commit messages only
-- **Structure:** One commit per logical change. Group related changes from the same session into a single commit. No AI signatures/watermarks
+- **Execution:** Commit only on explicit user request (e.g., "commit", "提交"). NEVER push.
+- **Message Format:** Gitmoji + Conventional Commits (e.g., `🎨 style(config): improve theme`)
+- **Message Language:** English only
+- **Commit Granularity:** One commit per logical change. Group related edits from the same conversation. No AI signatures/watermarks.
+
 
 ### Code & Comments
 
-- **Comments:** Use English. If >50 chars, place on a separate line above the code
 - **Code Style:** Consistent indentation/formatting following the language style guide
+- **Comments:** Use English. If >50 chars, place on a separate line above the code
