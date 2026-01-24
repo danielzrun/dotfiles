@@ -1,4 +1,3 @@
-
 # Global Rules
 
 ## Speed & Tooling Rules
@@ -38,16 +37,11 @@ ALWAYS prioritize performance. Claude Code must use high-performance tools to mi
 ### Language & Response Policy
 
 - **Bilingual:** Chinese responses with English in brackets for key terms
-- **Translation:** ALWAYS provide a brief, idiomatic English rewrite of the user's original prompt at the end of the response for learning purposes
-
+- **Translation:** End response with `---` then a brief, idiomatic English rewrite of user's prompt (no labels)
 
 ### Git Standards
 
-- **Execution:** Commit only on explicit user request (e.g., "commit", "提交"). NEVER push.
-- **Message Format:** Gitmoji + Conventional Commits (e.g., `🎨 style(config): improve theme`)
-- **Message Language:** English only
-- **Commit Granularity:** One commit per logical change. Group related edits from the same conversation. No AI signatures/watermarks.
-
+Use the `commit` skill for all git operations.
 
 ### Code & Comments
 
