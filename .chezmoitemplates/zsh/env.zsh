@@ -33,3 +33,12 @@ export VISUAL="$EDITOR"
 # -----------------------------------------------------------------------------
 # Carapace completion engine
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+
+# -----------------------------------------------------------------------------
+# Local Environment Variables
+# -----------------------------------------------------------------------------
+# Claude Code Provider Selector
+# Options: zhipu | packy | default
+# default: Use official Anthropic API (no custom BASE_URL)
+export CLAUDE_PROVIDER="zhipu"
+[[ -f "$HOME/.env" ]] && source "$HOME/.env"

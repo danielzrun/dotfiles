@@ -1,10 +1,11 @@
 {
-  "layout": "default",
+  "lineLayout": "compact",
+  "showSeparators": false,
   "pathLevels": 2,
   "gitStatus": {
     "enabled": true,
     "showDirty": true,
-    "showAheadBehind": true,
+    "showAheadBehind": false,
     "showFileStats": true
   },
   "display": {

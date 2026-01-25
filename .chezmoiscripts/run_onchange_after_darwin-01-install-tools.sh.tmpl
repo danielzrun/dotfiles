@@ -57,6 +57,16 @@ else
     echo "✓ Claude Code already installed"
 fi
 
+# Install Bun
+if ! command -v bun >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing Bun..."
+    # Pretend to be bash to prevent modifying .zshrc
+    SHELL=/bin/bash bash -c 'curl -fsSL https://bun.sh/install | bash'
+else
+    echo "✓ Bun already installed"
+fi
+
 echo ""
 echo "✅ Essential tools synced!"
 
