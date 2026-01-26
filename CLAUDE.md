@@ -4,7 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is a [chezmoi](https://www.chezmoi.io/)-managed dotfiles repository for macOS development, optimized for Python/FastAPI development, modern CLI tools, and Vim workflows. The repository follows chezmoi's template-based structure where `.tmpl` files contain dynamic configuration using Go templating syntax.
+This is a [chezmoi](https://www.chezmoi.io/)-managed dotfiles repository for macOS development,
+optimized for Python/FastAPI development, modern CLI tools, and Vim workflows.
+The repository follows chezmoi's template-based structure where `.tmpl` files contain
+dynamic configuration using Go templating syntax.
 
 ## Common Commands
 
@@ -39,14 +42,15 @@ chezmoi verify
 - **`run_onchange_*.sh.tmpl`** scripts execute automatically when their target file changes (hash-checked)
 
 Key template variables:
+
 - `{{ .chezmoi.hostname }}` - Machine hostname (used for conditional git email)
-- `{{ .chezmoi.os }}` - Operating system (darwin/linux)
+- `{{ .chezmoi.os }}` - Operating System (darwin/linux)
 - `{{ .chezmoi.sourceDir }}` - Path to this repository
 - `{{ template "name" . }}` - Include reusable templates from `.chezmoitemplates/`
 
 ### Directory Structure
 
-```
+```text
 ├── .chezmoitemplates/     # Reusable template snippets
 │   └── zsh/              # Shell configuration modules (python.zsh, modern-tools.zsh)
 ├── .chezmoiscripts/      # Installation and setup scripts
@@ -63,7 +67,7 @@ Key template variables:
 │   └── ...
 ├── dot_zshrc.tmpl        # Main shell configuration
 └── install.sh            # Initial installation script
-```
+```bash
 
 ### Automation Pattern
 
@@ -112,6 +116,7 @@ email = "personal@example.com"
 ### Neovim Configuration
 
 Uses **LazyVim** with:
+
 - `lua/config/lazy.lua` - Lazy.nvim bootstrap
 - `lua/plugins/init.lua` - Plugin overrides (Catppuccin theme)
 - LazyVim plugins are imported; customizations go in `lua/plugins/`
@@ -119,7 +124,7 @@ Uses **LazyVim** with:
 ### Key Tooling Decisions
 
 | Category | Tool | Why |
-|----------|------|-----|
+| :--- | :--- | :--- |
 | Package Manager | Homebrew | macOS standard, declarative via Brewfile |
 | Python | uv | Faster than pip/poetry/pyenv, unified toolchain |
 | Shell History | Atuin | Sync across machines, better search than ctrl+r |
@@ -138,14 +143,17 @@ Uses **LazyVim** with:
 ## Adding New Packages
 
 **For lightweight CLI tools:**
+
 - Edit `dot_config/brew/Brewfile` (organized by category)
 - The `run_onchange_after_*` script will auto-install on next `chezmoi apply`
 
 **For large GUI applications:**
+
 - Edit `dot_config/brew/Brewfile.casks`
 - Install manually: `brew bundle --file=~/.config/brew/Brewfile.casks`
 - Or wait for next `chezmoi apply` (interactive prompt via `run_once_*` script)
 
 ## Platform-Specific Configuration
 
-Use `{{ if eq .chezmoi.os "darwin" }}` for macOS-only blocks (see `dot_config/git/config.tmpl` for osxkeychain credential helper example).
+Use `{{ if eq .chezmoi.os "darwin" }}` for macOS-only blocks
+(see `dot_config/git/config.tmpl` for osxkeychain credential helper example).
