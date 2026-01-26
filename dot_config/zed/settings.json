@@ -1,5 +1,6 @@
 // Zed settings - Only non-default configurations
 {
+  "auto_update": false,
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "on_yank",
