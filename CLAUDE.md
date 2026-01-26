@@ -51,6 +51,7 @@ Key template variables:
 ### Directory Structure
 
 ```text
+
 ├── .chezmoitemplates/     # Reusable template snippets
 │   └── zsh/              # Shell configuration modules (python.zsh, modern-tools.zsh)
 ├── .chezmoiscripts/      # Installation and setup scripts

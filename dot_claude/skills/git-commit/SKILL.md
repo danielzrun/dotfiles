@@ -13,6 +13,7 @@ Extends the official `commit-commands` plugin with custom Git Standards.
 ## Trigger
 
 This skill is automatically invoked when user says:
+
 - "commit"
 - "提交"
 - Semantically similar phrases requesting a commit
@@ -20,6 +21,7 @@ This skill is automatically invoked when user says:
 ## Git Standards
 
 ### Message Format
+
 - **Format:** `emoji type[(scope)]: description`
 - **Type mapping:**
     ✨ feat     🐛 fix      📝 docs    🎨 style    ♻️ refactor
@@ -29,10 +31,12 @@ This skill is automatically invoked when user says:
 - **Example:** `🎨 style(config): improve theme`
 
 ### Message Requirements
+
 - English only
 - No AI signatures/watermarks
 
 ### Commit Granularity
+
 - One commit per type[(scope)]
 - Group commits with same type and scope
 - If no scope, group by type only
@@ -43,6 +47,7 @@ This skill is automatically invoked when user says:
 Follow the official `commit-commands` plugin workflow:
 
 ### 1. Get Context
+
 ```bash
 git status
 git diff HEAD
@@ -51,7 +56,9 @@ git log --oneline -10
 ```
 
 ### 2. Determine Type
+
 Analyze the changes to identify the conventional commit type:
+
 - **feat:** New feature
 - **fix:** Bug fix
 - **docs:** Documentation changes
@@ -65,31 +72,37 @@ Analyze the changes to identify the conventional commit type:
 - **revert:** Revert a previous commit
 
 ### 3. Determine Scope (Optional)
+
 - Scope = Module/component name affected by the change
 - **Always ask user before adding scope**
 - If changes are project-wide or ambiguous, omit scope
 
 ### 4. Generate Commit Message
+
 Based on type and scope analysis, propose a commit message following the format:
 
 **Title (required):**
-```
+
+```text
 emoji type[(scope)]: description
 ```
 
 **Body (optional but recommended for multi-file or complex changes):**
-```
+
+```text
 - Bullet point 1
 - Bullet point 2
 ```
 
 Use body when:
+
 - More than 2 files are changed
 - Changes have multiple distinct aspects
 - Migration or refactoring steps need explanation
 
 ### 5. Confirm with User
-```
+
+```text
 Proposed commit message:
 <message>
 
@@ -100,14 +113,17 @@ Confirm? Reply 'yes' or provide corrections.
 ```
 
 ### 6. Execute Commit
+
 After user confirmation, stage and commit using allowed tools:
 
 **For single-line message:**
+
 ```bash
 git commit -m "<title>"
 ```
 
 **For message with body:**
+
 ```bash
 git commit -m "<title>" -m "<body>"
 ```
@@ -125,6 +141,7 @@ git commit -m "<title>" -m "<body>"
 | Libraries | parser, formatter, validator, logger |
 
 **How to identify scope:**
+
 1. Check project structure (directories/packages)
 2. Map changed files to their module
 3. Use the module/directory name as scope
