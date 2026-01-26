@@ -1,0 +1,24 @@
+# Claude Code Plugin Marketplaces
+#
+# This file defines the plugin marketplaces to install on this machine.
+# Each line format: github-owner/repo
+# Lines starting with # are comments and will be ignored.
+#
+# The marketplace name is automatically derived from the repo name.
+# For example: "anthropics/claude-plugins-official" becomes "claude-plugins-official"
+#
+# To add a new marketplace:
+# 1. Add a new line: owner/repo
+# 2. Run: chezmoi apply
+#
+# To remove a marketplace:
+# 1. Remove the line from this file
+# 2. Manually run: claude plugin marketplace remove <name>
+#
+# Changes to this file will trigger automatic sync via chezmoi's run_onchange script.
+
+# Official Anthropic plugins marketplace
+anthropics/claude-plugins-official
+
+# Claude HUD plugin for status line display
+jarrodwatts/claude-hud

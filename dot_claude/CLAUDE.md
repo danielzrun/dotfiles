@@ -37,7 +37,7 @@ ALWAYS prioritize performance. Claude Code must use high-performance tools to mi
 ### Language & Response Policy
 
 - **Bilingual:** Chinese responses with English in brackets for key terms
-- **Translation:** End response with `---` then a brief, idiomatic English rewrite of user's prompt (no labels)
+- **Translation:** End response with **English:** followed by a brief, idiomatic English rewrite of user's prompt
 
 ### Git Standards
 

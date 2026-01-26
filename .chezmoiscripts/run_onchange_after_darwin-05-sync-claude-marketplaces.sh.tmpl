@@ -1,0 +1,57 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+# =============================================================================
+# Sync Claude Code Plugin Marketplaces
+# =============================================================================
+# This script automatically syncs plugin marketplaces defined in marketplaces.txt
+# Triggers on changes to the marketplaces.txt file
+# hash: {{ include "dot_claude/marketplaces.txt" | sha256sum }}
+
+set -euo pipefail
+
+echo "🔄 Syncing Claude Code plugin marketplaces..."
+
+# Check if claude command exists
+if ! command -v claude &> /dev/null; then
+    echo "⚠️  'claude' command not found. Install Claude Code first."
+    exit 0
+fi
+
+# Path to marketplaces config file
+MARKETPLACES_FILE="{{ .chezmoi.sourceDir }}/dot_claude/marketplaces.txt"
+
+if [ ! -f "$MARKETPLACES_FILE" ]; then
+    echo "⚠️  Marketplaces file not found: $MARKETPLACES_FILE"
+    exit 0
+fi
+
+# Get currently installed marketplaces
+echo "📋 Reading installed marketplaces..."
+INSTALLED_MARKETPLACES=$(claude plugin marketplace list 2>/dev/null | grep "❯" | awk '{print $2}' || echo "")
+
+# Read marketplaces.txt and install missing ones
+echo "📦 Processing marketplace list..."
+while IFS= read -r repo || [ -n "$repo" ]; do
+    # Skip empty lines and comments
+    [[ -z "$repo" || "$repo" =~ ^# ]] && continue
+
+    # Extract marketplace name from repo (e.g., "owner/repo-name" -> "repo-name")
+    name="${repo##*/}"
+
+    # Check if marketplace is already installed
+    if echo "$INSTALLED_MARKETPLACES" | grep -q "^${name}$"; then
+        echo "✓ Marketplace already installed: $name"
+    else
+        echo "📥 Installing marketplace: $name (${repo})..."
+        claude plugin marketplace add "${repo}" || {
+            echo "⚠️  Failed to install marketplace: $name"
+            continue
+        }
+        echo "✅ Installed: $name"
+    fi
+done < "$MARKETPLACES_FILE"
+
+echo ""
+echo "✅ Claude Code marketplaces synced!"
+
+{{- end -}}
