@@ -16,6 +16,9 @@ vim.keymap.set({ "n", "v" }, "<D-v>", '"+p', { desc = "Paste from system clipboa
 -- Paste from system clipboard using Cmd+V in insert mode
 vim.keymap.set("i", "<D-v>", "<C-r>+", { desc = "Paste from system clipboard" })
 
+-- Save file using Cmd+S
+vim.keymap.set({ "n", "i", "v" }, "<D-s>", "<cmd>w<cr>", { desc = "Save file" })
+
 -- Scroll viewport without moving cursor (scroll wheel behavior)
 vim.keymap.set({ "n", "v" }, "<ScrollWheelUp>", "<C-y>", { silent = true, desc = "Scroll viewport up" })
 vim.keymap.set({ "n", "v" }, "<ScrollWheelDown>", "<C-e>", { silent = true, desc = "Scroll viewport down" })
