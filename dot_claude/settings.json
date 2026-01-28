@@ -61,9 +61,6 @@
       "mcp__chrome-devtools__*",
       "WebFetch(domain:docs.anthropic.com)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:openrouter.ai)",
-      "WebFetch(domain:www.comet.com)",
-      "WebFetch(domain:docs.convex.dev)",
       "WebFetch(domain:docs.z.ai)",
       "WebFetch(domain:pypi.org)",
       "WebSearch"
@@ -71,7 +68,15 @@
     "deny": [
       "Bash(rm -rf /:*)",
       "Bash(sudo:*)",
-      "Bash(reboot)"
+      "Bash(reboot)",
+      "Bash(ls /)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(~/.env)",
+      "Read(~/.env.*)",
+      "Read(~/.ssh/*)",
+      "Read(~/.ssh/id_*)",
+      "Read(~/.aws/credentials)"
     ],
     "defaultMode": "plan"
   },
