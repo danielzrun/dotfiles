@@ -40,5 +40,5 @@ export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 # Claude Code Provider Selector
 # Options: zhipu | packy | default
 # default: Use official Anthropic API (no custom BASE_URL)
-export CLAUDE_PROVIDER="zhipu"
+export CLAUDE_PROVIDER="packy"
 [[ -f "$HOME/.env" ]] && source "$HOME/.env"

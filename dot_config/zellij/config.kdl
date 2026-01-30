@@ -11,6 +11,7 @@ pane_frames false                  // Hide frames by default
 show_tips false                    // Disable startup tips
 show_release_notes false           // Disable release notes
 
+
 themes {
     catppuccin-mocha {
         bg "#1e1e2e"

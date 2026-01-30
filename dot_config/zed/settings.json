@@ -1,5 +1,8 @@
 // Zed settings - Only non-default configurations
 {
+  "title_bar": {
+    "show_branch_icon": true
+  },
   "auto_update": false,
   "vim_mode": true,
   "vim": {
@@ -44,7 +47,7 @@
     }
   },
   "tabs": {
-    "file_icons": false
+    "file_icons": true
   },
   "prettier": {
     "allowed": false
