@@ -30,9 +30,3 @@ disabled = false
 success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
 vicmd_symbol = "[←](bold green)"
-
-# Zellij session indicator
-[custom.zellij]
-command = "echo '[ Zellij ]'"
-when = "[[ -n $ZELLIJ ]]"
-format = "[$output](bold blue italic) "

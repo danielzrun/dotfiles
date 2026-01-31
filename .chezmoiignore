@@ -1,4 +1,5 @@
 .config/chezmoi/*
+.config/tmux/plugins/*
 install.sh
 README.md
 CLAUDE.md

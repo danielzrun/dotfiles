@@ -1,5 +1,5 @@
 # ====================================================================
-# Vi-mode Configuration - Cursor shape changes for Zellij/Ghostty
+# Vi-mode Configuration - Cursor shape changes for Ghostty
 # ====================================================================
 
 # Reduce ESC delay for vi-mode (default 0.4s is too slow)

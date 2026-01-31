@@ -116,7 +116,7 @@ brew "duti"          # Set default file associations
 # -----------------------------------------------------------------------------
 # Terminal
 # -----------------------------------------------------------------------------
-brew "zellij"        # Modern terminal multiplexer (Rust, better UX than tmux)
+brew "tmux"          # Terminal multiplexer
 
 # -----------------------------------------------------------------------------
 # Fonts

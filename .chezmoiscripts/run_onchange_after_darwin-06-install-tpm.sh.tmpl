@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# =============================================================================
+# Install TPM (Tmux Plugin Manager)
+# =============================================================================
+# This script automatically installs TPM if not present
+# Triggers on changes to tmux config
+# hash: {{ include "dot_config/tmux/tmux.conf.tmpl" | sha256sum }}
+
+set -euo pipefail
+
+TPM_DIR="{{ .chezmoi.homeDir }}/.config/tmux/plugins/tpm"
+
+if [ ! -d "$TPM_DIR" ]; then
+    echo "📦 Installing TPM (Tmux Plugin Manager)..."
+    mkdir -p "$(dirname "$TPM_DIR")"
+    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
+    echo "✓ TPM installed to $TPM_DIR"
+    echo ""
+    echo "🔧 To install plugins, press: Ctrl+b + Shift+i"
+else
+    echo "✓ TPM already installed"
+fi

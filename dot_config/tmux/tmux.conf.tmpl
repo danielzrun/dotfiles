@@ -1,0 +1,69 @@
+# =============================================================================
+# Tmux Configuration
+# =============================================================================
+
+# General Settings
+# -----------------------------------------------------------------------------
+
+# Enable 256 colors and true color support
+set -g default-terminal "screen-256color"
+set-option -ga terminal-overrides ",xterm-256color:Tc"
+
+# Enable mouse support
+set -g mouse on
+
+# Enable automatic renaming by default
+# Programs can rename windows automatically
+set -g allow-rename on
+set -g automatic-rename on
+
+# Start window and pane indexing from 1
+set -g base-index 1
+set -g pane-base-index 1
+set-window-option -g pane-base-index 1
+set-option -g renumber-windows on
+
+# Key Bindings
+# -----------------------------------------------------------------------------
+
+# Reload configuration file
+bind r source-file {{ .chezmoi.homeDir }}/.config/tmux/tmux.conf \; display "Reloaded!"
+
+# Toggle window name lock/unlock
+# Use a window variable to track lock state
+bind-key -T prefix , run-shell ' \
+  if [ "$(tmux show-window-options -v @window_locked 2>/dev/null)" = "1" ]; then \
+    tmux set-window-option -u @window_locked \; set-window-option automatic-rename on \; set-window-option allow-rename on \; display-message "Window unlocked"; \
+  else \
+    tmux command-prompt -p "Lock Name:" "rename-window \"%%\" ; set-window-option @window_locked 1 ; set-window-option automatic-rename off ; set-window-option allow-rename off ; display-message \"Window locked\""; \
+  fi'
+
+# Plugins
+# -----------------------------------------------------------------------------
+
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+
+# UI Theme (Catppuccin)
+set -g @plugin 'catppuccin/tmux'
+set -g @catppuccin_flavour 'mocha'
+
+# Plugin Configuration
+# -----------------------------------------------------------------------------
+
+# Catppuccin status bar configuration
+set -g @catppuccin_status_fill "icon"
+set -g @catppuccin_window_status_style "basic"
+
+# Initialize TPM (must be at the bottom)
+# -----------------------------------------------------------------------------
+run '{{ .chezmoi.homeDir }}/.config/tmux/plugins/tpm/tpm'
+
+# Status line setup
+# Session module shows prefix status via color change (green -> red)
+set -g status-right "#{E:@catppuccin_status_session}"
+
+# Window status format (must be after TPM to override Catppuccin defaults)
+# Use #W for window name instead of #T for title
+set -g window-status-format "#[fg=#11111b,bg=#{@thm_overlay_2}] #I #[fg=#cdd6f4,bg=#{@thm_surface_0}] #W "
+set -g window-status-current-format "#[fg=#11111b,bg=#{@thm_mauve}] #I #[fg=#cdd6f4,bg=#{@thm_surface_1}] #W "
