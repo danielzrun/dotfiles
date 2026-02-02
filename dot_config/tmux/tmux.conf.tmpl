@@ -26,12 +26,24 @@ set-option -g renumber-windows on
 # Key Bindings
 # -----------------------------------------------------------------------------
 
+# Prefix key (Ctrl+a instead of Ctrl+b)
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# Start new panes in current directory
+bind c new-window -c "#{pane_current_path}"
+unbind '"'
+unbind %
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
 # Reload configuration file
 bind r source-file {{ .chezmoi.homeDir }}/.config/tmux/tmux.conf \; display "Reloaded!"
 
 # Toggle window name lock/unlock
 # Use a window variable to track lock state
-bind-key -T prefix , run-shell ' \
+bind , run-shell ' \
   if [ "$(tmux show-window-options -v @window_locked 2>/dev/null)" = "1" ]; then \
     tmux set-window-option -u @window_locked \; set-window-option automatic-rename on \; set-window-option allow-rename on \; display-message "Window unlocked"; \
   else \
@@ -55,15 +67,14 @@ set -g @catppuccin_flavour 'mocha'
 set -g @catppuccin_status_fill "icon"
 set -g @catppuccin_window_status_style "basic"
 
+# Window status text: show #T normally, #W when locked
+set -g @catppuccin_window_text "#{?#{@window_locked},#W,#T}"
+set -g @catppuccin_window_current_text "#{?#{@window_locked},#W,#T}"
+
+set -g status-left ""
+# Session module shows prefix status via color change (green -> red)
+set -g status-right "#[fg=#{@thm_mauve}][#H] #{E:@catppuccin_status_session}"
+
 # Initialize TPM (must be at the bottom)
 # -----------------------------------------------------------------------------
 run '{{ .chezmoi.homeDir }}/.config/tmux/plugins/tpm/tpm'
-
-# Status line setup
-# Session module shows prefix status via color change (green -> red)
-set -g status-right "#{E:@catppuccin_status_session}"
-
-# Window status format (must be after TPM to override Catppuccin defaults)
-# Use #W for window name instead of #T for title
-set -g window-status-format "#[fg=#11111b,bg=#{@thm_overlay_2}] #I #[fg=#cdd6f4,bg=#{@thm_surface_0}] #W "
-set -g window-status-current-format "#[fg=#11111b,bg=#{@thm_mauve}] #I #[fg=#cdd6f4,bg=#{@thm_surface_1}] #W "

@@ -35,6 +35,17 @@ source $ZSH/oh-my-zsh.sh
 # -----------------------------------------------------------------------------
 # Shell Options
 # -----------------------------------------------------------------------------
+
+# Window Title
+# Set window title to current directory instead of hostname
+case $TERM in
+  xterm*|tmux*|screen*)
+    precmd() {
+      print -Pn "\e]0;%~\a"
+    }
+    ;;
+esac
+
 # History
 HISTSIZE=50000
 SAVEHIST=50000

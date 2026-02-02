@@ -18,3 +18,7 @@ cursor-style-blink = false
 
 # macOS
 macos-option-as-alt = true
+
+# Shell Integration
+# Automatically sync terminfo to remote hosts via SSH, fixing terminal recognition issues
+shell-integration-features = ssh-terminfo

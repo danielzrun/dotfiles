@@ -1,0 +1,2 @@
+# Fix mosh-server PATH issue on macOS
+export PATH="/opt/homebrew/bin:$PATH"
