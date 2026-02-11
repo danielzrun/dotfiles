@@ -3,7 +3,6 @@
   "title_bar": {
     "show_branch_icon": true
   },
-  "auto_update": false,
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "on_yank",
