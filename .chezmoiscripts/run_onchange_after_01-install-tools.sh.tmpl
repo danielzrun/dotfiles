@@ -1,20 +1,23 @@
-{{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 # =============================================================================
 # Essential Tools Installation
 # =============================================================================
 # This script runs when its content changes (via run_onchange_ prefix)
 # Use this for tools that should be kept up-to-date with config changes
-# Hash: {{ include ".chezmoiscripts/run_onchange_after_darwin-01-install-tools.sh.tmpl" | sha256sum }}
+# Hash: {{ include ".chezmoiscripts/run_onchange_after_01-install-tools.sh.tmpl" | sha256sum }}
 
-# Install Homebrew if not present
+# Install Homebrew if not present (supports both macOS and Linux)
 if ! command -v brew >/dev/null 2>&1; then
-    echo "⚠️  Homebrew not found. Installing Homebrew first..."
+    echo "⚠️  Homebrew not found. Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-    # Add Homebrew to PATH for Apple Silicon
+    # Add Homebrew to PATH for current session
     if [[ -d "/opt/homebrew" ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    elif [[ -d "/usr/local/bin/brew" ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
     fi
 fi
 
@@ -69,5 +72,3 @@ fi
 
 echo ""
 echo "✅ Essential tools synced!"
-
-{{- end -}}

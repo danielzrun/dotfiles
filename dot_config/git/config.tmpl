@@ -101,4 +101,7 @@
 {{- if eq .chezmoi.os "darwin" }}
 [credential]
     helper = osxkeychain
+{{- else if eq .chezmoi.os "linux" }}
+[credential]
+    helper = store
 {{- end }}

@@ -1,8 +1,10 @@
 # Dotfiles
 
-Modern macOS dotfiles managed with [chezmoi](https://www.chezmoi.io/).
+Cross-platform dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 
 Optimized for Python/FastAPI development with modern CLI tools and Neovim workflows.
+
+**Supports**: macOS (Apple Silicon + Intel) and Linux (Ubuntu/Debian)
 
 ## Features
 
@@ -11,7 +13,7 @@ Optimized for Python/FastAPI development with modern CLI tools and Neovim workfl
 - **Python**: uv-based workflow with FastAPI aliases
 - **AI**: Claude Code assistant
 - **Shell**: Zsh + Oh My Zsh with curated plugins and vi-mode
-- **Automation**: One-time macOS defaults and Homebrew package installation
+- **Automation**: One-command setup via Homebrew (macOS & Linux)
 - **Security**: Age encryption for sensitive config
 
 ## Quick Start
@@ -40,14 +42,20 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply YOUR_GITHUB_USERNAME
 | **Python** | `uvs` (sync), `uvr` (run), `uvdev` (FastAPI) |
 | **Neovim** | LazyVim + Catppuccin theme |
 | **Claude Code** | AI coding assistant |
-| **Git** | Aliases: `lg`, `ll`, `amend`, `undo`, `clean-branches` |
+| **Terminal** | ghostty (macOS only), starship prompt |
+| **History** | atuin (sync across machines) |
 
-### macOS Automation
+### Platform Automation
 
+**macOS:**
 - **System**: Fast key repeat (1ms), disabled auto-correction
 - **Finder**: Full path in title, search current folder by default
 - **Dock**: Auto-hide with zero delay, no recent apps
 - **Screenshots**: PNG format, no shadow
+
+**Linux:**
+- **Package Manager**: Homebrew for Linux or native package manager
+- All CLI tools install automatically via cross-platform scripts
 
 ## Common Commands
 
@@ -79,7 +87,9 @@ chezmoi update               # Pull latest from git
 │   ├── lazygit/config.yml      # Git TUI
 │   ├── atuin/config.toml       # Shell history
 │   └── direnv/                 # Project-specific env
-├── run_once_*.sh.tmpl          # One-time setup (tools, packages, defaults, apps)
+├── run_once_*.sh.tmpl          # One-time setup (platform-specific)
+├── run_onchange_after_*.tmpl    # Cross-platform scripts (tools, packages, plugins)
+└── run_onchange_after_darwin-*.tmpl  # macOS-specific scripts (GUI apps, defaults)
 ```
 
 ## Customization

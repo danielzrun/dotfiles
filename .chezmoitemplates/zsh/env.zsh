@@ -14,8 +14,14 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # Homebrew
 # -----------------------------------------------------------------------------
 # Initialize Homebrew environment (sets HOMEBREW_PREFIX, PATH, MANPATH, etc.)
+# macOS Apple Silicon
 if [[ -d "/opt/homebrew" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
+# Linux / macOS Intel
+elif [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ -d "/usr/local/bin/brew" ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
 fi
 
 export HOMEBREW_NO_AUTO_UPDATE=1      # Disable auto-update (update manually with `brew update`)

@@ -16,8 +16,10 @@ window-padding-y = 4
 # Cursor
 cursor-style-blink = false
 
+{{- if eq .chezmoi.os "darwin" }}
 # macOS
 macos-option-as-alt = true
+{{- end }}
 
 # Shell Integration
 # Automatically sync terminfo to remote hosts via SSH, fixing terminal recognition issues

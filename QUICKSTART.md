@@ -235,14 +235,23 @@ Cmd+C / Cmd+V           # Copy/Paste (normal/insert mode)
 # Close tab: Cmd+W
 ```
 
-### zellij (Terminal Multiplexer)
+### tmux (Terminal Multiplexer)
 
 ```bash
-zellij                  # Start session
+tmux                    # Start session
 
-# Keybindings
-Ctrl+P then s           # Split pane
-Ctrl+P then t           # New tab
-Ctrl+P then w           # Close pane
-Ctrl+P then o           # Toggle pane
+# Prefix key: Ctrl+A (customized from default Ctrl+B)
+# Keybindings (press Ctrl+A then:)
+Ctrl+A c                # New window
+Ctrl+A n / Ctrl+A p     # Next/previous window
+Ctrl+A 0-9              # Switch to window by number
+Ctrl+A ,                # Rename window
+Ctrl+A w                # List windows
+Ctrl+A %                # Split pane vertically
+Ctrl+A "                # Split pane horizontally
+Ctrl+A arrow keys       # Navigate panes
+Ctrl+A x                # Close pane
+Ctrl+A d                # Detach session
+tmux ls                 # List sessions
+tmux attach             # Reattach to session
 ```
