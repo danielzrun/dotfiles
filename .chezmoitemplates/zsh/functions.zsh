@@ -168,11 +168,11 @@ function y() {
 }
 
 # Claude Code Provider Switcher
-# Usage: ccs [zhipu|packy|default]
+# Usage: ccs [zhipu|packy|openrouter|default]
 function ccs() {
 	local env_file="$HOME/.env"
 	local provider="${1:-}"
-	local valid_providers=("zhipu" "packy" "default")
+	local valid_providers=("zhipu" "packy" "openrouter" "default")
 
 	# Show current provider if no argument
 	if [[ -z "$provider" ]]; then
