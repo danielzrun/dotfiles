@@ -166,3 +166,45 @@ function y() {
 	fi
 	rm -f -- "$tmp"
 }
+
+# Claude Code Provider Switcher
+# Usage: ccs [zhipu|packy|default]
+function ccs() {
+	local env_file="$HOME/.env"
+	local provider="${1:-}"
+	local valid_providers=("zhipu" "packy" "default")
+
+	# Show current provider if no argument
+	if [[ -z "$provider" ]]; then
+		if [[ -f "$env_file" ]]; then
+			grep "export CLAUDE_PROVIDER=" "$env_file" 2>/dev/null | cut -d'"' -f2 || echo "default"
+		else
+			echo "default (.env not found)"
+		fi
+		return 0
+	fi
+
+	# Validate provider
+	if [[ ! " ${valid_providers[@]} " =~ " ${provider} " ]]; then
+		echo "❌ Invalid provider: $provider"
+		echo "   Valid options: ${valid_providers[*]}"
+		return 1
+	fi
+
+	# Check .env exists
+	if [[ ! -f "$env_file" ]]; then
+		echo "❌ Error: $env_file not found"
+		echo "   Please create ~/.env with your provider configurations first"
+		return 1
+	fi
+
+	# Update CLAUDE_PROVIDER in .env
+	sed -i '' "s/export CLAUDE_PROVIDER=.*/export CLAUDE_PROVIDER=\"$provider\"/" "$env_file" 2>/dev/null || \
+	sed -i "s/export CLAUDE_PROVIDER=.*/export CLAUDE_PROVIDER=\"$provider\"/" "$env_file"
+
+	# Reload environment
+	source "$env_file"
+
+	# Show result
+	echo "✅ Switched to: $provider"
+}
