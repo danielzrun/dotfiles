@@ -1,0 +1,17 @@
+# =============================================================================
+# pipx - Python Applications
+# =============================================================================
+# Add Python packages to install globally with pipx.
+# One package name per line. Comments start with #.
+# =============================================================================
+
+# Data Science
+kaggle
+
+# Development Tools
+# pre-commit
+# poetry
+
+# CLI Utilities
+# httpie
+# rich

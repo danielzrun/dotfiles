@@ -1,0 +1,37 @@
+#!/bin/bash
+set -euo pipefail
+
+# =============================================================================
+# pipx Python Applications Installation
+# =============================================================================
+# This script runs when Pipxfile changes
+# Hash: {{ include "dot_config/pipx/Pipxfile" | sha256sum }}
+
+echo "🐍 Syncing pipx packages..."
+
+if ! command -v pipx &> /dev/null; then
+    echo "⚠️  pipx not found, skipping..."
+    exit 0
+fi
+
+PACKAGES_FILE="{{ .chezmoi.sourceDir }}/dot_config/pipx/Pipxfile"
+
+if [ ! -f "$PACKAGES_FILE" ]; then
+    echo "⚠️  Pipxfile not found: $PACKAGES_FILE"
+    exit 0
+fi
+
+while IFS= read -r package || [ -n "$package" ]; do
+    # Skip empty lines and comments
+    [[ -z "$package" || "$package" =~ ^# ]] && continue
+
+    # Check if package is already installed
+    if pipx list | grep -q "^   $package" || pipx list | grep -q " $package "; then
+        echo "  ✓ $package"
+    else
+        echo "  📦 Installing $package..."
+        pipx install "$package" || true
+    fi
+done < "$PACKAGES_FILE"
+
+echo "✅ pipx packages synced!"

@@ -97,9 +97,10 @@ brew "age"           # File encryption
 # -----------------------------------------------------------------------------
 # Python Development (uv + FastAPI)
 # -----------------------------------------------------------------------------
-brew "python@3.12"
+brew "python@3.14"
 brew "uv"            # Fast Python package/project manager (replaces pip/poetry/pyenv)
 brew "ruff"          # Fast Python linter/formatter
+brew "pipx"          # Install and run Python applications in isolated environments
 
 # -----------------------------------------------------------------------------
 # Node.js Development
