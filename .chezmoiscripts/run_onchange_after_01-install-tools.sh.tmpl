@@ -76,7 +76,7 @@ fi
 if ! command -v starship >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing starship..."
-    curl -sS https://starship.rs/install.sh | sh
+    curl -sS https://starship.rs/install.sh | sh -s -- -y
 else
     echo "✓ starship already installed"
 fi
@@ -85,7 +85,7 @@ fi
 if ! command -v atuin >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing atuin..."
-    curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh | bash
+    curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh | bash -- --yes
 else
     echo "✓ atuin already installed"
 fi
@@ -106,7 +106,7 @@ if ! command -v yazi >/dev/null 2>&1; then
 else
     echo "✓ yazi already installed"
 fi
-{{- end -}}
+{{- end }}
 
 echo ""
 echo "✅ Essential tools synced!"
