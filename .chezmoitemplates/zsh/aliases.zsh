@@ -16,7 +16,7 @@ alias cc="claude"
 alias c="claude"
 alias cb="claude --dangerously-skip-permissions"
 
-{{- if eq .chezmoi.os "linux" -}}
+{{ if eq .chezmoi.os "linux" -}}
 # Linux-specific: fd-find installs as fdfind
 alias fd="fdfind"
-{{- end -}}
+{{- end }}
