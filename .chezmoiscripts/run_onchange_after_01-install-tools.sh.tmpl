@@ -76,7 +76,7 @@ fi
 if ! command -v starship >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing starship..."
-    curl -sS https://starship.rs/install.sh | sh -s -- -y
+    sudo curl -sS https://starship.rs/install.sh | sh -s -- -y
 else
     echo "✓ starship already installed"
 fi
