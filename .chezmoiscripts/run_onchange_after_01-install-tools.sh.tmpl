@@ -106,6 +106,27 @@ if ! command -v yazi >/dev/null 2>&1; then
 else
     echo "✓ yazi already installed"
 fi
+
+# Install neovim latest (Linux only)
+echo ""
+echo "📦 Installing neovim..."
+# Remove apt version if exists
+sudo apt-get remove -y neovim 2>/dev/null || true
+NVIM_TEMP=$(mktemp -d)
+NVOM=$(uname -m)
+if [ "$NVOM" = "aarch64" ] || [ "$NVOM" = "arm64" ]; then
+    NVOM="arm64"
+else
+    NVOM="x86_64"
+fi
+curl -sL "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz" -o "$NVIM_TEMP/nvim.tar.gz"
+tar -xzf "$NVIM_TEMP/nvim.tar.gz" -C "$NVIM_TEMP"
+mkdir -p ~/.local
+rm -rf ~/.local/nvim-linux64
+mv "$NVIM_TEMP/nvim-linux64" ~/.local/
+ln -sf ~/.local/nvim-linux64/bin/nvim ~/.local/bin/nvim
+rm -rf "$NVIM_TEMP"
+echo "✓ neovim installed"
 {{- end }}
 
 echo ""
