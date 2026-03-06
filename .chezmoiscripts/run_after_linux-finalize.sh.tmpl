@@ -1,0 +1,19 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# =============================================================================
+# Linux Setup Completion
+# =============================================================================
+# This script runs after all other scripts on every chezmoi apply
+# Confirms dotfiles setup is complete
+
+set -euo pipefail
+
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "✅ Ubuntu dotfiles setup complete!"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
+echo "Next steps:"
+echo "  • Restart your shell or run: exec zsh"
+echo "  • Check installed tools: command -v fzf rg bat eza"
+echo ""
+{{- end -}}

@@ -82,6 +82,7 @@ brew "mole"          # Clean tool
 # -----------------------------------------------------------------------------
 brew "ast-grep"      # Code search/rewrite by AST
 brew "hyperfine"     # Command-line benchmarking
+brew "just"          # Command runner (like make, but easier)
 brew "tldr"          # Simplified man pages
 
 # -----------------------------------------------------------------------------

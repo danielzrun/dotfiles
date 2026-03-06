@@ -6,7 +6,8 @@
 # Use this for tools that should be kept up-to-date with config changes
 # Hash: {{ include ".chezmoiscripts/run_onchange_after_01-install-tools.sh.tmpl" | sha256sum }}
 
-# Install Homebrew if not present (supports both macOS and Linux)
+{{ if eq .chezmoi.os "darwin" -}}
+# Install Homebrew (macOS only)
 if ! command -v brew >/dev/null 2>&1; then
     echo "⚠️  Homebrew not found. Installing Homebrew..."
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -14,12 +15,11 @@ if ! command -v brew >/dev/null 2>&1; then
     # Add Homebrew to PATH for current session
     if [[ -d "/opt/homebrew" ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
-    elif [[ -d "/home/linuxbrew/.linuxbrew" ]]; then
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     elif [[ -d "/usr/local/bin/brew" ]]; then
         eval "$(/usr/local/bin/brew shellenv)"
     fi
 fi
+{{- end }}
 
 # Install Oh My Zsh if not present
 if [ ! -d "$HOME/.oh-my-zsh" ]; then

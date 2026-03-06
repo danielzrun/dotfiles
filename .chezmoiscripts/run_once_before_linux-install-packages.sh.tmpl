@@ -1,0 +1,40 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# =============================================================================
+# Ubuntu Essential Packages Installation
+# =============================================================================
+# Runs only once on first chezmoi apply (via run_once_ prefix)
+# Installs zsh and git required for dotfiles setup
+
+set -euo pipefail
+
+echo "📦 Installing essential Ubuntu packages (zsh, git, unzip)..."
+
+# Check for Ubuntu
+if [ ! -f /etc/os-release ] || ! grep -qi "ubuntu" /etc/os-release; then
+    echo "⚠️  This script only supports Ubuntu"
+    exit 1
+fi
+
+# Check and install packages separately
+PACKAGES=""
+
+if ! command -v zsh >/dev/null 2>&1; then
+    PACKAGES="$PACKAGES zsh"
+fi
+
+if ! command -v git >/dev/null 2>&1; then
+    PACKAGES="$PACKAGES git"
+fi
+
+if ! command -v unzip >/dev/null 2>&1; then
+    PACKAGES="$PACKAGES unzip"
+fi
+
+# Update package list and install
+sudo apt-get update
+# shellcheck disable=SC2086
+sudo apt-get install -y $PACKAGES
+
+echo "✅ Essential packages installed!"
+{{- end -}}
