@@ -15,8 +15,8 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 sudo add-apt-repository universe -y 2>/dev/null || true
 sudo apt-get update
 
-# Install packages from Aptfile
-xargs -a {{ .chezmoi.sourceDir }}/dot_config/ubuntu/Aptfile sudo apt-get install -y
+# Install packages from Aptfile (filter comments and empty lines)
+grep -v '^#' {{ .chezmoi.sourceDir }}/dot_config/ubuntu/Aptfile | grep -v '^$' | xargs sudo apt-get install -y
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
