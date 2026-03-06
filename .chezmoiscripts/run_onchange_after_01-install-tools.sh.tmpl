@@ -90,26 +90,23 @@ else
     echo "✓ atuin already installed"
 fi
 
-# Install yazi
-if ! command -v yazi >/dev/null 2>&1; then
-    echo ""
-    echo "📦 Installing yazi..."
-    sh -c "$(curl -sSL https://github.com/sxyazi/yazi/releases/latest/download/yazi-installer.sh)" -- -y
-    echo "✓ yazi installed"
-else
-    echo "✓ yazi already installed"
-fi
-
 # Install neovim latest (Linux only)
 LATEST_VERSION=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//')
 CURRENT_VERSION=$(command -v nvim >/dev/null 2>&1 && nvim --version | grep -oP 'NVIM v\K[0-9.]+' || echo "none")
 
 if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
     echo ""
-    [ "$CURRENT_VERSION" != "none" ] && echo "  Updating neovim $CURRENT_VERSION → $LATEST_VERSION..." || echo "📦 Installing neovim $LATEST_VERSION..."
+    if [ "$CURRENT_VERSION" != "none" ]; then
+        echo "  Updating neovim $CURRENT_VERSION -> $LATEST_VERSION..."
+    else
+        echo "  Installing neovim $LATEST_VERSION..."
+    fi
     sudo apt-get remove -y neovim 2>/dev/null || true
+    # Detect architecture
+    ARCH=$(uname -m)
+    [ "$ARCH" = "aarch64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="x64"
     rm -rf ~/.local/nvim-linux64
-    curl -sL "https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz" | tar -xzf - -C ~/.local
+    curl -sL "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${NVIM_ARCH}.tar.gz" | tar -xzf - -C ~/.local
     rm -rf ~/.local/bin/nvim
     ln -sf ~/.local/nvim-linux64/bin/nvim ~/.local/bin/nvim
     echo "  ✓ neovim $LATEST_VERSION installed"
