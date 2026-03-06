@@ -105,10 +105,14 @@ if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
     # Detect architecture
     ARCH=$(uname -m)
     [ "$ARCH" = "aarch64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="x64"
-    rm -rf ~/.local/nvim-linux64
+    # Remove old installation
+    rm -rf ~/.local/nvim-*
+    # Download and extract
     curl -sL "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${NVIM_ARCH}.tar.gz" | tar -xzf - -C ~/.local
-    rm -rf ~/.local/bin/nvim
-    ln -sf ~/.local/nvim-linux64/bin/nvim ~/.local/bin/nvim
+    # Find extracted directory (all neovim builds use nvim-linux64)
+    NVIM_DIR=$(find ~/.local -maxdepth 1 -type d -name "nvim-*" | head -1)
+    rm -f ~/.local/bin/nvim
+    ln -sf ${NVIM_DIR}/bin/nvim ~/.local/bin/nvim
     echo "  ✓ neovim $LATEST_VERSION installed"
 fi
 {{- end }}

@@ -13,8 +13,8 @@ alias v="nvim"
 # Utils
 # -----------------------------------------------------------------------------
 alias cc="claude"
-alias c="cc"
-alias cb="cc --dangerously-skip-permissions"
+alias c="claude"
+alias cb="claude --dangerously-skip-permissions"
 
 {{- if eq .chezmoi.os "linux" -}}
 # Linux-specific: fd-find installs as fdfind
