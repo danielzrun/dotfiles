@@ -70,5 +70,43 @@ else
     echo "✓ Bun already installed"
 fi
 
+#(Linux only)
+{{ if eq .chezmoi.os "linux" -}}
+# Install starship
+if ! command -v starship >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing starship..."
+    curl -sS https://starship.rs/install.sh | sh
+else
+    echo "✓ starship already installed"
+fi
+
+# Install atuin
+if ! command -v atuin >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing atuin..."
+    curl --proto '=https' --tlsv1.2 -sSf https://setup.atuin.sh | bash
+else
+    echo "✓ atuin already installed"
+fi
+
+# Install yazi
+if ! command -v yazi >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing yazi..."
+    # Download latest release from GitHub
+    YAZI_TEMP=$(mktemp -d)
+    YAZI_VERSION=$(curl -s https://api.github.com/repos/sxyazi/yazi/releases/latest | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+    curl -sL "https://github.com/sxyazi/yazi/releases/download/${YAZI_VERSION}/yazi-${YAZI_VERSION#v}-x86_64-unknown-linux-gnu.zip" -o "$YAZI_TEMP/yazi.zip"
+    unzip -q "$YAZI_TEMP/yazi.zip" -d "$YAZI_TEMP"
+    mkdir -p ~/.local/bin
+    mv "$YAZI_TEMP/yazi-${YAZI_VERSION#v}-x86_64-unknown-linux-gnu/yazi" ~/.local/bin/
+    rm -rf "$YAZI_TEMP"
+    echo "✓ yazi installed"
+else
+    echo "✓ yazi already installed"
+fi
+{{- end -}}
+
 echo ""
 echo "✅ Essential tools synced!"

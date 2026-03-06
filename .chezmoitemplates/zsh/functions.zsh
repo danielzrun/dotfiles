@@ -172,7 +172,7 @@ function y() {
 function ccs() {
 	local env_file="$HOME/.env"
 	local provider="${1:-}"
-	local valid_providers=("zhipu" "packy" "openrouter" "default")
+	local valid_providers=("zhipu" "zhipu5"  "packy" "openrouter" "default")
 
 	# Show current provider if no argument
 	if [[ -z "$provider" ]]; then

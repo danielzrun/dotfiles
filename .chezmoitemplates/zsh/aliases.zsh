@@ -14,3 +14,8 @@ alias v="nvim"
 # -----------------------------------------------------------------------------
 alias cc="claude"
 alias c="cc"
+
+{{- if eq .chezmoi.os "linux" -}}
+# Linux-specific: fd-find installs as fdfind
+alias fd="fdfind"
+{{- end -}}
