@@ -15,8 +15,12 @@ if [ ! -d "$TPM_DIR" ]; then
     mkdir -p "$(dirname "$TPM_DIR")"
     git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
     echo "✓ TPM installed to $TPM_DIR"
-    echo ""
-    echo "🔧 To install plugins, press: Ctrl+b + Shift+i"
 else
     echo "✓ TPM already installed"
 fi
+
+# Install plugins automatically
+echo ""
+echo "📦 Installing tmux plugins..."
+"$TPM_DIR/bin/install_plugins" || echo "⚠ Some plugins may need manual install"
+echo "✓ Plugins installed"
