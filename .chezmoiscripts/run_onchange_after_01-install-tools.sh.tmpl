@@ -6,11 +6,6 @@
 # Use this for tools that should be kept up-to-date with config changes
 # Hash: {{ include ".chezmoiscripts/run_onchange_after_01-install-tools.sh.tmpl" | sha256sum }}
 
-# Activate shell environment for current session
-# This ensures PATH and other environment variables are available for tool detection
-[ -f "$HOME/.zprofile" ] && source "$HOME/.zprofile"
-[ -f "$HOME/.zshrc" ] && source "$HOME/.zshrc"
-
 {{ if eq .chezmoi.os "darwin" -}}
 # Install Homebrew (macOS only)
 if ! command -v brew >/dev/null 2>&1; then
@@ -91,14 +86,6 @@ if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
     echo "  ✓ neovim $LATEST_VERSION installed"
 fi
 {{- end }}
-
-# Set zsh as default shell
-if [ "$SHELL" != "$(command -v zsh)" ]; then
-    echo ""
-    echo "🔄 Changing default shell to zsh..."
-    chsh -s "$(command -v zsh)"
-    echo "✓ Default shell changed to zsh (restart terminal to take effect)"
-fi
 
 echo ""
 echo "✅ Essential tools synced!"

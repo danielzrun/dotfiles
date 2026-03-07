@@ -8,6 +8,9 @@
 
 set -euo pipefail
 
+# Ensure PATH includes user binaries for tool detection
+export PATH="$HOME/.local/bin:$PATH"
+
 echo "🔄 Syncing Claude Code plugin marketplaces..."
 
 # Check if claude command exists
