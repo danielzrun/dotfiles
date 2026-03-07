@@ -1,0 +1,43 @@
+#!/bin/bash
+# =============================================================================
+# Oh My Zsh Installation
+# =============================================================================
+# Runs once before .zshrc is applied (via run_once_before_ prefix)
+# This ensures Oh My Zsh is installed before chezmoi applies our .zshrc
+
+# Install Oh My Zsh if not present
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    echo "📥 Installing Oh My Zsh..."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    echo "✅ Oh My Zsh installed"
+fi
+
+# Install Oh My Zsh custom plugins
+PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
+
+install_plugin() {
+    local name=$1
+    local repo=$2
+    local target="$PLUGINS_DIR/$name"
+
+    if [ ! -d "$target" ]; then
+        echo "📥 Installing plugin: $name..."
+        git clone --depth=1 "$repo" "$target"
+    fi
+}
+
+echo "📦 Installing Oh My Zsh plugins..."
+install_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
+install_plugin "zsh-completions" "https://github.com/zsh-users/zsh-completions"
+install_plugin "fzf-tab" "https://github.com/Aloxaf/fzf-tab"
+install_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
+
+# Set zsh as default shell
+if [ "$SHELL" != "$(command -v zsh)" ]; then
+    echo ""
+    echo "🔄 Changing default shell to zsh..."
+    chsh -s "$(which zsh)"
+    echo "✓ Default shell changed to zsh (restart terminal to take effect)"
+fi
+
+echo "✅ Oh My Zsh setup complete!"

@@ -6,6 +6,11 @@
 # Use this for tools that should be kept up-to-date with config changes
 # Hash: {{ include ".chezmoiscripts/run_onchange_after_01-install-tools.sh.tmpl" | sha256sum }}
 
+# Activate shell environment for current session
+# This ensures PATH and other environment variables are available for tool detection
+[ -f "$HOME/.zprofile" ] && source "$HOME/.zprofile"
+[ -f "$HOME/.zshrc" ] && source "$HOME/.zshrc"
+
 {{ if eq .chezmoi.os "darwin" -}}
 # Install Homebrew (macOS only)
 if ! command -v brew >/dev/null 2>&1; then
@@ -20,36 +25,6 @@ if ! command -v brew >/dev/null 2>&1; then
     fi
 fi
 {{- end }}
-
-# Install Oh My Zsh if not present
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    echo "📥 Installing Oh My Zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    echo "✅ Oh My Zsh installed"
-fi
-
-# Install Oh My Zsh plugins
-PLUGINS_DIR="$HOME/.oh-my-zsh/custom/plugins"
-
-install_plugin() {
-    local name=$1
-    local repo=$2
-    local target="$PLUGINS_DIR/$name"
-
-    if [ ! -d "$target" ]; then
-        echo "📥 Installing plugin: $name..."
-        git clone --depth=1 "$repo" "$target"
-    else
-        echo "✓ Plugin already installed: $name"
-    fi
-}
-
-echo ""
-echo "📦 Installing Oh My Zsh plugins..."
-install_plugin "zsh-autosuggestions" "https://github.com/zsh-users/zsh-autosuggestions"
-install_plugin "zsh-completions" "https://github.com/zsh-users/zsh-completions"
-install_plugin "fzf-tab" "https://github.com/Aloxaf/fzf-tab"
-install_plugin "zsh-syntax-highlighting" "https://github.com/zsh-users/zsh-syntax-highlighting"
 
 # Install Claude Code via native script
 if ! command -v claude >/dev/null 2>&1; then
@@ -116,6 +91,14 @@ if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
     echo "  ✓ neovim $LATEST_VERSION installed"
 fi
 {{- end }}
+
+# Set zsh as default shell
+if [ "$SHELL" != "$(command -v zsh)" ]; then
+    echo ""
+    echo "🔄 Changing default shell to zsh..."
+    chsh -s "$(command -v zsh)"
+    echo "✓ Default shell changed to zsh (restart terminal to take effect)"
+fi
 
 echo ""
 echo "✅ Essential tools synced!"

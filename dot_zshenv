@@ -1,2 +1,11 @@
-# Fix mosh-server PATH issue on macOS
+# =============================================================================
+# PATH Configuration
+# =============================================================================
+# Set PATH for all shells (login, non-login, interactive, non-interactive)
+# This file is sourced by zsh before .zprofile and .zshrc
+
+# User local binaries
+export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+
+# Homebrew (macOS)
 export PATH="/opt/homebrew/bin:$PATH"
