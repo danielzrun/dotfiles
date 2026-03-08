@@ -16,7 +16,7 @@ if ! [ -d "/Applications/Zed.app" ]; then
     exit 0
 fi
 
-echo "🔧 Configuring Zed as default editor via duti..."
+echo "› Configuring Zed as default editor via duti..."
 
 # Define file extensions to associate with Zed
 # Organized by category for easy maintenance
@@ -55,6 +55,6 @@ for ext in "${EXTENSIONS[@]}"; do
     duti -s "$EDITOR_BUNDLE_ID" ".$ext" all 2>/dev/null || true
 done
 
-echo "✅ Default file associations configured for Zed!"
+echo "✓ Default file associations configured for Zed!"
 
 {{- end -}}

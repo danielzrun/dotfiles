@@ -1,18 +1,31 @@
-{{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 # =============================================================================
-# Linux Setup Completion
+# Setup Final Check
 # =============================================================================
-# This script runs after all other scripts on every chezmoi apply
-# Confirms dotfiles setup is complete
+# This script runs LAST after all other scripts on every chezmoi apply
+# Provides status reminders and next steps
 
 set -euo pipefail
 
+echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo "✅ Debian-based Linux dotfiles setup complete!"
+echo "✅ Dotfiles setup complete!"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
+
+# Check atuin login status
+if command -v atuin >/dev/null 2>&1; then
+    if ! atuin status &>/dev/null; then
+        echo "⚠️  Atuin is not logged in!"
+        echo ""
+        echo "Run the following command to sync your shell history:"
+        echo "  atuin login"
+        echo ""
+    else
+        echo "✓ Atuin is logged in"
+    fi
+fi
+
 echo "Next steps:"
 echo "  • Restart your shell or run: zsh"
 echo ""
-{{- end -}}

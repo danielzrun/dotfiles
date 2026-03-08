@@ -58,11 +58,13 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
     echo ""
     echo "✅ Large applications synced!"
+    echo ""
 else
     echo "❌ Installation cancelled."
     echo ""
     echo "💡 To install later, run:"
     echo "   brew bundle --file=~/.config/brew/Brewfile.casks"
+    echo ""
 fi
 
 {{- end -}}
