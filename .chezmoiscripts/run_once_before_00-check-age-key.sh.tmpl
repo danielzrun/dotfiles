@@ -1,0 +1,39 @@
+#!/bin/bash
+# =============================================================================
+# Age Encryption Key Check
+# =============================================================================
+# Runs once before chezmoi applies any encrypted files
+# Ensures the age private key exists before decryption attempts
+
+KEY_FILE="$HOME/.config/chezmoi/key.txt"
+
+if [ ! -f "$KEY_FILE" ]; then
+    echo ""
+    echo "⚠️  Age encryption key not found!"
+    echo ""
+    echo "Chezmoi needs an age private key to decrypt encrypted files in this repository."
+    echo ""
+    echo "📋 Please paste your age private key now (press Ctrl+D or Cmd+D when done):"
+    echo ""
+
+    # Create directory if it doesn't exist
+    mkdir -p "$(dirname "$KEY_FILE")"
+
+    # Handle Ctrl+C - clean up and exit
+    trap 'echo ""; echo "❌ Cancelled by user"; rm -f "$KEY_FILE"; exit 1' INT
+
+    # Read the key from user input
+    cat > "$KEY_FILE"
+
+    # Restore default signal handling
+    trap - INT
+
+    # Set correct permissions
+    chmod 600 "$KEY_FILE"
+
+    echo ""
+    echo "✅ Age key saved to: $KEY_FILE"
+    echo ""
+fi
+
+echo "✅ Age key found: $KEY_FILE"
