@@ -5,6 +5,8 @@
 # =============================================================================
 # Runs only once on first chezmoi apply (via run_once_ prefix)
 
+set -euo pipefail
+
 echo "🔧 Configuring macOS defaults..."
 
 # Prevent System Preferences from overriding our changes

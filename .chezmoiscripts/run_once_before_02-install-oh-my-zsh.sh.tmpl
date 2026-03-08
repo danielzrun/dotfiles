@@ -5,6 +5,8 @@
 # Runs once before .zshrc is applied (via run_once_before_ prefix)
 # This ensures Oh My Zsh is installed before chezmoi applies our .zshrc
 
+set -euo pipefail
+
 # Install Oh My Zsh if not present
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "📥 Installing Oh My Zsh..."

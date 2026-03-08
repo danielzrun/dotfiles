@@ -6,6 +6,8 @@
 # This script runs when Brewfile hash changes (via run_onchange_ prefix)
 # Hash: {{ include "dot_config/brew/Brewfile" | sha256sum }}
 
+set -euo pipefail
+
 # Sync packages from Brewfile
 echo "📦 Syncing Homebrew packages from Brewfile..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"

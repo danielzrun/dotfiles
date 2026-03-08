@@ -5,6 +5,8 @@
 # Runs once before chezmoi applies any encrypted files
 # Ensures the age private key exists before decryption attempts
 
+set -euo pipefail
+
 KEY_FILE="$HOME/.config/chezmoi/key.txt"
 
 if [ ! -f "$KEY_FILE" ]; then
