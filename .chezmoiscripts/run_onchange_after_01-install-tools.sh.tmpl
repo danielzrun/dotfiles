@@ -122,6 +122,75 @@ if ! command -v yazi >/dev/null 2>&1; then
 else
     echo "✓ yazi already installed"
 fi
+
+# Install eza (modern ls replacement)
+if ! command -v eza >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing eza..."
+    # Download latest release
+    EZA_URL="https://github.com/eza-community/eza/releases/latest/download/eza-${ARCH}-unknown-linux-gnu.tar.gz"
+    TEMP_TAR=$(mktemp)
+    trap "rm -f $TEMP_TAR" EXIT
+    if ! curl -fsSL "$EZA_URL" -o "$TEMP_TAR"; then
+        echo "  ⚠️  Failed to download eza. Install manually: cargo install eza"
+        exit 1
+    fi
+    if ! file "$TEMP_TAR" | grep -q gzip; then
+        echo "  ⚠️  Downloaded file is not valid. Install manually: cargo install eza"
+        exit 1
+    fi
+    tar -xzf "$TEMP_TAR" -C ~/.local
+    rm -f ~/.local/bin/eza
+    ln -sf ~/.local/eza ~/.local/bin/eza
+    echo "  ✓ eza installed"
+else
+    echo "✓ eza already installed"
+fi
+
+# Install git-delta (syntax-highlighting pager for git)
+if ! command -v delta >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing git-delta..."
+    DELTA_URL="https://github.com/dandavison/delta/releases/latest/download/delta-${ARCH}-unknown-linux-gnu.tar.gz"
+    TEMP_TAR=$(mktemp)
+    trap "rm -f $TEMP_TAR" EXIT
+    if ! curl -fsSL "$DELTA_URL" -o "$TEMP_TAR"; then
+        echo "  ⚠️  Failed to download delta. Install manually: cargo install git-delta"
+        exit 1
+    fi
+    if ! file "$TEMP_TAR" | grep -q gzip; then
+        echo "  ⚠️  Downloaded file is not valid. Install manually: cargo install git-delta"
+        exit 1
+    fi
+    # Delta tar extracts to a directory, get the binary
+    tar -xzf "$TEMP_TAR" -C ~/.local
+    rm -f ~/.local/bin/delta
+    ln -sf ~/.local/delta-${ARCH}-unknown-linux-gnu/delta ~/.local/bin/delta
+    echo "  ✓ git-delta installed"
+else
+    echo "✓ git-delta already installed"
+fi
+
+# Install just (command runner)
+if ! command -v just >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing just..."
+    JUST_URL="https://github.com/casey/just/releases/latest/download/just-${ARCH}-unknown-linux-gnu.tar.gz"
+    TEMP_TAR=$(mktemp)
+    trap "rm -f $TEMP_TAR" EXIT
+    if ! curl -fsSL "$JUST_URL" -o "$TEMP_TAR"; then
+        echo "  ⚠️  Failed to download just. Install manually: cargo install just"
+        exit 1
+    fi
+    if ! file "$TEMP_TAR" | grep -q gzip; then
+        echo "  ⚠️  Downloaded file is not valid. Install manually: cargo install just"
+        exit 1
+    fi
+    tar -xzf "$TEMP_TAR" -C ~/.local/bin
+    echo "  ✓ just installed"
+else
+    echo "✓ just already installed"
+fi
 {{- end }}
 
 echo ""
