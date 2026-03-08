@@ -6,6 +6,8 @@
 # Use this for tools that should be kept up-to-date with config changes
 # Hash: {{ include ".chezmoiscripts/run_onchange_after_01-install-tools.sh.tmpl" | sha256sum }}
 
+set -euo pipefail
+
 {{ if eq .chezmoi.os "darwin" -}}
 # Install Homebrew (macOS only)
 if ! command -v brew >/dev/null 2>&1; then
@@ -56,6 +58,8 @@ if ! command -v atuin >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing atuin..."
     curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
+    # Link atuin to ~/.local/bin for PATH access
+    ln -sf ~/.atuin/bin/atuin ~/.local/bin/atuin
 else
     echo "✓ atuin already installed"
 fi
@@ -84,6 +88,23 @@ if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
     rm -f ~/.local/bin/nvim
     ln -sf ${NVIM_DIR}/bin/nvim ~/.local/bin/nvim
     echo "  ✓ neovim $LATEST_VERSION installed"
+fi
+
+# Install yazi (Linux only)
+if ! command -v yazi >/dev/null 2>&1; then
+    echo ""
+    echo "📦 Installing yazi..."
+    # Detect architecture
+    YAZI_ARCH=$(uname -m)
+    [ "$YAZI_ARCH" = "aarch64" ] && YAZI_ARCH="aarch64" || YAZI_ARCH="x86_64"
+    # Download and extract yazi
+    curl -sL "https://github.com/sxyazi/yazi/releases/latest/download/yazi-${YAZI_ARCH}-unknown-linux-gnu.tar.gz" | tar -xzf - -C ~/.local
+    # Create symlink
+    rm -f ~/.local/bin/yazi
+    ln -sf ~/.local/yazi-${YAZI_ARCH}-unknown-linux-gnu/yazi ~/.local/bin/yazi
+    echo "  ✓ yazi installed"
+else
+    echo "✓ yazi already installed"
 fi
 {{- end }}
 

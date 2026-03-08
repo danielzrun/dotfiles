@@ -1,18 +1,28 @@
 {{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 # =============================================================================
-# Ubuntu Essential Packages Installation
+# Debian-based Essential Packages Installation
 # =============================================================================
 # Runs only once on first chezmoi apply (via run_once_ prefix)
 # Installs zsh and git required for dotfiles setup
+# Supports: Debian, Ubuntu, Linux Mint, Pop!_OS, and other deb-based distros
 
 set -euo pipefail
 
-echo "📦 Installing essential Ubuntu packages (zsh, git, unzip)..."
+echo "📦 Installing essential Debian-based packages (zsh, git, unzip)..."
 
-# Check for Ubuntu
-if [ ! -f /etc/os-release ] || ! grep -qi "ubuntu" /etc/os-release; then
-    echo "⚠️  This script only supports Ubuntu"
+# Detect Debian-based distributions
+if [ ! -f /etc/os-release ]; then
+    echo "⚠️  Cannot detect OS distribution"
+    exit 1
+fi
+
+# Source os-release to get ID and ID_LIKE variables
+. /etc/os-release
+
+# Check if this is a Debian-based distribution
+if [[ "$ID" != "debian" && "$ID_LIKE" != *"debian"* ]]; then
+    echo "⚠️  This script only supports Debian-based distributions"
     exit 1
 fi
 

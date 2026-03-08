@@ -1,22 +1,21 @@
 {{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
 # =============================================================================
-# Ubuntu Apt Package Installation
+# Debian-based Apt Package Installation
 # =============================================================================
 # This script runs when Aptfile hash changes (via run_onchange_ prefix)
-# Hash: {{ include "dot_config/ubuntu/Aptfile" | sha256sum }}
+# Supports: Debian, Ubuntu, Linux Mint, Pop!_OS, and other deb-based distros
+# Hash: {{ include "dot_config/debian/Aptfile" | sha256sum }}
 
 set -euo pipefail
 
-echo "📦 Installing Ubuntu packages from Aptfile..."
+echo "📦 Installing Debian-based packages from Aptfile..."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# Ensure universe repo is enabled
-sudo add-apt-repository universe -y 2>/dev/null || true
 sudo apt-get update
 
 # Install packages from Aptfile (filter comments and empty lines)
-grep -v '^#' {{ .chezmoi.sourceDir }}/dot_config/ubuntu/Aptfile | grep -v '^$' | xargs sudo apt-get install -y
+grep -v '^#' {{ .chezmoi.sourceDir }}/dot_config/debian/Aptfile | grep -v '^$' | xargs sudo apt-get install -y
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
