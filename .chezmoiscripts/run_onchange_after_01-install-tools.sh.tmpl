@@ -49,8 +49,10 @@ fi
 {{ if eq .chezmoi.os "linux" -}}
 # Detect system architecture
 ARCH=$(uname -m)
+# Normalize architecture: aarch64 -> arm64 for GitHub releases
+[ "$ARCH" = "aarch64" ] && ARCH="arm64" || true
 # Neovim uses arm64 (not aarch64) for ARM builds
-[ "$ARCH" = "aarch64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="x86_64"
+[ "$ARCH" = "arm64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="x86_64"
 
 # Install starship
 if ! command -v starship >/dev/null 2>&1; then
@@ -95,110 +97,18 @@ if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
     echo "  ✓ neovim $LATEST_VERSION installed"
 fi
 
-# Install yazi (Linux only)
+# Install yazi (terminal file manager)
 if ! command -v yazi >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing yazi..."
-    # Download to temp file first (yazi releases use .zip format)
-    TEMP_ZIP=$(mktemp)
-    trap "rm -f $TEMP_ZIP" EXIT
     YAZI_URL="https://github.com/sxyazi/yazi/releases/latest/download/yazi-${ARCH}-unknown-linux-gnu.zip"
-    echo "  Downloading from: $YAZI_URL"
-    if ! curl -fsSL "$YAZI_URL" -o "$TEMP_ZIP"; then
-        echo "  ⚠️  Failed to download yazi. Please check your internet connection."
-        echo "  You can install manually: cargo install yazi"
-        exit 1
-    fi
-    # Verify it's a zip file
-    if ! file "$TEMP_ZIP" | grep -q Zip; then
-        echo "  ⚠️  Downloaded file is not a valid zip archive."
-        echo "  The URL may be incorrect or GitHub may be rate limiting."
-        echo "  You can install manually: cargo install yazi"
-        exit 1
-    fi
-    # Extract yazi binary directly
-    unzip -q -o "$TEMP_ZIP" -d ~/.local
-    # Create symlink (yazi zip extracts the binary directly, not in a subdirectory)
-    rm -f ~/.local/bin/yazi
+    curl -fsSL "$YAZI_URL" | funzip > ~/.local/yazi && chmod +x ~/.local/yazi
     ln -sf ~/.local/yazi ~/.local/bin/yazi
     echo "  ✓ yazi installed"
 else
     echo "✓ yazi already installed"
 fi
 
-# Install eza (modern ls replacement)
-if ! command -v eza >/dev/null 2>&1; then
-    echo ""
-    echo "📦 Installing eza..."
-    # Download latest release
-    EZA_URL="https://github.com/eza-community/eza/releases/latest/download/eza_${ARCH}-unknown-linux-gnu.tar.gz"
-    TEMP_TAR=$(mktemp)
-    trap "rm -f $TEMP_TAR" EXIT
-    if ! curl -fsSL "$EZA_URL" -o "$TEMP_TAR"; then
-        echo "  ⚠️  Failed to download eza. Install manually: cargo install eza"
-        exit 1
-    fi
-    if ! file "$TEMP_TAR" | grep -q gzip; then
-        echo "  ⚠️  Downloaded file is not valid. Install manually: cargo install eza"
-        exit 1
-    fi
-    tar -xzf "$TEMP_TAR" -C ~/.local
-    rm -f ~/.local/bin/eza
-    ln -sf ~/.local/eza ~/.local/bin/eza
-    echo "  ✓ eza installed"
-else
-    echo "✓ eza already installed"
-fi
-
-# Install git-delta (syntax-highlighting pager for git)
-if ! command -v delta >/dev/null 2>&1; then
-    echo ""
-    echo "📦 Installing git-delta..."
-    # Get download URL from API (filename includes version)
-    DELTA_URL=$(curl -s https://api.github.com/repos/dandavison/delta/releases/latest | grep -o '"browser_download_url": *"[^"]*'${ARCH}'-unknown-linux-gnu\.tar\.gz"' | sed -E 's/.*"([^"]+)".*/\1/')
-    TEMP_TAR=$(mktemp)
-    trap "rm -f $TEMP_TAR" EXIT
-    if ! curl -fsSL "$DELTA_URL" -o "$TEMP_TAR"; then
-        echo "  ⚠️  Failed to download delta. Install manually: cargo install git-delta"
-        exit 1
-    fi
-    if ! file "$TEMP_TAR" | grep -q gzip; then
-        echo "  ⚠️  Downloaded file is not valid. Install manually: cargo install git-delta"
-        exit 1
-    fi
-    # Delta tar extracts to a directory with version in name
-    tar -xzf "$TEMP_TAR" -C ~/.local
-    rm -f ~/.local/bin/delta
-    # Find the extracted delta directory
-    DELTA_DIR=$(find ~/.local -maxdepth 1 -type d -name "delta-*" | head -1)
-    ln -sf ${DELTA_DIR}/delta ~/.local/bin/delta
-    echo "  ✓ git-delta installed"
-else
-    echo "✓ git-delta already installed"
-fi
-
-# Install just (command runner)
-if ! command -v just >/dev/null 2>&1; then
-    echo ""
-    echo "📦 Installing just..."
-    # Get download URL from API (filename includes version, uses musl)
-    JUST_URL=$(curl -s https://api.github.com/repos/casey/just/releases/latest | grep -o '"browser_download_url": *"[^"]*'${ARCH}'-unknown-linux-musl\.tar\.gz"' | sed -E 's/.*"([^"]+)".*/\1/')
-    TEMP_TAR=$(mktemp)
-    trap "rm -f $TEMP_TAR" EXIT
-    if ! curl -fsSL "$JUST_URL" -o "$TEMP_TAR"; then
-        echo "  ⚠️  Failed to download just. Install manually: cargo install just"
-        exit 1
-    fi
-    if ! file "$TEMP_TAR" | grep -q gzip; then
-        echo "  ⚠️  Downloaded file is not valid. Install manually: cargo install just"
-        exit 1
-    fi
-    # Just tar extracts directly to the binary
-    tar -xzf "$TEMP_TAR" -C ~/.local/bin
-    echo "  ✓ just installed"
-else
-    echo "✓ just already installed"
-fi
 {{- end }}
 
 echo ""
