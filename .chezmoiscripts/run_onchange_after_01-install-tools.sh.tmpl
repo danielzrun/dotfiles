@@ -102,7 +102,11 @@ if ! command -v yazi >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing yazi..."
     YAZI_URL="https://github.com/sxyazi/yazi/releases/latest/download/yazi-${YAZI_ARCH}-unknown-linux-gnu.zip"
-    curl -fsSL "$YAZI_URL" | funzip > ~/.local/yazi && chmod +x ~/.local/yazi
+    TEMP_ZIP=$(mktemp)
+    curl -fsSL "$YAZI_URL" -o "$TEMP_ZIP"
+    unzip -q -o "$TEMP_ZIP" -d ~/.local yazi
+    chmod +x ~/.local/yazi
+    rm -f "$TEMP_ZIP"
     ln -sf ~/.local/yazi ~/.local/bin/yazi
     echo "  ✓ yazi installed"
 else
