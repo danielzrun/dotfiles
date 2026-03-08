@@ -1,0 +1,38 @@
+# =============================================================================
+# Local Environment Variables
+# =============================================================================
+# This file contains sensitive configuration that should NOT be committed to git
+# Copy this file to ~/.env and fill in your actual values
+# =============================================================================
+
+# Claude Code Provider Configuration
+# Options: default, zhipu, zhipu5, packy, openrouter
+export CLAUDE_PROVIDER="default"
+
+# =============================================================================
+# Zhipu AI Configuration
+# =============================================================================
+if [[ "$CLAUDE_PROVIDER" == "zhipu" ]]; then
+  export ANTHROPIC_AUTH_TOKEN="your-zhipu-api-key"
+  export ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/paas/v4"
+  export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.7"
+  export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-5"
+fi
+
+# =============================================================================
+# Packy API Configuration
+# =============================================================================
+if [[ "$CLAUDE_PROVIDER" == "packy" ]]; then
+  export ANTHROPIC_AUTH_TOKEN="your-packy-api-key"
+  export ANTHROPIC_BASE_URL="https://www.packyapi.com"
+fi
+
+# =============================================================================
+# OpenRouter Configuration
+# =============================================================================
+if [[ "$CLAUDE_PROVIDER" == "openrouter" ]]; then
+  export OPENROUTER_API_KEY="your-openrouter-api-key"
+  export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
+  export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"
+  export ANTHROPIC_API_KEY=""
+fi
