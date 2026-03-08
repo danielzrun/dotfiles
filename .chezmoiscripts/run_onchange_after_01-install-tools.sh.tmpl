@@ -44,6 +44,11 @@ fi
 
 #(Linux only)
 {{ if eq .chezmoi.os "linux" -}}
+# Detect system architecture
+ARCH=$(uname -m)
+# Neovim uses arm64 (not aarch64) for ARM builds
+[ "$ARCH" = "aarch64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="x86_64"
+
 # Install starship
 if ! command -v starship >/dev/null 2>&1; then
     echo ""
@@ -76,9 +81,6 @@ if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
         echo "  Installing neovim $LATEST_VERSION..."
     fi
     sudo apt-get remove -y neovim 2>/dev/null || true
-    # Detect architecture
-    ARCH=$(uname -m)
-    [ "$ARCH" = "aarch64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="x64"
     # Remove old installation
     rm -rf ~/.local/nvim-*
     # Download and extract
@@ -94,14 +96,28 @@ fi
 if ! command -v yazi >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing yazi..."
-    # Detect architecture
-    YAZI_ARCH=$(uname -m)
-    [ "$YAZI_ARCH" = "aarch64" ] && YAZI_ARCH="aarch64" || YAZI_ARCH="x86_64"
-    # Download and extract yazi
-    curl -sL "https://github.com/sxyazi/yazi/releases/latest/download/yazi-${YAZI_ARCH}-unknown-linux-gnu.tar.gz" | tar -xzf - -C ~/.local
-    # Create symlink
+    # Download to temp file first (yazi releases use .zip format)
+    TEMP_ZIP=$(mktemp)
+    trap "rm -f $TEMP_ZIP" EXIT
+    YAZI_URL="https://github.com/sxyazi/yazi/releases/latest/download/yazi-${ARCH}-unknown-linux-gnu.zip"
+    echo "  Downloading from: $YAZI_URL"
+    if ! curl -fsSL "$YAZI_URL" -o "$TEMP_ZIP"; then
+        echo "  ⚠️  Failed to download yazi. Please check your internet connection."
+        echo "  You can install manually: cargo install yazi"
+        exit 1
+    fi
+    # Verify it's a zip file
+    if ! file "$TEMP_ZIP" | grep -q Zip; then
+        echo "  ⚠️  Downloaded file is not a valid zip archive."
+        echo "  The URL may be incorrect or GitHub may be rate limiting."
+        echo "  You can install manually: cargo install yazi"
+        exit 1
+    fi
+    # Extract yazi binary directly
+    unzip -q -o "$TEMP_ZIP" -d ~/.local
+    # Create symlink (yazi zip extracts the binary directly, not in a subdirectory)
     rm -f ~/.local/bin/yazi
-    ln -sf ~/.local/yazi-${YAZI_ARCH}-unknown-linux-gnu/yazi ~/.local/bin/yazi
+    ln -sf ~/.local/yazi ~/.local/bin/yazi
     echo "  ✓ yazi installed"
 else
     echo "✓ yazi already installed"
