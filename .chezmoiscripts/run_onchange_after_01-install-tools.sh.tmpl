@@ -128,7 +128,7 @@ if ! command -v eza >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing eza..."
     # Download latest release
-    EZA_URL="https://github.com/eza-community/eza/releases/latest/download/eza-${ARCH}-unknown-linux-gnu.tar.gz"
+    EZA_URL="https://github.com/eza-community/eza/releases/latest/download/eza_${ARCH}-unknown-linux-gnu.tar.gz"
     TEMP_TAR=$(mktemp)
     trap "rm -f $TEMP_TAR" EXIT
     if ! curl -fsSL "$EZA_URL" -o "$TEMP_TAR"; then
@@ -151,7 +151,8 @@ fi
 if ! command -v delta >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing git-delta..."
-    DELTA_URL="https://github.com/dandavison/delta/releases/latest/download/delta-${ARCH}-unknown-linux-gnu.tar.gz"
+    # Get download URL from API (filename includes version)
+    DELTA_URL=$(curl -s https://api.github.com/repos/dandavison/delta/releases/latest | grep -o '"browser_download_url": *"[^"]*'${ARCH}'-unknown-linux-gnu\.tar\.gz"' | sed -E 's/.*"([^"]+)".*/\1/')
     TEMP_TAR=$(mktemp)
     trap "rm -f $TEMP_TAR" EXIT
     if ! curl -fsSL "$DELTA_URL" -o "$TEMP_TAR"; then
@@ -162,10 +163,12 @@ if ! command -v delta >/dev/null 2>&1; then
         echo "  ⚠️  Downloaded file is not valid. Install manually: cargo install git-delta"
         exit 1
     fi
-    # Delta tar extracts to a directory, get the binary
+    # Delta tar extracts to a directory with version in name
     tar -xzf "$TEMP_TAR" -C ~/.local
     rm -f ~/.local/bin/delta
-    ln -sf ~/.local/delta-${ARCH}-unknown-linux-gnu/delta ~/.local/bin/delta
+    # Find the extracted delta directory
+    DELTA_DIR=$(find ~/.local -maxdepth 1 -type d -name "delta-*" | head -1)
+    ln -sf ${DELTA_DIR}/delta ~/.local/bin/delta
     echo "  ✓ git-delta installed"
 else
     echo "✓ git-delta already installed"
@@ -175,7 +178,8 @@ fi
 if ! command -v just >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing just..."
-    JUST_URL="https://github.com/casey/just/releases/latest/download/just-${ARCH}-unknown-linux-gnu.tar.gz"
+    # Get download URL from API (filename includes version, uses musl)
+    JUST_URL=$(curl -s https://api.github.com/repos/casey/just/releases/latest | grep -o '"browser_download_url": *"[^"]*'${ARCH}'-unknown-linux-musl\.tar\.gz"' | sed -E 's/.*"([^"]+)".*/\1/')
     TEMP_TAR=$(mktemp)
     trap "rm -f $TEMP_TAR" EXIT
     if ! curl -fsSL "$JUST_URL" -o "$TEMP_TAR"; then
@@ -186,6 +190,7 @@ if ! command -v just >/dev/null 2>&1; then
         echo "  ⚠️  Downloaded file is not valid. Install manually: cargo install just"
         exit 1
     fi
+    # Just tar extracts directly to the binary
     tar -xzf "$TEMP_TAR" -C ~/.local/bin
     echo "  ✓ just installed"
 else
