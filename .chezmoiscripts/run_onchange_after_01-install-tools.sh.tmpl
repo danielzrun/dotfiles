@@ -49,10 +49,10 @@ fi
 {{ if eq .chezmoi.os "linux" -}}
 # Detect system architecture
 ARCH=$(uname -m)
-# Normalize architecture: aarch64 -> arm64 for GitHub releases
-[ "$ARCH" = "aarch64" ] && ARCH="arm64" || true
-# Neovim uses arm64 (not aarch64) for ARM builds
-[ "$ARCH" = "arm64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="x86_64"
+# Neovim: aarch64 -> arm64
+[ "$ARCH" = "aarch64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="$ARCH"
+# Yazi: uses aarch64 (no conversion needed)
+YAZI_ARCH="$ARCH"
 
 # Install starship
 if ! command -v starship >/dev/null 2>&1; then
@@ -101,7 +101,7 @@ fi
 if ! command -v yazi >/dev/null 2>&1; then
     echo ""
     echo "📦 Installing yazi..."
-    YAZI_URL="https://github.com/sxyazi/yazi/releases/latest/download/yazi-${ARCH}-unknown-linux-gnu.zip"
+    YAZI_URL="https://github.com/sxyazi/yazi/releases/latest/download/yazi-${YAZI_ARCH}-unknown-linux-gnu.zip"
     curl -fsSL "$YAZI_URL" | funzip > ~/.local/yazi && chmod +x ~/.local/yazi
     ln -sf ~/.local/yazi ~/.local/bin/yazi
     echo "  ✓ yazi installed"
