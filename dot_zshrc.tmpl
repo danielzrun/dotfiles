@@ -62,6 +62,11 @@ setopt INC_APPEND_HISTORY
 # Share history across terminal tabs (works alongside Atuin)
 setopt SHARE_HISTORY
 
+{{- if eq .chezmoi.os "linux" }}
+# Disable bracketed paste mode (fixes paste issues in some Linux terminals)
+unset zle_bracketed_paste
+{{- end }}
+
 # -----------------------------------------------------------------------------
 # Modules & Functions
 # -----------------------------------------------------------------------------
