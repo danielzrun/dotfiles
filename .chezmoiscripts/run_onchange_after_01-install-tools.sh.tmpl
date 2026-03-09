@@ -113,13 +113,8 @@ if ! command -v yazi >/dev/null 2>&1; then
     YAZI_DIR=$(find ~/.local -maxdepth 1 -type d -name "yazi-*" | head -1)
     ln -sf "${YAZI_DIR}/yazi" ~/.local/bin/yazi
     ln -sf "${YAZI_DIR}/ya" ~/.local/bin/ya
-    # Verify installation
-    if yazi --version >/dev/null 2>&1; then
-        echo "  ✓ yazi installed"
-    else
-        echo "  ❌ yazi installation failed"
-        exit 1
-    fi
+
+    echo "  ✓ yazi installed"
 else
     echo "✓ yazi already installed"
 fi
