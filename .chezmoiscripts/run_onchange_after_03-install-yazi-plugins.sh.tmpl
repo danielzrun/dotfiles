@@ -9,6 +9,9 @@
 
 set -euo pipefail
 
+# Ensure PATH includes user binaries for ya command
+export PATH="$HOME/.local/bin:$PATH"
+
 echo "🎨 Installing Yazi flavors and plugins..."
 
 # Check if ya command exists
