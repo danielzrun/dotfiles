@@ -17,14 +17,35 @@ if [ ! -f /etc/os-release ]; then
     exit 1
 fi
 
-# Source os-release to get ID and ID_LIKE variables
+# Source os-release to get ID and VERSION_ID
 . /etc/os-release
 
-# Check if this is a Debian-based distribution
-if [[ "$ID" != "debian" && "$ID_LIKE" != *"debian"* ]]; then
-    echo "⚠️  This script only supports Debian-based distributions"
-    exit 1
-fi
+# Check version requirements: Debian 13+ or Ubuntu 24.04+
+case "$ID" in
+    debian)
+        # Require Debian 13+
+        if [ "${VERSION_ID%%.*}" -lt 13 ]; then
+            echo "⚠️  Debian 13+ required, found $VERSION_ID"
+            exit 1
+        fi
+        ;;
+    ubuntu)
+        # Require Ubuntu 24.04+
+        UB_MAJOR=${VERSION_ID%%.*}
+        UB_MINOR=${VERSION_ID#*.}
+        if [ "$UB_MAJOR" -lt 24 ] || { [ "$UB_MAJOR" -eq 24 ] && [ "${UB_MINOR%%.*}" -lt 04 ]; }; then
+            echo "⚠️  Ubuntu 24.04+ required, found $VERSION_ID"
+            exit 1
+        fi
+        ;;
+    *)
+        # Other Debian-based distros: check ID_LIKE
+        if [[ "$ID_LIKE" != *"debian"* ]]; then
+            echo "⚠️  This script only supports Debian 13+ or Ubuntu 24.04+"
+            exit 1
+        fi
+        ;;
+esac
 
 # Check and install packages separately
 PACKAGES=""
