@@ -4,12 +4,12 @@
 # Debian-based Essential Packages Installation
 # =============================================================================
 # Runs only once on first chezmoi apply (via run_once_ prefix)
-# Installs zsh and git required for dotfiles setup
+# Installs zsh, git, nvm required for dotfiles setup
 # Supports: Debian, Ubuntu, Linux Mint, Pop!_OS, and other deb-based distros
 
 set -euo pipefail
 
-echo "📦 Installing essential Debian-based packages (zsh, git, unzip)..."
+echo "📦 Installing essential Debian-based packages (zsh, git, unzip, nvm)..."
 
 # Detect Debian-based distributions
 if [ ! -f /etc/os-release ]; then
@@ -66,6 +66,36 @@ fi
 sudo apt-get update
 # shellcheck disable=SC2086
 sudo apt-get install -y $PACKAGES
+
+# Install nvm (Node Version Manager) + Node.js 24
+# Uses XDG-compliant path: ~/.config/nvm (or ~/.nvm as fallback)
+NVM_INSTALL_DIR="${NVM_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/nvm}"
+
+if [ ! -d "$NVM_INSTALL_DIR" ]; then
+    echo ""
+    echo "📦 Installing nvm v0.40.4..."
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
+
+    # Set NVM_DIR and install Node.js 24
+    export NVM_DIR="$NVM_INSTALL_DIR"
+    if [ -s "$NVM_DIR/nvm.sh" ]; then
+        bash -c ". \"$NVM_DIR/nvm.sh\" && nvm install 24 && nvm alias default 24"
+        echo "  ✓ nvm installed to $NVM_INSTALL_DIR"
+        echo "  ✓ Node.js 24 installed as default"
+    else
+        echo "  ⚠️  nvm.sh not found, skipping Node.js installation"
+    fi
+else
+    echo "✓ nvm already installed at $NVM_INSTALL_DIR"
+    # Ensure Node.js 24 is installed
+    export NVM_DIR="$NVM_INSTALL_DIR"
+    if [ -s "$NVM_DIR/nvm.sh" ]; then
+        if ! bash -c ". \"$NVM_DIR/nvm.sh\" && nvm list 24" >/dev/null 2>&1; then
+            bash -c ". \"$NVM_DIR/nvm.sh\" && nvm install 24 && nvm alias default 24"
+            echo "  ✓ Node.js 24 installed as default"
+        fi
+    fi
+fi
 
 echo "✅ Essential packages installed!"
 {{- end -}}
