@@ -54,6 +54,7 @@ brew "jnv"           # Interactive JSON filter
 brew "visidata"      # Terminal spreadsheet viewer
 brew "qsv"           # Fast CSV toolkit
 brew "lnav"          # Log file navigator
+brew "hl"            # Log viewer/highlighter
 
 # -----------------------------------------------------------------------------
 # File & Media Tools
