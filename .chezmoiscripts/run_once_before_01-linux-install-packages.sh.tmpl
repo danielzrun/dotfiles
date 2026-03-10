@@ -68,27 +68,23 @@ sudo apt-get update
 sudo apt-get install -y $PACKAGES
 
 # Install nvm (Node Version Manager) + Node.js 24
-# Uses XDG-compliant path: ~/.config/nvm (or ~/.nvm as fallback)
-NVM_INSTALL_DIR="${NVM_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/nvm}"
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 
-if [ ! -d "$NVM_INSTALL_DIR" ]; then
+if [ ! -d "$NVM_DIR" ]; then
     echo ""
     echo "📦 Installing nvm v0.40.4..."
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.4/install.sh | bash
 
-    # Set NVM_DIR and install Node.js 24
-    export NVM_DIR="$NVM_INSTALL_DIR"
     if [ -s "$NVM_DIR/nvm.sh" ]; then
         bash -c ". \"$NVM_DIR/nvm.sh\" && nvm install 24 && nvm alias default 24"
-        echo "  ✓ nvm installed to $NVM_INSTALL_DIR"
+        echo "  ✓ nvm installed to $NVM_DIR"
         echo "  ✓ Node.js 24 installed as default"
     else
         echo "  ⚠️  nvm.sh not found, skipping Node.js installation"
     fi
 else
-    echo "✓ nvm already installed at $NVM_INSTALL_DIR"
+    echo "✓ nvm already installed at $NVM_DIR"
     # Ensure Node.js 24 is installed
-    export NVM_DIR="$NVM_INSTALL_DIR"
     if [ -s "$NVM_DIR/nvm.sh" ]; then
         if ! bash -c ". \"$NVM_DIR/nvm.sh\" && nvm list 24" >/dev/null 2>&1; then
             bash -c ". \"$NVM_DIR/nvm.sh\" && nvm install 24 && nvm alias default 24"

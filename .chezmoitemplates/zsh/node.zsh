@@ -3,8 +3,7 @@
 # =============================================================================
 
 # nvm (Node Version Manager)
-# XDG-compliant: ~/.config/nvm, falls back to ~/.nvm
-export NVM_DIR="${NVM_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/nvm}"
+export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 
 if [ -s "$NVM_DIR/nvm.sh" ]; then
     source "$NVM_DIR/nvm.sh"
