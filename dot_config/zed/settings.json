@@ -1,5 +1,10 @@
 // Zed settings - Only non-default configurations
 {
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
   "title_bar": {
     "show_branch_icon": true
   },
