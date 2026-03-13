@@ -2,6 +2,10 @@
 # Utility Functions
 # =============================================================================
 
+# -----------------------------------------------------------------------------
+# File System / 文件系统
+# -----------------------------------------------------------------------------
+
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_";
@@ -14,47 +18,40 @@ function cdf() { # short for `cdfinder`
 }
 {{- end }}
 
-# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
-function targz() {
-	local tmpFile="${@%/}.tar";
-	tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
-
-	size=$(
-		stat -f"%z" "${tmpFile}" 2> /dev/null; # macOS `stat`
-		stat -c"%s" "${tmpFile}" 2> /dev/null;  # GNU `stat`
-	);
-
-	local cmd="";
-	if (( size < 52428800 )) && hash zopfli 2> /dev/null; then
-		# the .tar file is smaller than 50 MB and Zopfli is available; use it
-		cmd="zopfli";
+# Normalize `open` across Linux, macOS, and Windows.
+# This is needed to make the `o` function (see below) cross-platform.
+if [ ! $(uname -s) = 'Darwin' ]; then
+	if grep -q Microsoft /proc/version; then
+		# Ubuntu on Windows using the Linux subsystem
+		alias open='explorer.exe';
 	else
-		if hash pigz 2> /dev/null; then
-			cmd="pigz";
-		else
-			cmd="gzip";
-		fi;
+		alias open='xdg-open';
+	fi
+fi
+
+# `o` with no arguments opens the current directory, otherwise opens the given
+# location
+function o() {
+	if [ $# -eq 0 ]; then
+		open .;
+	else
+		open "$@";
 	fi;
-
-	echo "Compressing .tar ($((size / 1000)) kB) using \${cmd}\`…";
-	"${cmd}" -v "${tmpFile}" || return 1;
-	[ -f "${tmpFile}" ] && rm "${tmpFile}";
-
-	zippedSize=$(
-		stat -f"%z" "${tmpFile}.gz" 2> /dev/null; # macOS `stat`
-		stat -c"%s" "${tmpFile}.gz" 2> /dev/null; # GNU `stat`
-	);
-
-	echo "${tmpFile}.gz ($((zippedSize / 1000)) kB) created successfully.";
 }
 
-# Use Git’s colored diff when available
-hash git &>/dev/null;
-if [ $? -eq 0 ]; then
-	function diff() {
-		git diff --no-index --color-words "$@";
-	}
-fi;
+# -----------------------------------------------------------------------------
+# Development Tools / 开发工具
+# -----------------------------------------------------------------------------
+
+# Start an HTTP server from a directory, optionally specifying the port
+function server() {
+	local port="${1:-8000}";
+	sleep 1 && open "http://localhost:${port}/" &
+	# Set the default Content-Type to `text/plain` instead of `application/octet-stream`
+	# And serve everything as UTF-8 (although not technically correct, this doesn't break anything for binary files)
+	# Python3 HTTP server with UTF-8 support
+	python3 -m http.server --directory "${PWD}" "${port}"
+}
 
 # Create a data URL from a file
 function dataurl() {
@@ -63,25 +60,6 @@ function dataurl() {
 		mimeType="${mimeType};charset=utf-8";
 	fi
 	echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')";
-}
-
-# Start an HTTP server from a directory, optionally specifying the port
-function server() {
-	local port="${1:-8000}";
-	sleep 1 && open "http://localhost:${port}/" &
-	# Set the default Content-Type to `text/plain` instead of `application/octet-stream`
-	# And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
-	# Python3 HTTP server with UTF-8 support
-	python3 -m http.server --directory "${PWD}" "${port}"
-}
-
-# Compare original and gzipped file size
-function gz() {
-	local origsize=$(wc -c < "$1");
-	local gzipsize=$(gzip -c "$1" | wc -c);
-	local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
-	printf "orig: %d bytes\n" "$origsize";
-	printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
 }
 
 # Run `dig` and display the most useful info
@@ -123,28 +101,66 @@ function getcertnames() {
 	fi;
 }
 
-# Normalize `open` across Linux, macOS, and Windows.
-# This is needed to make the `o` function (see below) cross-platform.
-if [ ! $(uname -s) = 'Darwin' ]; then
-	if grep -q Microsoft /proc/version; then
-		# Ubuntu on Windows using the Linux subsystem
-		alias open='explorer.exe';
-	else
-		alias open='xdg-open';
-	fi
-fi
+# -----------------------------------------------------------------------------
+# Compression / 压缩工具
+# -----------------------------------------------------------------------------
 
-# `o` with no arguments opens the current directory, otherwise opens the given
-# location
-function o() {
-	if [ $# -eq 0 ]; then
-		open .;
+# Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
+function targz() {
+	local tmpFile="${@%/}.tar";
+	tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
+
+	size=$(
+		stat -f"%z" "${tmpFile}" 2> /dev/null; # macOS `stat`
+		stat -c"%s" "${tmpFile}" 2> /dev/null;  # GNU `stat`
+	);
+
+	local cmd="";
+	if (( size < 52428800 )) && hash zopfli 2> /dev/null; then
+		# the .tar file is smaller than 50 MB and Zopfli is available; use it
+		cmd="zopfli";
 	else
-		open "$@";
+		if hash pigz 2> /dev/null; then
+			cmd="pigz";
+		else
+			cmd="gzip";
+		fi;
 	fi;
+
+	echo "Compressing .tar ($((size / 1000)) kB) using \${cmd}\`…";
+	"${cmd}" -v "${tmpFile}" || return 1;
+	[ -f "${tmpFile}" ] && rm "${tmpFile}";
+
+	zippedSize=$(
+		stat -f"%z" "${tmpFile}.gz" 2> /dev/null; # macOS `stat`
+		stat -c"%s" "${tmpFile}.gz" 2> /dev/null; # GNU `stat`
+	);
+
+	echo "${tmpFile}.gz ($((zippedSize / 1000)) kB) created successfully.";
 }
 
-# Lazygit Alias
+# Compare original and gzipped file size
+function gz() {
+	local origsize=$(wc -c < "$1");
+	local gzipsize=$(gzip -c "$1" | wc -c);
+	local ratio=$(echo "$gzipsize * 100 / $origsize" | bc -l);
+	printf "orig: %d bytes\n" "$origsize";
+	printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio";
+}
+
+# Use Git's colored diff when available
+hash git &>/dev/null;
+if [ $? -eq 0 ]; then
+	function diff() {
+		git diff --no-index --color-words "$@";
+	}
+fi;
+
+# -----------------------------------------------------------------------------
+# Terminal Apps / 终端应用
+# -----------------------------------------------------------------------------
+
+# Lazygit - cd to directory after quitting
 function lg()
 {
     export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
@@ -165,6 +181,14 @@ function y() {
 		builtin cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"
+}
+
+# Tmux - create or attach to session
+# Usage: t [session_name]
+# Defaults to "dev" session if no argument provided
+function t() {
+	local session_name="${1:-dev}"
+	tmux new -A -s "$session_name"
 }
 
 # Claude Code Provider Switcher
