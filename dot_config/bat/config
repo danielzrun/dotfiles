@@ -1,0 +1,14 @@
+## Bat Configuration
+## Docs: https://github.com/sharkdp/bat#configuration
+
+# Theme (matches existing terminal/catppuccin setup)
+--theme="Catppuccin Mocha"
+
+# Display components: changes, grid, line-numbers, header
+--style=changes,grid,numbers,header
+
+# Show Git modifications context
+--diff-context=3
+
+# Wrap long lines
+--wrap=never
