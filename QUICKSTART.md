@@ -5,9 +5,14 @@ Essential tools and their daily usage.
 ## Table of Contents
 
 - [Navigation & Search](#navigation--search)
+- [Shell Functions](#shell-functions)
 - [Shell History](#shell-history)
 - [Git & GitHub](#git--github)
 - [Python Development](#python-development)
+- [Node.js Development](#nodejs-development)
+- [Data & JSON Tools](#data--json-tools)
+- [Log Analysis](#log-analysis)
+- [HTTP & Network](#http--network)
 - [Editor & Terminal](#editor--terminal)
 
 ---
@@ -36,8 +41,10 @@ eza -T          # Tree view
 eza -la --git  # Show git status
 
 # Aliases
-ls → eza
-ll → eza -l
+ls → eza --icons --git
+ll → eza -l --header --time-style long-iso
+la → eza -la --header --time-style long-iso
+tree → eza --tree --icons
 ```
 
 ### ripgrep (Fast `grep`)
@@ -78,6 +85,43 @@ fd -t d test              # Find test dirs
 # Pipe to fzf
 rg "pattern" | fzf
 fd . | fzf
+```
+
+---
+
+## Shell Functions
+
+### File System
+
+```bash
+mkd <dir>         # Create directory and enter it
+o [file]          # Open file/directory (cross-platform)
+cdf               # cd to Finder window location (macOS)
+```
+
+### Development Tools
+
+```bash
+server [port]     # Start HTTP server (default: 8000)
+dataurl <file>    # Create data URL from file
+digga <domain>    # DNS lookup (useful output)
+getcertnames <domain>  # Show SSL certificate names
+```
+
+### Compression
+
+```bash
+targz <dir>       # Create .tar.gz archive
+gz <file>         # Compare original vs gzipped size
+```
+
+### Terminal Apps
+
+```bash
+lg                # Lazygit (cd to directory on quit)
+y [path]          # Yazi file manager (cd on quit)
+t [name]          # Tmux session (default: "dev")
+ccs <provider>    # Switch Claude Code provider
 ```
 
 ---
@@ -123,14 +167,16 @@ f       - Fetch
 ?       - Help
 ```
 
-### Git Aliases
+### Git Aliases (Oh My Zsh)
 
 ```bash
-lg              # LazyGit
-ll              # Detailed log
-amend           # Amend last commit
-undo            # Undo last commit
-pf              # Force push (safe)
+gst             # git status
+gd              # git diff
+gco <branch>    # git checkout
+gcb <branch>    # git checkout -b
+gc              # git commit
+gp              # git push
+gl              # git log
 ```
 
 ### gh (GitHub CLI)
@@ -148,17 +194,20 @@ gh repo view            # Show repo info
 
 ### uv (Python Package Manager)
 
+**Installation**: `pipx install uv`
+
 ```bash
 # Project setup
-uv init                 # Init project
+uvinit                  # Init project (alias)
 uv venv                 # Create venv
-uv sync                 # Install dependencies
+uvs                     # uv sync (install dependencies)
 
-# Daily workflow (aliases)
-uvs                     # uv sync
+# Daily workflow
 uvr <cmd>               # uv run
 uva <pkg>               # uv add
 uvd <pkg>               # uv remove
+uvlock                  # uv lock
+uvpython                # uv python
 
 # FastAPI development
 uvdev                   # uvicorn main:app --reload
@@ -166,7 +215,13 @@ uvdevh                  # uvicorn --reload --host 0.0.0.0
 
 # Testing
 uvtest                  # pytest
+uvtestv                 # pytest -v
 uvshell                 # ipython
+
+# Traditional venv (fallback)
+venv                    # python3 -m venv .venv
+act                     # source .venv/bin/activate
+deact                   # deactivate
 ```
 
 ### direnv (Per-directory Environment)
@@ -210,7 +265,139 @@ export DEBUG=true
 
 ---
 
+## Node.js Development
+
+### nvm (Node Version Manager)
+
+```bash
+# Install Node.js
+nvm install 24          # Install Node.js 24
+nvm alias default 24    # Set as default
+
+# Daily usage
+nvm use 24              # Switch to Node.js 24
+node --version          # Check version
+```
+
+### pnpm (Package Manager)
+
+```bash
+pnpm install            # Install dependencies
+pnpm add <pkg>          # Add package
+pnpm dev                # Run dev script
+pnpm build              # Build project
+```
+
+---
+
+## Data & JSON Tools
+
+### jq / jaq (JSON Processor)
+
+```bash
+jq '.'                  # Pretty print JSON
+jq '.key'               # Extract key
+jq 'map(.key)'          # Transform array
+jq -c                   # Compact output (save tokens)
+
+# jaq is faster (Rust implementation)
+jaq '.' file.json
+```
+
+### fx (Interactive JSON Viewer)
+
+```bash
+fx file.json            # Interactive JSON viewer
+# Press: / to search, q to quit
+```
+
+### jless (JSON Pager)
+
+```bash
+jless file.json         # View JSON with vim keybindings
+# hjkl - navigate, q - quit
+```
+
+### jnv (Interactive JSON Filter)
+
+```bash
+jnv file.json           # Interactive JSON filtering
+# Type filter live, see results instantly
+```
+
+### visidata (Terminal Spreadsheet)
+
+```bash
+vd file.csv             # Open CSV/TSV as spreadsheet
+# Keys: < to sort, / to search, q to quit
+```
+
+### qsv (Fast CSV Toolkit)
+
+```bash
+qsv count data.csv      # Count rows
+qsv select col1,col2    # Select columns
+qsv search pattern      # Search CSV
+qsv stats               # Column statistics
+```
+
+---
+
+## Log Analysis
+
+### lnav (Log File Navigator)
+
+```bash
+lnav /var/log/*.log     # View logs with syntax highlighting
+# Keys: / to search, :help for commands
+```
+
+### hl (Log Highlighter)
+
+```bash
+hl -c error log.txt     # Highlight errors in color
+hl -p "ERROR|WARN" log  # Custom pattern
+```
+
+---
+
+## HTTP & Network
+
+### xh (HTTP Client)
+
+```bash
+xh https://api.example.com    # GET request
+xh POST https://api.example.com name=John  # POST
+xh -f https://api.example.com  # Follow redirects
+```
+
+### gping (Ping with Graph)
+
+```bash
+gping google.com       # Ping with live graph
+gping 8.8.8.8 1.1.1.1  # Multiple hosts
+```
+
+### bore-cli (Tunneling)
+
+```bash
+bore local 8000        # Tunnel localhost:8000 to public URL
+```
+
+---
+
 ## Editor & Terminal
+
+### yazi (File Manager)
+
+```bash
+y [path]               # Open yazi (cd to directory on quit)
+# Keybindings:
+# q - Quit and cd to selected directory
+# hjkl - Navigate
+# / - Search
+# Enter - Open
+```
 
 ### Neovim (LazyVim)
 
@@ -242,16 +429,35 @@ tmux                    # Start session
 
 # Prefix key: Ctrl+A (customized from default Ctrl+B)
 # Keybindings (press Ctrl+A then:)
-Ctrl+A c                # New window
+Ctrl+A c                # New window (in current dir)
 Ctrl+A n / Ctrl+A p     # Next/previous window
 Ctrl+A 0-9              # Switch to window by number
-Ctrl+A ,                # Rename window
+Ctrl+A ,                # Rename/lock window
 Ctrl+A w                # List windows
-Ctrl+A %                # Split pane vertically
-Ctrl+A "                # Split pane horizontally
+Ctrl+A |                # Split pane vertically
+Ctrl+A -                # Split pane horizontally
 Ctrl+A arrow keys       # Navigate panes
 Ctrl+A x                # Close pane
 Ctrl+A d                # Detach session
+Ctrl+A r                # Reload config
+
+# Session management
+t [name]                # Quick attach/create (function)
 tmux ls                 # List sessions
 tmux attach             # Reattach to session
+```
+
+### System Monitoring
+
+```bash
+btop                    # Modern system monitor (htop replacement)
+# Keys: q to quit, / for filter, F4 for process filter
+```
+
+### Command Running
+
+```bash
+just                    # List available commands
+just run                # Run command
+just -l                 # List all recipes
 ```
