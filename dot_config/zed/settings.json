@@ -14,9 +14,10 @@
     "toggle_relative_line_numbers": true
   },
   "terminal": {
-    "font_family": "Lilex Nerd Font Mono",
+    "font_family": ".ZedMono",
     "font_size": 16,
     "font_fallbacks": [
+      "Symbols Nerd Font Mono",
       "PingFang SC"
     ]
   },
@@ -32,13 +33,13 @@
   },
   "ui_font_size": 16,
   "ui_font_fallbacks": [
-    "Lilex Nerd Font",
+    "Symbols Nerd Font",
     "PingFang SC"
   ],
   "buffer_font_size": 16,
   "buffer_font_family": ".ZedMono",
   "buffer_font_fallbacks": [
-    "Lilex Nerd Font",
+    "Symbols Nerd Font Mono",
     "PingFang SC"
   ],
   "telemetry": {

@@ -24,6 +24,37 @@ if ! command -v brew >/dev/null 2>&1; then
         eval "$(/usr/local/bin/brew shellenv)"
     fi
 fi
+
+# Install fonts from chezmoi managed directory
+FONT_SOURCE_DIR="{{ .chezmoi.homeDir }}/.config/font"
+FONT_DEST_DIR="{{ .chezmoi.homeDir }}/Library/Fonts"
+
+if [[ -d "$FONT_SOURCE_DIR" ]]; then
+    echo ""
+    echo "📦 Installing fonts..."
+    count=0
+    for font in "$FONT_SOURCE_DIR"/*.ttf; do
+        if [[ -f "$font" ]]; then
+            font_name=$(basename "$font")
+            if [[ ! -f "$FONT_DEST_DIR/$font_name" ]]; then
+                cp "$font" "$FONT_DEST_DIR/"
+                echo "  ✓ Installed $font_name"
+                ((count++))
+            else
+                # Check if source is newer, update if needed
+                if [[ "$font" -nt "$FONT_DEST_DIR/$font_name" ]]; then
+                    cp "$font" "$FONT_DEST_DIR/"
+                    echo "  ✓ Updated $font_name"
+                    ((count++))
+                fi
+            fi
+        fi
+    done
+    if [[ $count -eq 0 ]]; then
+        echo "  ✓ Fonts already up to date"
+    fi
+    echo "✓ Fonts synced"
+fi
 {{- end }}
 
 # Install Claude Code via native script
