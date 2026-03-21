@@ -34,6 +34,7 @@ if command -v pnpm &> /dev/null; then
         *":$PNPM_HOME:"*) ;;
         *) export PATH="$PNPM_HOME:$PATH" ;;
     esac
+    export PNPM_FILTER_PROMPTS=true
     pnpm add -g $PACKAGES
 elif command -v bun &> /dev/null; then
     echo "Using bun..."
