@@ -37,6 +37,8 @@ export VISUAL="$EDITOR"
 # -----------------------------------------------------------------------------
 # Tools
 # -----------------------------------------------------------------------------
+# Starship prompt (log level: error, info, debug, trace)
+export STARSHIP_LOG=error
 # Carapace completion engine
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 

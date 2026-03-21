@@ -7,6 +7,8 @@
         // other registered language servers (ruff, pylsp, pyright).
         "ty",
         "!basedpyright",
+        "!pyright",
+        "!pylsp",
         "...",
       ],
     },

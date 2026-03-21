@@ -23,7 +23,7 @@ detect_folders = [".venv"]
 
 # Direnv status indicator
 [direnv]
-disabled = false
+disabled = true
 
 # Prompt character
 [character]
