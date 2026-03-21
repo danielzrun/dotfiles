@@ -33,3 +33,6 @@ vicmd_symbol = "[←](bold green)"
 
 [container]
 disabled = true
+
+[buf]
+disabled = true
