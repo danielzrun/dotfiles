@@ -9,6 +9,18 @@
 # Options: default, zhipu, zhipu5, packy, openrouter
 export CLAUDE_PROVIDER="default"
 
+unset ANTHROPIC_AUTH_TOKEN
+unset ANTHROPIC_BASE_URL
+unset ANTHROPIC_DEFAULT_SONNET_MODEL
+unset ANTHROPIC_DEFAULT_HAIKU_MODEL
+unset ANTHROPIC_DEFAULT_OPUS_MODEL
+unset ANTHROPIC_API_KEY
+unset CLAUDE_CODE_SUBAGENT_MODEL
+unset CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC
+
+# For Dmux
+export OPENROUTER_API_KEY="your-openrouter-api-key"
+
 # =============================================================================
 # Zhipu AI Configuration
 # =============================================================================
