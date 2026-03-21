@@ -12,7 +12,7 @@ alias v="nvim"
 # -----------------------------------------------------------------------------
 # Utils
 # -----------------------------------------------------------------------------
-alias cc="claude --enable-auto-mode --permission-mode auto"
+alias cc="claude"
 alias c="cc"
 alias cb="claude --dangerously-skip-permissions"
 alias d="dmux"

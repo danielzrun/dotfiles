@@ -85,7 +85,6 @@
     "command": "bash -c '\"$HOME/.bun/bin/bun\" \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)src/index.ts\"'"
   },
   "enabledPlugins": {
-    "claude-hud@claude-hud": true,
-    "pyright-lsp@claude-plugins-official": false
+    "claude-hud@claude-hud": true
   }
 }
