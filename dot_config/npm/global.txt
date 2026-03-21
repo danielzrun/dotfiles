@@ -1,0 +1,28 @@
+# npm Global Packages
+# Add one package per line. Lines starting with # are comments.
+# Run 'chezmoi apply' to install packages after modifying this file.
+
+# ============================================
+# Node.js Package Managers
+# ============================================
+@antfu/ni
+# pnpm is installed via Homebrew (see Brewfile)
+
+# ============================================
+# TypeScript / JavaScript Tools
+# ============================================
+tsx
+typescript
+ts-node
+
+# ============================================
+# Code Quality / Formatting
+# ============================================
+prettier
+eslint_d
+ biome
+
+# ============================================
+# Utilities
+# ============================================
+dmux

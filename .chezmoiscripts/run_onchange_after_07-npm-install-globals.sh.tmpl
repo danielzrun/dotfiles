@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# npm global packages auto-install script
+# This script runs when global.txt changes (hash-based trigger)
+# Hash: {{ include "dot_config/npm/global.txt" | sha256sum }}
+
+set -euo pipefail
+
+GLOBAL_PACKAGES_FILE="{{ .chezmoi.homeDir }}/.config/npm/global.txt"
+
+if [[ ! -f "$GLOBAL_PACKAGES_FILE" ]]; then
+    echo "⚠️  npm global packages file not found: $GLOBAL_PACKAGES_FILE"
+    exit 0
+fi
+
+echo "📦 Syncing npm global packages..."
+
+# Read package list (skip comments and empty lines)
+PACKAGES=$(grep -v '^\s*#' "$GLOBAL_PACKAGES_FILE" | grep -v '^\s*$' | tr '\n' ' ')
+
+if [[ -z "$PACKAGES" ]]; then
+    echo "ℹ️  No packages to install"
+    exit 0
+fi
+
+echo "Installing: $PACKAGES"
+
+# Detect preferred package manager
+if command -v pnpm &> /dev/null; then
+    echo "Using pnpm..."
+    # PNPM_HOME is set in .chezmoitemplates/zsh/node.zsh
+    export PNPM_HOME="${PNPM_HOME:-{{ .chezmoi.homeDir }}/.local/share/pnpm}"
+    # Add to PATH for this script execution
+    case ":$PATH:" in
+        *":$PNPM_HOME:"*) ;;
+        *) export PATH="$PNPM_HOME:$PATH" ;;
+    esac
+    pnpm add -g $PACKAGES
+elif command -v bun &> /dev/null; then
+    echo "Using bun..."
+    bun install -g $PACKAGES
+else
+    echo "Using npm..."
+    npm install -g $PACKAGES
+fi
+
+echo "✅ npm global packages synced"
