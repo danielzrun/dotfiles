@@ -25,8 +25,3 @@ fi
 if command -v carapace >/dev/null 2>&1; then
     source <(carapace _carapace zsh)
 fi
-
-# Atuin (shell history search & sync)
-if command -v atuin >/dev/null 2>&1; then
-    eval "$(atuin init zsh)"
-fi

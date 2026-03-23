@@ -6,7 +6,6 @@ Essential tools and their daily usage.
 
 - [Navigation & Search](#navigation--search)
 - [Shell Functions](#shell-functions)
-- [Shell History](#shell-history)
 - [Git & GitHub](#git--github)
 - [Python Development](#python-development)
 - [Node.js Development](#nodejs-development)
@@ -122,32 +121,6 @@ lg                # Lazygit (cd to directory on quit)
 y [path]          # Yazi file manager (cd on quit)
 t [name]          # Tmux session (default: "dev")
 ccs <provider>    # Switch Claude Code provider
-```
-
----
-
-## Shell History
-
-### atuin (Synced Shell History)
-
-```bash
-# Setup (first time only)
-atuin register -u <username> -e <email>    # Register account
-atuin login                                 # Login to sync
-atuin key                                   # View encryption key (save to password manager!)
-
-# Import & Sync
-atuin import auto                           # Import existing shell history
-atuin sync                                  # Manual sync (auto-sync enabled by default)
-
-# Security
-atuin account delete                        # Delete server data
-atuin history prune --dry-run               # Preview deletions
-atuin history prune                         # Delete matching entries
-
-# Daily usage
-# Up arrow - Search history (fuzzy)
-# Ctrl+R - Full interactive search
 ```
 
 ---

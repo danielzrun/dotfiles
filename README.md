@@ -8,7 +8,7 @@ Optimized for Python/FastAPI and Node.js development with modern CLI tools, Neov
 
 ## Features
 
-- **Modern CLI Stack**: ripgrep, zoxide, eza, bat, fd, fzf, delta, atuin, carapace
+- **Modern CLI Stack**: ripgrep, zoxide, eza, bat, fd, fzf, delta, carapace
 - **Neovim**: LazyVim with custom keymaps and auto-clipboard sync
 - **Python**: uv-based workflow with FastAPI aliases (installed via pipx)
 - **Node.js**: nvm + pnpm setup
@@ -33,7 +33,6 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply YOUR_GITHUB_USERNAME
 | **Navigation** | zoxide (z), eza (ls), yazi (file manager) |
 | **Viewing** | bat (cat), delta (git diff), difftastic |
 | **Git** | lazygit, lazydocker, gh |
-| **History** | atuin (sync across machines) |
 | **Terminal** | ghostty, tmux, starship prompt |
 
 ### Development
@@ -104,7 +103,7 @@ chezmoi update               # Pull latest from git
 │   │   ├── env.zsh             # Environment variables
 │   │   ├── functions.zsh       # Shell functions (t, lg, y, ccs, etc.)
 │   │   ├── keybindings.zsh     # vi-mode keybindings
-│   │   ├── modern-tools.zsh    # eza, bat, atuin, carapace
+│   │   ├── modern-tools.zsh    # eza, bat, carapace
 │   │   ├── node.zsh            # nvm setup
 │   │   ├── path.zsh            # PATH configuration
 │   │   ├── python.zsh          # uv aliases
@@ -123,7 +122,6 @@ chezmoi update               # Pull latest from git
 │   ├── starship.toml           # Prompt config
 │   ├── ghostty/config.tmpl     # Terminal
 │   ├── lazygit/config.yml      # Git TUI
-│   ├── atuin/config.toml       # Shell history
 │   ├── direnv/direnvrc         # Project-specific env
 │   ├── pipx/Pipxfile           # Python global packages
 │   └── debian/Aptfile          # Debian packages

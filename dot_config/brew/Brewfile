@@ -9,7 +9,6 @@
 # Shell & Prompt
 # -----------------------------------------------------------------------------
 brew "starship"      # Modern prompt
-brew "atuin"         # Shell history sync & search
 brew "carapace"      # Advanced shell completions
 brew "zoxide"        # Smart directory jumper
 brew "fzf"           # Fuzzy finder

@@ -128,7 +128,6 @@ Uses **LazyVim** with:
 | :--- | :--- | :--- |
 | Package Manager | Homebrew | macOS standard, declarative via Brewfile |
 | Python | uv | Faster than pip/poetry/pyenv, unified toolchain |
-| Shell History | Atuin | Sync across machines, better search than ctrl+r |
 | Directory Jumping | Zoxide | Smart ranking (frecency) vs cd |
 | Git Diff | Delta + difftastic | Side-by-side view + structural diffs |
 | Terminal | Ghostty | GPU-accelerated, modern vs iTerm2 |

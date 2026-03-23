@@ -104,17 +104,6 @@ else
     echo "✓ starship already installed"
 fi
 
-# Install atuin
-if ! command -v atuin >/dev/null 2>&1; then
-    echo ""
-    echo "📦 Installing atuin..."
-    curl --proto '=https' --tlsv1.2 -LsSf https://setup.atuin.sh | sh -s -- --non-interactive
-    # Link atuin to ~/.local/bin for PATH access
-    ln -sf ~/.atuin/bin/atuin ~/.local/bin/atuin
-else
-    echo "✓ atuin already installed"
-fi
-
 # Install neovim latest (Linux only)
 LATEST_VERSION=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//')
 CURRENT_VERSION=$(command -v nvim >/dev/null 2>&1 && nvim --version | grep -oP 'NVIM v\K[0-9.]+' || echo "none")
