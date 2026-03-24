@@ -98,7 +98,10 @@
     # Delta is the best choice for interactive mode
     diffFilter = delta --color-only --features=catppuccin-mocha
 
-{{- if eq .chezmoi.os "darwin" }}
+[fetch]
+    prune = true
+
+{{ if eq .chezmoi.os "darwin" }}
 [credential]
     helper = osxkeychain
 {{- else if eq .chezmoi.os "linux" }}
