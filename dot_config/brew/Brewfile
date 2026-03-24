@@ -32,6 +32,7 @@ brew "git-delta"     # Better git diff viewer
 brew "difftastic"    # Structural diff tool (for lazygit)
 brew "gh"            # GitHub CLI
 brew "lazygit"       # Git TUI (Vim keybindings)
+brew "git-filter-repo"  # Rewrite Git history
 
 # -----------------------------------------------------------------------------
 # Docker Tools
