@@ -14,8 +14,14 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo ""
 
 # Rebuild bat theme cache (for custom themes like Catppuccin)
-if command -v bat >/dev/null 2>&1; then
-    bat cache --build &>/dev/null
+# Note: Debian/Ubuntu installs as 'batcat', macOS as 'bat'
+BAT_CMD="bat"
+if ! command -v bat >/dev/null 2>&1 && command -v batcat >/dev/null 2>&1; then
+    BAT_CMD="batcat"
+fi
+
+if command -v "$BAT_CMD" >/dev/null 2>&1; then
+    "$BAT_CMD" cache --build &>/dev/null
     echo "✓ Bat theme cache updated"
 fi
 
