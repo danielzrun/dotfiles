@@ -35,4 +35,3 @@ cask "glance-chamburr"  # Quick Look plugin for unsupported file formats
 cask "hex-fiend"     # Fast hex editor for macOS
 # cask "imhex"         # Advanced hex editor with pattern language
 brew "ghostscript"   # PostScript/PDF interpreter (required by some PDF tools)
-brew "bufbuild/buf/buf"  # Protobuf toolchain
