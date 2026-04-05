@@ -22,3 +22,9 @@ anthropics/claude-plugins-official
 
 # Claude HUD plugin for status line display
 jarrodwatts/claude-hud
+
+# Codex CLI plugin for GPT-5 and OpenAI models
+openai/codex-plugin-cc
+
+# Persistent memory for Claude Code sessions
+thedotmack/claude-mem
