@@ -5,3 +5,9 @@ README.md
 CLAUDE.md
 LICENSE
 QUICKSTART.md
+
+# Codex runtime files (keep only auth.json and config.toml)
+.codex/log/*
+.codex/sessions/*
+.codex/*.sqlite*
+.codex/history.jsonl

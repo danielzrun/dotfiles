@@ -1,0 +1,10 @@
+model_provider = "packycode"
+model = "gpt-5.4"
+model_reasoning_effort = "high"
+disable_response_storage = true
+
+[model_providers.packycode]
+name = "packycode"
+base_url = "https://www.packyapi.com/v1"
+wire_api = "responses"
+requires_openai_auth = true
