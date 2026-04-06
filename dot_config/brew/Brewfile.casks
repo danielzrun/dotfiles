@@ -26,6 +26,7 @@ cask "ghostty"       # GPU-accelerated terminal (~50MB)
 # -----------------------------------------------------------------------------
 # Productivity Tools
 # -----------------------------------------------------------------------------
+cask "alfred"        # Productivity app with hotkeys, snippets, and workflows
 cask "snipaste"      # Screenshot & annotation tool
 cask "glance-chamburr"  # Quick Look plugin for unsupported file formats
 
