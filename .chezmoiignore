@@ -2,9 +2,11 @@
 .config/tmux/plugins/*
 install.sh
 README.md
+README.zh-CN.md
 CLAUDE.md
 LICENSE
 QUICKSTART.md
+QUICKSTART.zh-CN.md
 
 # Codex runtime files (keep only auth.json and config.toml)
 .codex/log/*
