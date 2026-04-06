@@ -25,3 +25,9 @@ jarrodwatts/claude-hud
 
 # Codex CLI plugin for GPT-5 and OpenAI models
 openai/codex-plugin-cc
+
+# Oh My Claude Code - collection of community plugins
+Yeachan-Heo/oh-my-claudecode
+
+# Everything Claude Code - comprehensive plugin collection
+affaan-m/everything-claude-code
