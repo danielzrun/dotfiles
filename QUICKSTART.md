@@ -6,18 +6,18 @@ Essential tools and their daily usage.
 
 ## Table of Contents
 
-- [Navigation & Search](#navigation-search)
+- [Navigation & Search](#navigation--search)
 - [Text Processing](#text-processing)
 - [Shell Functions](#shell-functions)
-- [Git & GitHub](#git-github)
-- [SSH & Sessions](#ssh-sessions)
+- [Git & GitHub](#git--github)
+- [SSH & Sessions](#ssh--sessions)
 - [Python Development](#python-development)
 - [Process Management](#process-management)
 - [Node.js Development](#nodejs-development)
-- [Data & JSON Tools](#data-json-tools)
+- [Data & JSON Tools](#data--json-tools)
 - [Log Analysis](#log-analysis)
-- [HTTP & Network](#http-network)
-- [Editor & Terminal](#editor-terminal)
+- [HTTP & Network](#http--network)
+- [Editor & Terminal](#editor--terminal)
 - [Kaggle CLI](#kaggle-cli)
 
 ---
