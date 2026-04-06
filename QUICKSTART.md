@@ -1,18 +1,24 @@
+English | [简体中文](QUICKSTART.zh-CN.md)
+
 # Quick Start
 
 Essential tools and their daily usage.
 
 ## Table of Contents
 
-- [Navigation & Search](#navigation--search)
+- [Navigation & Search](#navigation-search)
+- [Text Processing](#text-processing)
 - [Shell Functions](#shell-functions)
-- [Git & GitHub](#git--github)
+- [Git & GitHub](#git-github)
+- [SSH & Sessions](#ssh-sessions)
 - [Python Development](#python-development)
+- [Process Management](#process-management)
 - [Node.js Development](#nodejs-development)
-- [Data & JSON Tools](#data--json-tools)
+- [Data & JSON Tools](#data-json-tools)
 - [Log Analysis](#log-analysis)
-- [HTTP & Network](#http--network)
-- [Editor & Terminal](#editor--terminal)
+- [HTTP & Network](#http-network)
+- [Editor & Terminal](#editor-terminal)
+- [Kaggle CLI](#kaggle-cli)
 
 ---
 
@@ -86,6 +92,22 @@ rg "pattern" | fzf
 fd . | fzf
 ```
 
+### sd (Modern Find & Replace)
+
+```bash
+sd 'old' 'new' file.txt           # Simple replace
+sd 'foo.*bar' 'baz' file.txt      # Regex replace
+sd -s 'old' 'new' file.txt        # String literal replace
+sd 'old' 'new' -i file.txt        # Case insensitive
+sd 'old' 'new' *.txt              # Multiple files
+
+# Pipeline usage
+cat file.txt | sd 'foo' 'bar'
+rg "pattern" -l | sd "\.txt$" ".md"  # Rename files via list
+```
+
+Faster and more intuitive than sed, with regex-first syntax.
+
 ---
 
 ## Shell Functions
@@ -119,6 +141,8 @@ gz <file>         # Compare original vs gzipped size
 ```bash
 lg                # Lazygit (cd to directory on quit)
 y [path]          # Yazi file manager (cd on quit)
+s                 # lazyssh (SSH server picker)
+d                 # dmux (tmux session manager)
 t [name]          # Tmux session (default: "dev")
 ccs <provider>    # Switch Claude Code provider
 ```
@@ -160,6 +184,28 @@ gh pr checkout 123      # Checkout PR
 gh issue create         # Create issue
 gh repo view            # Show repo info
 ```
+
+---
+
+## SSH & Sessions
+
+### lazyssh (SSH Server Picker)
+
+```bash
+s                       # Quick open SSH picker (alias)
+lazyssh                 # Full command
+```
+
+Interactive TUI for quickly connecting to saved SSH servers. Press `?` for help, `q` to quit.
+
+### dmux (Tmux Session Manager)
+
+```bash
+d                       # Quick open dmux (alias)
+dmux                    # Full command
+```
+
+Tmux session manager for organizing terminal workspaces. Automatically creates `.dmux/` directory for session state.
 
 ---
 
@@ -235,6 +281,22 @@ layout_node
 export DATABASE_URL="postgresql://localhost/mydb"
 export DEBUG=true
 ```
+
+---
+
+## Process Management
+
+### procs (Modern ps)
+
+```bash
+procs                   # Colorized process list
+procs python            # Filter by name
+procs --tree            # Tree view
+procs --sort cpu        # Sort by CPU usage
+procs --watch           # Auto-refresh (like htop)
+```
+
+Modern replacement for ps with colors, auto-formatting, and intelligent column sizing.
 
 ---
 
@@ -374,6 +436,8 @@ y [path]               # Open yazi (cd to directory on quit)
 
 ### Neovim (LazyVim)
 
+**Enabled Extras**: codeium (AI), mini-surround, docker, json, markdown, python, toml, yaml
+
 ```vim
 # System clipboard
 Cmd+C / Cmd+V           # Copy/Paste (normal/insert mode)
@@ -434,3 +498,18 @@ just                    # List available commands
 just run                # Run command
 just -l                 # List all recipes
 ```
+
+---
+
+## Kaggle CLI
+
+```bash
+kaggle competitions list           # List competitions
+kaggle competitions download -c <name>  # Download competition data
+kaggle datasets download -d <name> # Download dataset
+kaggle kernels output <username>   # View kernel output
+kaggle kernels list                # List kernels
+kaggle files list <competition>    # List files in competition
+```
+
+Kaggle CLI for data science competitions and datasets (installed via pipx).

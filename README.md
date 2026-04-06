@@ -1,3 +1,5 @@
+English | [简体中文](README.zh-CN.md)
+
 # Dotfiles
 
 Cross-platform dotfiles managed with [chezmoi](https://www.chezmoi.io/).
@@ -8,7 +10,7 @@ Optimized for Python/FastAPI and Node.js development with modern CLI tools, Neov
 
 ## Features
 
-- **Modern CLI Stack**: ripgrep, zoxide, eza, bat, fd, fzf, delta, carapace
+- **Modern CLI Stack**: ripgrep, zoxide, eza, bat, fd, fzf, delta, sd, carapace
 - **Neovim**: LazyVim with custom keymaps and auto-clipboard sync
 - **Python**: uv-based workflow with FastAPI aliases (installed via pipx)
 - **Node.js**: nvm + pnpm setup
@@ -23,16 +25,72 @@ Optimized for Python/FastAPI and Node.js development with modern CLI tools, Neov
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply YOUR_GITHUB_USERNAME
 ```
 
+**During initial setup, chezmoi will prompt for:**
+- `Your name`: Your name for git commits
+- `Email address`: Your email for git commits
+
+These values are stored in `.chezmoi.toml.tmpl` and used throughout your dotfiles (e.g., git config).
+
+### ⚠️ Important: Fork Users Must Reconfigure Encryption
+
+This repository uses [age](https://github.com/FiloSottile/age) encryption for sensitive files (stored in `.chezmoi.toml.tmpl`).
+
+**If you fork this repository, you MUST generate your own age keypair:**
+
+```bash
+# 1. Generate new age keypair
+age-keygen -o key.txt
+
+# 2. Display your public key (copy this output)
+cat key.txt
+
+# 3. Move private key to chezmoi config directory
+mv key.txt ~/.config/chezmoi/key.txt
+
+# 4. Edit .chezmoi.toml.tmpl and replace:
+#    - The recipient public key with your own
+#    - Optionally update name/email prompts
+
+# 5. Recreate encrypted files from examples:
+#    You cannot decrypt the original .age files.
+#    Reference the .example files to create your own configs:
+
+# Example: Create .env from example
+cp ~/.local/share/chezmoi/dot_env.example ~/.env
+# Edit the file with your values
+chezmoi add --encrypt ~/.env
+
+# Example: Setup Kaggle credentials
+mkdir -p ~/.kaggle
+cp ~/.local/share/chezmoi/dot_kaggle/kaggle.json.example ~/.kaggle/kaggle.json
+# Edit with your Kaggle API credentials
+chezmoi add --encrypt ~/.kaggle/kaggle.json
+
+# Example: Setup Codex auth (if using)
+mkdir -p ~/.config/codex
+cp ~/.local/share/chezmoi/dot_codex/auth.json.example ~/.config/codex/auth.json
+# Edit with your Codex credentials
+chezmoi add --encrypt ~/.config/codex/auth.json
+```
+
+**Example files available:**
+- `dot_env.example` - Environment variables template
+- `dot_kaggle/kaggle.json.example` - Kaggle API credentials
+- `dot_codex/auth.json.example` - Codex authentication (optional)
+
+**Why?** The original age keys are private to this repository. Encrypted files (`.age` suffix) can only be decrypted by the matching private key. You must create your own encrypted files using the example templates.
+
 ## What's Included
 
 ### Core Tools
 
 | Category | Tools |
 |----------|-------|
-| **Search** | ripgrep (rg), fd, fzf, ast-grep |
+| **Search** | ripgrep (rg), fd, fzf, ast-grep, sd (find/replace) |
 | **Navigation** | zoxide (z), eza (ls), yazi (file manager) |
 | **Viewing** | bat (cat), delta (git diff), difftastic |
 | **Git** | lazygit, lazydocker, gh |
+| **SSH** | lazyssh (server picker), dmux (tmux sessions) |
 | **Terminal** | ghostty, tmux, starship prompt |
 
 ### Development
@@ -41,7 +99,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply YOUR_GITHUB_USERNAME
 |---------------|-------|
 | **Python** | `uvs` (sync), `uvr` (run), `uvdev` (FastAPI) - via pipx |
 | **Node.js** | nvm (version management), pnpm (package manager) |
-| **Neovim** | LazyVim + Catppuccin theme |
+| **Neovim** | LazyVim + Catppuccin + AI/codeium, docker, json, markdown, python, toml, yaml extras |
 | **Claude Code** | AI coding assistant with provider switcher (ccs) |
 | **Docker** | lazydocker (TUI) |
 | **Command Runner** | just (command recipes) |
@@ -51,7 +109,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply YOUR_GITHUB_USERNAME
 | Category | Tools |
 |----------|-------|
 | **JSON** | jq, jaq (faster), fx (interactive), jless (pager), jnv (filter) |
-| **Data** | visidata (spreadsheets), qsv (CSV toolkit) |
+| **Data** | visidata (spreadsheets), qsv (CSV toolkit), kaggle CLI |
 | **Logs** | lnav (log navigator), hl (log highlighter) |
 | **HTTP/Network** | xh (httpie clone), gping (ping with graph), bore-cli (tunneling) |
 
@@ -59,7 +117,7 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply YOUR_GITHUB_USERNAME
 
 | Category | Tools |
 |----------|-------|
-| **Monitoring** | btop (system monitor) |
+| **Monitoring** | btop (system monitor), procs (modern ps) |
 | **Compression** | zopfli, pigz (via targz function) |
 | **Security** | age (encryption) |
 | **Media** | ffmpeg, imagemagick, poppler, resvg |
@@ -139,10 +197,35 @@ Quick reference for custom functions:
 | `t [name]` | Create/attach to tmux session (default: "dev") |
 | `lg` | Lazygit (cd to directory on quit) |
 | `y [path]` | Yazi file manager (cd on quit) |
+| `s` | lazyssh (SSH server picker) |
+| `d` | dmux (tmux session manager) |
 | `ccs <provider>` | Switch Claude Code provider |
 | `mkd <dir>` | Create directory and enter it |
 | `o [file]` | Open file/directory (cross-platform) |
 | `server [port]` | Start HTTP server (default: 8000) |
+
+## Claude Code Integration
+
+### Plugin Marketplaces
+- `anthropics/claude-plugins-official` - Official Anthropic plugins
+- `jarrodwatts/claude-hud` - Statusline display plugin
+- `openai/codex-plugin-cc` - GPT-5/Codex integration
+- `Yeachan-Heo/oh-my-claudecode` - Community plugins collection
+- `affaan-m/everything-claude-code` - Comprehensive plugin ecosystem
+
+### Enabled Plugins
+- **serena** - Semantic coding tools with AST manipulation
+- **hookify** - Behavior prevention hooks from conversation analysis
+- **context7** - Library documentation lookup (replaces web search)
+- **claude-hud** - Real-time statusline integration
+- **claude-md-management** - Documentation management (CLAUDE.md)
+- **commit-commands** - Git workflow automation
+- **security-guidance** - Security vulnerability detection
+
+### Configuration Files
+- `~/.config/claude/settings.json` - Main settings and permissions
+- `~/.config/claude/marketplaces.txt` - Plugin marketplace sources
+- `~/.config/claude/plugins/` - Installed plugins directory
 
 ## Customization
 
@@ -162,6 +245,10 @@ chezmoi apply  # Apply
 cd ~/.local/share/chezmoi
 git add . && git commit -m "message"
 ```
+
+## Documentation
+
+- [Quick Start Guide](QUICKSTART.md) / [快速入门](QUICKSTART.zh-CN.md)
 
 ## References
 
