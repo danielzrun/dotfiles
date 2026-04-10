@@ -43,7 +43,6 @@ export STARSHIP_LOG=error
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 # Claude Code display settings
 export CLAUDE_CODE_NO_FLICKER=1
-export CLAUDE_CODE_DISABLE_MOUSE=1
 
 # -----------------------------------------------------------------------------
 # Local Environment Variables
