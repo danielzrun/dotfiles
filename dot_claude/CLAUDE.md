@@ -1,49 +1,30 @@
-# Global Rules
+# Project Context & Core Standards
 
-## Speed & Tooling Rules
+## 🚀 Global Speed & Tooling Policy
+- **Performance First:** ALWAYS prioritize high-performance tools to minimize latency.
+- **Tool Preferences:**
+  - Use `fd` instead of `find`.
+  - Use `rg` instead of `grep`.
+  - Use `jq` for JSON processing.
+- **Search Strategy:** Start broad (`rg "term"`), then narrow down with context (`rg -C 5`).
 
-ALWAYS prioritize performance. Claude Code must use high-performance tools to minimize latency and error rates.
+## 🗣️ Language & Response Policy
+- **Bilingual Mode:** Respond in **Chinese** with English technical terms in brackets.
+- **Translation:** ALWAYS end your response with **"English:"** followed by a brief, idiomatic English rewrite of the user's prompt.
 
-### File Exploration & Search
+## 🌳 Git Standards
+- **Workflow:** ALWAYS use the `/git-commit` skill for all git commit operations.
+- **Safety:** Do not execute `git push` without explicit user confirmation.
+- **Pre-commit:** Ensure code is formatted and linted before committing.
 
-- **Recursive View:** Use `fd . -t f` (fastest) or `rg --files` (respects .gitignore)
-- **Directory Structure:** Use `fd . -t d`
-- **Content Search:** Use `rg "pattern"`. Use `-i` (case-insensitive) or `-t <type>` (filter)
-
-### JSON & Data Processing
-
-- **Primary Tool:** Use `jq`
-- **Token Efficiency:** ALWAYS use `jq -c` (compact output) to save context tokens
-- **Advanced:** Use `jaq` (Rust version) if available for heavy processing
-
-### Execution Strategy
-
-- **Start Broad:** `rg "partial_term"` to find entry points
-- **Context:** Use `rg -C 5` to understand surrounding logic before editing
-- **Decision:** Use `ls -la` only for single-directory inspection
-
-### Critical Banned List
-
-- **NO** `tree`: Not installed, use `fd . -t d`
-- **NO** `find`: Too slow, use `fd`
-- **NO** `grep`: Too slow, use `rg`
-- **NO** `ls -R`: Inefficient, use `rg --files`
-- **NO** `cat | grep`: Use `rg "pattern" filename`
+## 🎯 Code Review & Quality Standards
+- **Target Standard (Score 9):** Aim for "Functional, robust, clean". **This is the acceptance threshold.**
+- **Anti-Perfectionism:** Do NOT aim for Score 10 (Over-engineering). "Good enough to ship" (9/10) is preferred.
+- **Priorities:** Correctness > Readability > Performance.
+- **Auto-Pass:** If Score >= 9, task is complete.
+- **Auto-Fix:** Only re-write if Score < 7 (Critical Error).
 
 ---
 
-## Global Development Rules
-
-### Language & Response Policy
-
-- **Bilingual:** Chinese responses with English in brackets for key terms
-- **Translation:** End response with **English:** followed by a brief, idiomatic English rewrite of user's prompt
-
-### Git Standards
-
-Use the `commit` skill for all git operations.
-
-### Code & Comments
-
-- **Code Style:** Consistent indentation/formatting following the language style guide
-- **Comments:** Use English. If >50 chars, place on a separate line above the code
+## 📚 Detailed Rules
+- Refer to `.claude/rules/` for specific tooling parameters, banned commands, and coding style guidelines.
