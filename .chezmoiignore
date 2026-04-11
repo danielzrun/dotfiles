@@ -1,5 +1,4 @@
 .config/chezmoi/*
-.claude/*
 .config/tmux/plugins/*
 .gitignore
 install.sh
