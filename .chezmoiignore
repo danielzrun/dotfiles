@@ -1,5 +1,7 @@
 .config/chezmoi/*
+.claude/*
 .config/tmux/plugins/*
+.gitignore
 install.sh
 README.md
 README.zh-CN.md
