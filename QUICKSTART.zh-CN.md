@@ -164,16 +164,18 @@ f       - 获取
 ?       - 帮助
 ```
 
-### Git 别名 (Oh My Zsh)
+### Git 别名
 
 ```bash
+g               # git
 gst             # git status
 gd              # git diff
 gco <branch>    # git checkout
-gcb <branch>    # git checkout -b
-gc              # git commit
+gcmsg           # git commit -m
 gp              # git push
-gl              # git log
+gl              # git pull
+gb              # git branch
+glog            # git log --oneline --graph --decorate
 ```
 
 ### gh (GitHub CLI)

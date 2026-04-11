@@ -15,7 +15,7 @@ Optimized for Python/FastAPI and Node.js development with modern CLI tools, Neov
 - **Python**: uv-based workflow with FastAPI aliases (installed via pipx)
 - **Node.js**: nvm + pnpm setup
 - **AI**: Claude Code assistant with provider switching
-- **Shell**: Zsh + Oh My Zsh with curated plugins and vi-mode
+- **Shell**: Zsh + Sheldon (fast plugin manager) with curated plugins and vi-mode
 - **Automation**: One-command setup via Homebrew (macOS & Linux)
 - **Security**: Age encryption for sensitive config
 
@@ -161,6 +161,7 @@ chezmoi update               # Pull latest from git
 │   │   ├── env.zsh             # Environment variables
 │   │   ├── functions.zsh       # Shell functions (t, lg, y, ccs, etc.)
 │   │   ├── keybindings.zsh     # vi-mode keybindings
+│   │   ├── tool-hooks.zsh      # zoxide, direnv, fzf init
 │   │   ├── modern-tools.zsh    # eza, bat, carapace
 │   │   ├── node.zsh            # nvm setup
 │   │   ├── path.zsh            # PATH configuration
@@ -177,6 +178,7 @@ chezmoi update               # Pull latest from git
 │   ├── git/ignore              # Global gitignore
 │   ├── brew/Brewfile           # Homebrew CLI packages
 │   ├── brew/Brewfile.casks     # GUI apps (install separately)
+│   ├── sheldon/plugins.toml    # Shell plugin config
 │   ├── starship.toml           # Prompt config
 │   ├── ghostty/config.tmpl     # Terminal
 │   ├── lazygit/config.yml      # Git TUI

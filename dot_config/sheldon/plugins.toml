@@ -1,0 +1,74 @@
+# =============================================================================
+# Sheldon Plugin Manager Configuration
+# =============================================================================
+# A fast, configurable shell plugin manager for Zsh
+# Documentation: https://sheldon.cli.rs
+# =============================================================================
+
+shell = "zsh"
+
+# -----------------------------------------------------------------------------
+# Deferred Loading Template
+# -----------------------------------------------------------------------------
+# Load heavy plugins asynchronously for faster startup
+# Based on: https://sheldon.cli.rs/Examples.html
+# -----------------------------------------------------------------------------
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+
+[templates]
+defer = "{%- for file in files -%}\nzsh-defer source \"{{ file }}\"\n{%- endfor -%}"
+
+# -----------------------------------------------------------------------------
+# Zsh Completions
+# -----------------------------------------------------------------------------
+# Additional completion definitions for various commands
+# Source: https://github.com/zsh-users/zsh-completions
+# Note: Must be loaded before compinit (handled by Sheldon)
+# -----------------------------------------------------------------------------
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
+
+# -----------------------------------------------------------------------------
+# Zsh Autosuggestions
+# -----------------------------------------------------------------------------
+# Suggests commands as you type based on history
+# Source: https://github.com/zsh-users/zsh-autosuggestions
+# Uses deferred loading for faster startup
+# -----------------------------------------------------------------------------
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
+apply = ["defer"]
+
+# -----------------------------------------------------------------------------
+# FZF Tab
+# -----------------------------------------------------------------------------
+# FZF-powered tab completion
+# Source: https://github.com/Aloxaf/fzf-tab
+# Note: Must be loaded after compinit (handled by Sheldon order)
+# -----------------------------------------------------------------------------
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+
+# -----------------------------------------------------------------------------
+# Zsh Syntax Highlighting
+# -----------------------------------------------------------------------------
+# Syntax highlighting for Zsh commands
+# Source: https://github.com/zsh-users/zsh-syntax-highlighting
+# MUST be last plugin loaded (deferred for performance)
+# -----------------------------------------------------------------------------
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+apply = ["defer"]
+
+# =============================================================================
+# Notes:
+# =============================================================================
+# - Git aliases are in .chezmoitemplates/zsh/aliases.zsh
+# - Vi-mode configuration is in .chezmoitemplates/zsh/vi-mode.zsh
+# - uv, direnv, zoxide, fzf are initialized in .chezmoitemplates/zsh/modern-tools.zsh
+# - Starship prompt is configured separately (not a plugin)
+# - Custom keybindings and functions are in .chezmoitemplates/zsh/
+# - No oh-my-zsh dependency (fully optimized)
+# =============================================================================

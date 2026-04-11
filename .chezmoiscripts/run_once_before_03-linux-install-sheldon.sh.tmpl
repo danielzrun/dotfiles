@@ -1,0 +1,68 @@
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/bash
+# =============================================================================
+# Sheldon Plugin Manager Installation (Linux)
+# =============================================================================
+# Runs once on first apply (via run_once_before_ prefix)
+# Downloads and installs pre-compiled Sheldon binary
+
+set -euo pipefail
+
+SHELDON_VERSION="0.8.5"
+SHELDON_URL="https://github.com/rossmacarthur/sheldon/releases/download/v${SHELDON_VERSION}"
+ARCH=$(uname -m)
+
+# Detect architecture
+case "$ARCH" in
+    x86_64)
+        BINARY_NAME="sheldon-${SHELDON_VERSION}-x86_64-unknown-linux-gnu.tar.gz"
+        ;;
+    aarch64|arm64)
+        BINARY_NAME="sheldon-${SHELDON_VERSION}-aarch64-unknown-linux-gnu.tar.gz"
+        ;;
+    *)
+        echo "⚠️  Unsupported architecture: $ARCH"
+        echo "   Supported: x86_64, aarch64"
+        exit 1
+        ;;
+esac
+
+# Check if sheldon already installed
+if command -v sheldon >/dev/null 2>&1; then
+    echo "✓ Sheldon already installed"
+    sheldon --version
+    exit 0
+fi
+
+echo "📦 Installing Sheldon ${SHELDON_VERSION}..."
+
+# Create temp directory
+TMP_DIR=$(mktemp -d)
+cd "$TMP_DIR"
+
+# Download Sheldon
+echo "  📥 Downloading ${BINARY_NAME}..."
+curl -fLO "${SHELDON_URL}/${BINARY_NAME}"
+
+# Extract
+echo "  📦 Extracting..."
+tar xzf "${BINARY_NAME}"
+
+# Install to /usr/local/bin (requires sudo)
+echo "  🔧 Installing to /usr/local/bin..."
+sudo mv sheldon /usr/local/bin/
+
+# Cleanup
+cd -
+rm -rf "$TMP_DIR"
+
+# Verify installation
+if command -v sheldon >/dev/null 2>&1; then
+    echo ""
+    echo "✅ Sheldon installed successfully!"
+    sheldon --version
+else
+    echo "⚠️  Installation failed"
+    exit 1
+fi
+{{- end -}}

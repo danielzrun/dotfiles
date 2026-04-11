@@ -15,7 +15,7 @@
 - **Python**: 基于 uv 的工作流和 FastAPI 别名（通过 pipx 安装）
 - **Node.js**: nvm + pnpm 配置
 - **AI 辅助**: Claude Code 编程助手，支持提供商切换
-- **Shell**: Zsh + Oh My Zsh，精选插件和 vi 模式
+- **Shell**: Zsh + Sheldon（快速插件管理器），精选插件和 vi 模式
 - **自动化**: 通过 Homebrew 一键安装（macOS 和 Linux）
 - **安全**: 使用 Age 加密敏感配置
 
@@ -161,6 +161,7 @@ chezmoi update               # 从 git 拉取最新
 │   │   ├── env.zsh             # 环境变量
 │   │   ├── functions.zsh       # Shell 函数（t, lg, y, ccs 等）
 │   │   ├── keybindings.zsh     # vi-mode 快捷键
+│   │   ├── tool-hooks.zsh      # zoxide, direnv, fzf 初始化
 │   │   ├── modern-tools.zsh    # eza, bat, carapace
 │   │   ├── node.zsh            # nvm 配置
 │   │   ├── path.zsh            # PATH 配置
@@ -177,6 +178,7 @@ chezmoi update               # 从 git 拉取最新
 │   ├── git/ignore              # 全局 gitignore
 │   ├── brew/Brewfile           # Homebrew CLI 包
 │   ├── brew/Brewfile.casks     # GUI 应用（单独安装）
+│   ├── sheldon/plugins.toml    # Shell 插件配置
 │   ├── starship.toml           # 提示符配置
 │   ├── ghostty/config.tmpl     # 终端
 │   ├── lazygit/config.yml      # Git TUI

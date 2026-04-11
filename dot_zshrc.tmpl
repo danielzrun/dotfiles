@@ -6,31 +6,29 @@
 # =============================================================================
 
 # -----------------------------------------------------------------------------
-# Oh My Zsh Configuration
+# Completion System
 # -----------------------------------------------------------------------------
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME=""  # Using Starship instead
+# Initialize zsh completion system before loading plugins
+# Must be called before plugins that use compdef
+# -----------------------------------------------------------------------------
+autoload -Uz compinit && compinit
 
-# Custom completion paths
-if [[ -d "$HOME/.docker/completions" ]]; then
-  fpath=("$HOME/.docker/completions" $fpath)
-fi
+# -----------------------------------------------------------------------------
+# Tool Hooks Initialization
+# -----------------------------------------------------------------------------
+# Initialize tools that need eval hooks (zoxide, direnv, fzf)
+# Must load after compinit for completions to work
+# -----------------------------------------------------------------------------
+{{ template "zsh/tool-hooks.zsh" . }}
 
-# Plugins (order matters!)
-plugins=(
-  git                      # Git aliases and completion
-  vi-mode                  # Vim mode (better than bindkey -v)
-  uv                       # uv completion
-  direnv                   # Per-directory environment variables
-  zoxide                   # Smart directory jumper
-  fzf                      # Fuzzy finder integration
-  zsh-completions          # Additional completions (must be before compinit)
-  zsh-autosuggestions      # Command suggestions
-  fzf-tab                  # FZF integration (must be after compinit, before highlighting)
-  zsh-syntax-highlighting  # Syntax highlighting (MUST be last)
-)
-
-source $ZSH/oh-my-zsh.sh
+# -----------------------------------------------------------------------------
+# Sheldon Plugin Manager
+# -----------------------------------------------------------------------------
+# Fast, configurable shell plugin manager
+# Config: ~/.config/sheldon/plugins.toml (managed by chezmoi)
+# Documentation: https://sheldon.cli.rs
+# -----------------------------------------------------------------------------
+eval "$(sheldon source)"
 
 # -----------------------------------------------------------------------------
 # Shell Options

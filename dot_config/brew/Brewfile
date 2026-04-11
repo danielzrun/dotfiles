@@ -9,6 +9,7 @@
 # Shell & Prompt
 # -----------------------------------------------------------------------------
 brew "starship"      # Modern prompt
+brew "sheldon"       # Fast shell plugin manager
 brew "carapace"      # Advanced shell completions
 brew "zoxide"        # Smart directory jumper
 brew "fzf"           # Fuzzy finder

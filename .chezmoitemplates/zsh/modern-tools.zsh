@@ -25,3 +25,9 @@ fi
 if command -v carapace >/dev/null 2>&1; then
     source <(carapace _carapace zsh)
 fi
+
+{{ if eq .chezmoi.os "linux" -}}
+# Linux-specific: fd-find installs as fdfind
+alias fd="fdfind"
+alias bat="batcat"
+{{- end }}
