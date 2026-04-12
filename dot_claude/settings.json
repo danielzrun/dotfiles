@@ -93,5 +93,19 @@
     "hookify@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "serena@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "ecc": {
+      "source": {
+        "source": "github",
+        "repo": "affaan-m/everything-claude-code"
+      }
+    }
   }
 }

@@ -12,6 +12,10 @@
 .idea/
 .vscode/
 
+# Tools
+.dmux
+.serena
+
 # Editor
 *.swp
 *.swo
