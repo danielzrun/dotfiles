@@ -63,6 +63,7 @@ brew "hl"            # Log viewer/highlighter
 # -----------------------------------------------------------------------------
 brew "yazi"          # Terminal file manager
 brew "ffmpeg"        # Video/audio processing
+brew "yt-dlp"        # Video/media downloader
 brew "sevenzip"      # 7z archive tool
 brew "poppler"       # PDF rendering library
 brew "imagemagick"   # Image processing

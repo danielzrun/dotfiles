@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 # =============================================================================
-# Sync Claude Code Plugin Marketplaces
+# Install Claude Code Plugins, Marketplaces & Skills
 # =============================================================================
-# This script automatically syncs plugin marketplaces defined in marketplaces.txt
+# This script automatically installs:
+# - Plugin marketplaces defined in marketplaces.txt
+# - get-shit-done-cc plugin (via npx)
+# - gstack skill (via git clone)
 # Triggers on changes to the marketplaces.txt file
 # hash: {{ include "dot_claude/marketplaces.txt" | sha256sum }}
 
@@ -11,7 +14,7 @@ set -euo pipefail
 # Ensure PATH includes user binaries for tool detection
 export PATH="$HOME/.local/bin:$PATH"
 
-echo "🔄 Syncing Claude Code plugin marketplaces..."
+echo "🔄 Installing Claude Code plugins, marketplaces & skills..."
 
 # Check if claude command exists
 if ! command -v claude &> /dev/null; then
@@ -54,6 +57,23 @@ while IFS= read -r repo || [ -n "$repo" ]; do
 done < "$MARKETPLACES_FILE"
 
 echo ""
-echo "✅ Claude Code marketplaces synced!"
 
+# Install get-shit-done-cc plugin via npx
+if [ -d "$HOME/.claude/get-shit-done" ]; then
+    echo "✓ get-shit-done-cc already installed"
+else
+    echo "📦 Installing get-shit-done-cc plugin..."
+    npx get-shit-done-cc --claude --global
+fi
 
+# Install gstack skill
+GSTACK_DIR="$HOME/.claude/skills/gstack"
+if [ -d "$GSTACK_DIR" ]; then
+    echo "✓ gstack already installed"
+else
+    echo "📦 Installing gstack skill..."
+    git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git "$GSTACK_DIR"
+    cd "$GSTACK_DIR" && ./setup
+fi
+
+echo "✅ Claude Code plugins, marketplaces & skills installed!"
