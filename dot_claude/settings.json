@@ -92,7 +92,8 @@
     "context7@claude-plugins-official": true,
     "hookify@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
-    "serena@claude-plugins-official": true
+    "serena@claude-plugins-official": true,
+    "andrej-karpathy-skills@karpathy-skills": true
   },
   "extraKnownMarketplaces": {
     "openai-codex": {

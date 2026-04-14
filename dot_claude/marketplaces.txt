@@ -28,3 +28,6 @@ openai/codex-plugin-cc
 
 # Everything Claude Code - comprehensive plugin collection
 affaan-m/everything-claude-code
+
+# Andrej Karpathy inspired skills collection
+forrestchang/andrej-karpathy-skills
