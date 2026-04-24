@@ -1,5 +1,13 @@
 // Zed settings - Only non-default configurations
 {
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "project_panel": {
+    "dock": "left"
+  },
   "languages": {
     "Python": {
       "language_servers": [
@@ -19,7 +27,7 @@
     },
   },
   "title_bar": {
-    "show_branch_icon": true,
+    "show_branch_status_icon": true
   },
   "vim_mode": true,
   "vim": {

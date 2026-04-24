@@ -31,3 +31,6 @@ affaan-m/everything-claude-code
 
 # Andrej Karpathy inspired skills collection
 forrestchang/andrej-karpathy-skills
+
+# Agents marketplace by wshobson
+wshobson/agents
