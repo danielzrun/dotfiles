@@ -63,6 +63,7 @@ if [ -d "$HOME/.claude/get-shit-done" ]; then
     echo "✓ get-shit-done-cc already installed"
 else
     echo "📦 Installing get-shit-done-cc plugin..."
+    source $HOME/.nvm/nvm.sh
     npx get-shit-done-cc --claude --global
 fi
 
@@ -73,7 +74,7 @@ if [ -d "$GSTACK_DIR" ]; then
 else
     echo "📦 Installing gstack skill..."
     git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git "$GSTACK_DIR"
-    cd "$GSTACK_DIR" && ./setup
+    cd "$GSTACK_DIR" && ./setup --host claude
 fi
 
 echo "✅ Claude Code plugins, marketplaces & skills installed!"
