@@ -9,6 +9,7 @@
 set -euo pipefail
 
 # Ensure PATH includes user binaries for tool detection
+source ~/.zshrc
 export PATH="$HOME/.local/bin:$PATH"
 
 {{ if eq .chezmoi.os "darwin" -}}
