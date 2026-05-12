@@ -32,7 +32,7 @@ if command -v pnpm &> /dev/null; then
     # Add to PATH for this script execution
     case ":$PATH:" in
         *":$PNPM_HOME:"*) ;;
-        *) export PATH="$PNPM_HOME:$PATH" ;;
+        *) export PATH="$PNPM_HOME/bin:$PATH" ;;
     esac
     export PNPM_FILTER_PROMPTS=true
     pnpm add -g $PACKAGES

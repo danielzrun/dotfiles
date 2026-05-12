@@ -74,7 +74,7 @@ if [ -d "$GSTACK_DIR" ]; then
 else
     echo "📦 Installing gstack skill..."
     git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git "$GSTACK_DIR"
+    export PATH="$HOME/.bun/bin:$PATH"
     cd "$GSTACK_DIR" && ./setup --host claude
-fi
 
 echo "✅ Claude Code plugins, marketplaces & skills installed!"
