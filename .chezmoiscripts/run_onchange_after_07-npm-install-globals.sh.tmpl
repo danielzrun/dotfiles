@@ -4,6 +4,7 @@
 # Hash: {{ include "dot_config/npm/global.txt" | sha256sum }}
 
 set -euo pipefail
+source $HOME/.nvm/nvm.sh
 
 GLOBAL_PACKAGES_FILE="{{ .chezmoi.homeDir }}/.config/npm/global.txt"
 
@@ -24,24 +25,15 @@ fi
 
 echo "Installing: $PACKAGES"
 
-# Detect preferred package manager
-if command -v pnpm &> /dev/null; then
-    echo "Using pnpm..."
-    # PNPM_HOME is set in .chezmoitemplates/zsh/node.zsh
-    export PNPM_HOME="${PNPM_HOME:-{{ .chezmoi.homeDir }}/.local/share/pnpm}"
-    # Add to PATH for this script execution
-    case ":$PATH:" in
-        *":$PNPM_HOME:"*) ;;
-        *) export PATH="$PNPM_HOME/bin:$PATH" ;;
-    esac
-    export PNPM_FILTER_PROMPTS=true
-    pnpm add -g --yes $PACKAGES
-elif command -v bun &> /dev/null; then
-    echo "Using bun..."
-    bun install -g $PACKAGES
-else
-    echo "Using npm..."
-    npm install -g $PACKAGES
-fi
+echo "Using pnpm..."
+# PNPM_HOME is set in .chezmoitemplates/zsh/node.zsh
+export PNPM_HOME="${PNPM_HOME:-{{ .chezmoi.homeDir }}/.local/share/pnpm}"
+# Add to PATH for this script execution
+case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+export PNPM_FILTER_PROMPTS=true
+pnpm add -g --yes $PACKAGES
 
 echo "✅ npm global packages synced"

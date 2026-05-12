@@ -28,3 +28,16 @@ fi
 echo "Next steps:"
 echo "  • Restart your shell or run: zsh"
 echo ""
+
+# Check if default shell is not zsh
+CURRENT_SHELL="${SHELL:-}"
+if [[ "$CURRENT_SHELL" != */zsh ]]; then
+    echo "⚠️  Your default shell is currently: $CURRENT_SHELL"
+    echo "📝 To make zsh your default shell, run:"
+    echo ""
+    echo "    chsh -s /bin/zsh"
+    echo ""
+    echo "   You'll need to enter your password."
+    echo "   After changing, restart your terminal for the change to take effect."
+    echo ""
+fi
