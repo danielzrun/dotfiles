@@ -4,7 +4,11 @@
 # Hash: {{ include "dot_config/npm/global.txt" | sha256sum }}
 
 set -euo pipefail
+
+# Only source nvm on Linux (macOS uses system Node.js)
+{{ if eq .chezmoi.os "linux" }}
 source $HOME/.nvm/nvm.sh
+{{ end }}
 
 GLOBAL_PACKAGES_FILE="{{ .chezmoi.homeDir }}/.config/npm/global.txt"
 
@@ -34,6 +38,6 @@ case ":$PATH:" in
     *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 export PNPM_FILTER_PROMPTS=true
-pnpm add -g --yes $PACKAGES
+pnpm add -g $PACKAGES
 
 echo "✅ npm global packages synced"

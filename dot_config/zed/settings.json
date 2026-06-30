@@ -1,5 +1,6 @@
 // Zed settings - Only non-default configurations
 {
+  "cli_default_open_behavior": "existing_window",
   "agent": {
     "dock": "right",
     "favorite_models": [],
