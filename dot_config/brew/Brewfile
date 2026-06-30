@@ -44,7 +44,9 @@ brew "lazydocker"    # Docker TUI
 # -----------------------------------------------------------------------------
 # Kubernetes Tools
 # -----------------------------------------------------------------------------
-brew "derailed/k9s/k9s"   # Kubernetes TUI
+brew "derailed/k9s/k9s"     # Kubernetes TUI
+brew "argocd"               # Argo CD CLI
+brew "helm"                 # Kubernetes package manager
 
 # -----------------------------------------------------------------------------
 # JSON Tools
