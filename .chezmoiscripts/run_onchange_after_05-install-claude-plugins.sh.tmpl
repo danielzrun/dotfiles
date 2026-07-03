@@ -58,15 +58,6 @@ done < "$MARKETPLACES_FILE"
 
 echo ""
 
-# Install get-shit-done-cc plugin via npx
-if [ -d "$HOME/.claude/get-shit-done" ]; then
-    echo "✓ get-shit-done-cc already installed"
-else
-    echo "📦 Installing get-shit-done-cc plugin..."
-    source $HOME/.nvm/nvm.sh
-    npx get-shit-done-cc --claude --global
-fi
-
 # Install gstack skill
 GSTACK_DIR="$HOME/.claude/skills/gstack"
 if [ -d "$GSTACK_DIR" ]; then

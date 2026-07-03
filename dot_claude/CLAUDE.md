@@ -12,11 +12,6 @@
 - **Bilingual Mode:** Respond in **Chinese** with English technical terms in brackets.
 - **Translation:** ALWAYS end your response with **"English:"** followed by a brief, idiomatic English rewrite of the user's prompt.
 
-## 🌳 Git Standards
-- **Workflow:** ALWAYS use the `/git-commit` skill for all git commit operations.
-- **Safety:** Do not execute `git push` without explicit user confirmation.
-- **Pre-commit:** Ensure code is formatted and linted before committing.
-
 ## 🎯 Code Review & Quality Standards
 - **Target Standard (Score 9):** Aim for "Functional, robust, clean". **This is the acceptance threshold.**
 - **Anti-Perfectionism:** Do NOT aim for Score 10 (Over-engineering). "Good enough to ship" (9/10) is preferred.
