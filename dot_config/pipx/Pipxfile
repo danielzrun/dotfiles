@@ -5,9 +5,6 @@
 # One package name per line. Comments start with #.
 # =============================================================================
 
-# Data Science
-kaggle
-
 # Development Tools
 uv
 

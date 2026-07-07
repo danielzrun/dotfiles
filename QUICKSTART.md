@@ -18,7 +18,6 @@ Essential tools and their daily usage.
 - [Log Analysis](#log-analysis)
 - [HTTP & Network](#http--network)
 - [Editor & Terminal](#editor--terminal)
-- [Kaggle CLI](#kaggle-cli)
 
 ---
 
@@ -500,18 +499,3 @@ just                    # List available commands
 just run                # Run command
 just -l                 # List all recipes
 ```
-
----
-
-## Kaggle CLI
-
-```bash
-kaggle competitions list           # List competitions
-kaggle competitions download -c <name>  # Download competition data
-kaggle datasets download -d <name> # Download dataset
-kaggle kernels output <username>   # View kernel output
-kaggle kernels list                # List kernels
-kaggle files list <competition>    # List files in competition
-```
-
-Kaggle CLI for data science competitions and datasets (installed via pipx).

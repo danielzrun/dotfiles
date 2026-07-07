@@ -60,12 +60,6 @@ cp ~/.local/share/chezmoi/dot_env.example ~/.env
 # 编辑文件填入你的值
 chezmoi add --encrypt ~/.env
 
-# 示例: 设置 Kaggle 凭证
-mkdir -p ~/.kaggle
-cp ~/.local/share/chezmoi/dot_kaggle/kaggle.json.example ~/.kaggle/kaggle.json
-# 编辑填入你的 Kaggle API 凭证
-chezmoi add --encrypt ~/.kaggle/kaggle.json
-
 # 示例: 设置 Codex 认证（如果使用）
 mkdir -p ~/.config/codex
 cp ~/.local/share/chezmoi/dot_codex/auth.json.example ~/.config/codex/auth.json
@@ -75,7 +69,6 @@ chezmoi add --encrypt ~/.config/codex/auth.json
 
 **可用的示例文件：**
 - `dot_env.example` - 环境变量模板
-- `dot_kaggle/kaggle.json.example` - Kaggle API 凭证
 - `dot_codex/auth.json.example` - Codex 认证（可选）
 
 **为什么？** 原始 age 密钥属于此仓库私有。加密文件（`.age` 后缀）只能由匹配的私钥解密。你必须使用示例模板创建自己的加密文件。
@@ -109,7 +102,7 @@ chezmoi add --encrypt ~/.config/codex/auth.json
 | 类别 | 工具 |
 |----------|-------|
 | **JSON** | jq, jaq (更快), fx (交互式), jless (分页), jnv (过滤) |
-| **数据** | visidata (电子表格), qsv (CSV 工具集), kaggle CLI |
+| **数据** | visidata (电子表格), qsv (CSV 工具集) |
 | **日志** | lnav (日志导航器), hl (日志高亮) |
 | **HTTP/网络** | xh (httpie 替代), gping (图形化 ping), bore-cli (隧道) |
 

@@ -10,7 +10,6 @@
 
 ## 🗣️ Language & Response Policy
 - **Bilingual Mode:** Respond in **Chinese** with English technical terms in brackets.
-- **Translation:** ALWAYS end your response with **"English:"** followed by a brief, idiomatic English rewrite of the user's prompt.
 
 ## 🎯 Code Review & Quality Standards
 - **Target Standard (Score 9):** Aim for "Functional, robust, clean". **This is the acceptance threshold.**

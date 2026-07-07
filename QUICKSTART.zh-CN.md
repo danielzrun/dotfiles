@@ -18,7 +18,6 @@
 - [日志分析](#日志分析)
 - [HTTP 与网络](#http--与网络)
 - [编辑器与终端](#编辑器与终端)
-- [Kaggle CLI](#kaggle-cli)
 
 ---
 
@@ -500,18 +499,3 @@ just                    # 列出可用命令
 just run                # 运行命令
 just -l                 # 列出所有配方
 ```
-
----
-
-## Kaggle CLI
-
-```bash
-kaggle competitions list           # 列出竞赛
-kaggle competitions download -c <name>  # 下载竞赛数据
-kaggle datasets download -d <name> # 下载数据集
-kaggle kernels output <username>   # 查看内核输出
-kaggle kernels list                # 列出内核
-kaggle files list <competition>    # 列出竞赛文件
-```
-
-用于数据科学竞赛和数据集的 Kaggle CLI（通过 pipx 安装）。

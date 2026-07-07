@@ -60,12 +60,6 @@ cp ~/.local/share/chezmoi/dot_env.example ~/.env
 # Edit the file with your values
 chezmoi add --encrypt ~/.env
 
-# Example: Setup Kaggle credentials
-mkdir -p ~/.kaggle
-cp ~/.local/share/chezmoi/dot_kaggle/kaggle.json.example ~/.kaggle/kaggle.json
-# Edit with your Kaggle API credentials
-chezmoi add --encrypt ~/.kaggle/kaggle.json
-
 # Example: Setup Codex auth (if using)
 mkdir -p ~/.config/codex
 cp ~/.local/share/chezmoi/dot_codex/auth.json.example ~/.config/codex/auth.json
@@ -75,7 +69,6 @@ chezmoi add --encrypt ~/.config/codex/auth.json
 
 **Example files available:**
 - `dot_env.example` - Environment variables template
-- `dot_kaggle/kaggle.json.example` - Kaggle API credentials
 - `dot_codex/auth.json.example` - Codex authentication (optional)
 
 **Why?** The original age keys are private to this repository. Encrypted files (`.age` suffix) can only be decrypted by the matching private key. You must create your own encrypted files using the example templates.
@@ -109,7 +102,7 @@ chezmoi add --encrypt ~/.config/codex/auth.json
 | Category | Tools |
 |----------|-------|
 | **JSON** | jq, jaq (faster), fx (interactive), jless (pager), jnv (filter) |
-| **Data** | visidata (spreadsheets), qsv (CSV toolkit), kaggle CLI |
+| **Data** | visidata (spreadsheets), qsv (CSV toolkit) |
 | **Logs** | lnav (log navigator), hl (log highlighter) |
 | **HTTP/Network** | xh (httpie clone), gping (ping with graph), bore-cli (tunneling) |
 
