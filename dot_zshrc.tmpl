@@ -5,6 +5,10 @@
 # Used for: aliases, plugins, prompts, key bindings
 # =============================================================================
 
+# Tie PATH (colon-separated scalar) to path (array) so they stay in sync,
+# remove duplicate entries (-U), and export to child processes (-x)
+typeset -TUx PATH path
+
 # -----------------------------------------------------------------------------
 # Completion System
 # -----------------------------------------------------------------------------

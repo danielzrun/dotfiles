@@ -14,7 +14,6 @@
 tsx
 typescript
 ts-node
-@bufbuild/buf
 
 # ============================================
 # Code Quality / Formatting
@@ -22,8 +21,3 @@ ts-node
 prettier
 eslint_d
 biome
-
-# ============================================
-# Utilities
-# ============================================
-@openai/codex

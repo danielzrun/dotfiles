@@ -4,7 +4,7 @@
 # Add to PATH in order of priority
 
 # Local binaries (highest priority)
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.kimi-code/bin:$PATH"
 
 # Bun (only add if installed)
 if [ -d "$HOME/.bun" ]; then
