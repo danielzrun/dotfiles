@@ -58,15 +58,4 @@ done < "$MARKETPLACES_FILE"
 
 echo ""
 
-# Install gstack skill
-GSTACK_DIR="$HOME/.claude/skills/gstack"
-if [ -d "$GSTACK_DIR" ]; then
-    echo "✓ gstack already installed"
-else
-    echo "📦 Installing gstack skill..."
-    git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git "$GSTACK_DIR"
-    export PATH="$HOME/.bun/bin:$PATH"
-    cd "$GSTACK_DIR" && ./setup --host claude
-fi
-
 echo "✅ Claude Code plugins, marketplaces & skills installed!"
