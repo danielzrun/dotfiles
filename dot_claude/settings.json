@@ -94,13 +94,5 @@
     "security-guidance@claude-plugins-official": true,
     "serena@claude-plugins-official": true
   },
-  "extraKnownMarketplaces": {
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
-      }
-    }
-  },
   "skipDangerousModePermissionPrompt": true
 }

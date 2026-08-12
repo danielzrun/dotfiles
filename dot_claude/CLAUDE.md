@@ -11,22 +11,5 @@
 ## 🗣️ Language & Response Policy
 - **Bilingual Mode:** Respond in **Chinese** with English technical terms in brackets.
 
-## 🎯 Code Review & Quality Standards
-- **Target Standard (Score 9):** Aim for "Functional, robust, clean". **This is the acceptance threshold.**
-- **Anti-Perfectionism:** Do NOT aim for Score 10 (Over-engineering). "Good enough to ship" (9/10) is preferred.
-- **Priorities:** Correctness > Readability > Performance.
-- **Auto-Pass:** If Score >= 9, task is complete.
-- **Auto-Fix:** Only re-write if Score < 7 (Critical Error).
-
----
-
 ## 📚 Detailed Rules
 - Refer to `.claude/rules/` for specific tooling parameters, banned commands, and coding style guidelines.
-
-## 🛠️ gstack
-Use /browse from gstack for all web browsing. Never use mcp__claude-in-chrome__* tools.
-Available skills: /office-hours, /plan-ceo-review, /plan-eng-review, /plan-design-review,
-/design-consultation, /design-shotgun, /design-html, /review, /ship, /land-and-deploy,
-/canary, /benchmark, /browse, /open-gstack-browser, /qa, /qa-only, /design-review,
-/setup-browser-cookies, /setup-deploy, /retro, /investigate, /document-release, /codex,
-/cso, /autoplan, /pair-agent, /careful, /freeze, /guard, /unfreeze, /gstack-upgrade, /learn.
