@@ -23,3 +23,8 @@ globs: **/*
 - **NO `ls -R`:** Inefficient, use `rg --files`.
 - **NO `cat | grep`:** Use `rg "pattern" filename` instead.
 - **NO `ls -la` (Recursive):** Only use `ls -la` for single-directory inspection.
+
+### 🛠️ Task Runners
+- **NO `Makefile`:** Never create or modify a `Makefile` (including `make` docs/examples).
+- **Use `justfile`:** All task-runner recipes go in a `justfile`, run with `just <recipe>`.
+  Document setup/dev/test/lint commands as `just` recipes, not `make` targets.

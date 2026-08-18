@@ -143,7 +143,6 @@ y [path]          # Yazi file manager (cd on quit)
 s                 # lazyssh (SSH server picker)
 d                 # dmux (tmux session manager)
 t [name]          # Tmux session (default: "dev")
-ccs <provider>    # Switch Claude Code provider
 ```
 
 ---

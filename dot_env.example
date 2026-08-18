@@ -5,46 +5,5 @@
 # Copy this file to ~/.env and fill in your actual values
 # =============================================================================
 
-# Claude Code Provider Configuration
-# Options: default, zhipu, zhipu5, packy, openrouter
-export CLAUDE_PROVIDER="default"
-
-unset ANTHROPIC_AUTH_TOKEN
-unset ANTHROPIC_BASE_URL
-unset ANTHROPIC_DEFAULT_SONNET_MODEL
-unset ANTHROPIC_DEFAULT_HAIKU_MODEL
-unset ANTHROPIC_DEFAULT_OPUS_MODEL
-unset ANTHROPIC_API_KEY
-unset CLAUDE_CODE_SUBAGENT_MODEL
-unset CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC
-
-# For Dmux
-export OPENROUTER_API_KEY="your-openrouter-api-key"
-
-# =============================================================================
-# Zhipu AI Configuration
-# =============================================================================
-if [[ "$CLAUDE_PROVIDER" == "zhipu" ]]; then
-  export ANTHROPIC_AUTH_TOKEN="your-zhipu-api-key"
-  export ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/paas/v4"
-  export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-4.7"
-  export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-5"
-fi
-
-# =============================================================================
-# Packy API Configuration
-# =============================================================================
-if [[ "$CLAUDE_PROVIDER" == "packy" ]]; then
-  export ANTHROPIC_AUTH_TOKEN="your-packy-api-key"
-  export ANTHROPIC_BASE_URL="https://www.packyapi.com"
-fi
-
-# =============================================================================
-# OpenRouter Configuration
-# =============================================================================
-if [[ "$CLAUDE_PROVIDER" == "openrouter" ]]; then
-  export OPENROUTER_API_KEY="your-openrouter-api-key"
-  export ANTHROPIC_BASE_URL="https://openrouter.ai/api"
-  export ANTHROPIC_AUTH_TOKEN="$OPENROUTER_API_KEY"
-  export ANTHROPIC_API_KEY=""
-fi
+export ANTHROPIC_AUTH_TOKEN="your-zhipu-token"
+export ARK_BEARER_TOKEN="your-volcano-ark-token"

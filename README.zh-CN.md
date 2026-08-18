@@ -93,7 +93,7 @@ chezmoi add --encrypt ~/.config/codex/auth.json
 | **Python** | `uvs` (同步), `uvr` (运行), `uvdev` (FastAPI) - 通过 pipx |
 | **Node.js** | nvm (版本管理), pnpm (包管理器) |
 | **Neovim** | LazyVim + Catppuccin + AI/codeium, docker, json, markdown, python, toml, yaml 扩展 |
-| **Claude Code** | AI 编程助手，支持提供商切换 (ccs) |
+| **Claude Code** | AI 编程助手 |
 | **Docker** | lazydocker (TUI) |
 | **命令运行器** | just (命令配方) |
 
@@ -152,7 +152,7 @@ chezmoi update               # 从 git 拉取最新
 │   ├── zsh/
 │   │   ├── aliases.zsh         # 编辑器, Claude 别名
 │   │   ├── env.zsh             # 环境变量
-│   │   ├── functions.zsh       # Shell 函数（t, lg, y, ccs 等）
+│   │   ├── functions.zsh       # Shell 函数（t, lg, y 等）
 │   │   ├── keybindings.zsh     # vi-mode 快捷键
 │   │   ├── tool-hooks.zsh      # zoxide, direnv, fzf 初始化
 │   │   ├── modern-tools.zsh    # eza, bat, carapace
@@ -194,7 +194,6 @@ chezmoi update               # 从 git 拉取最新
 | `y [path]` | Yazi 文件管理器（退出时 cd 到目录） |
 | `s` | lazyssh（SSH 服务器选择器） |
 | `d` | dmux（tmux 会话管理器） |
-| `ccs <provider>` | 切换 Claude Code 提供商 |
 | `mkd <dir>` | 创建目录并进入 |
 | `o [file]` | 打开文件/目录（跨平台） |
 | `server [port]` | 启动 HTTP 服务器（默认: 8000） |

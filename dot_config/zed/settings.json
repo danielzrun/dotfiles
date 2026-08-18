@@ -1,5 +1,6 @@
 // Zed settings - Only non-default configurations
 {
+  "format_on_save": "modifications_if_available",
   "cli_default_open_behavior": "existing_window",
   "agent": {
     "dock": "right",

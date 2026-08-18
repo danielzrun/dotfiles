@@ -143,7 +143,6 @@ y [path]          # Yazi 文件管理器（退出时 cd 到目录）
 s                 # lazyssh（SSH 服务器选择器）
 d                 # dmux（tmux 会话管理器）
 t [name]          # Tmux 会话（默认: "dev"）
-ccs <provider>    # 切换 Claude Code 提供商
 ```
 
 ---

@@ -1,0 +1,195 @@
+{
+    "models": [
+        {
+            "slug": "doubao-seed-2.1-turbo",
+            "display_name": "Doubao-Seed-2.1-turbo",
+            "description": "Volcengine Doubao Seed 2.1 turbo: balanced coding, agent and multimodal capabilities",
+            "default_reasoning_level": "high",
+            "supported_reasoning_levels": [
+                {
+                    "effort": "low",
+                    "description": "Light reasoning"
+                },
+                {
+                    "effort": "high",
+                    "description": "Enhanced reasoning"
+                }
+            ],
+            "shell_type": "shell_command",
+            "visibility": "list",
+            "supported_in_api": true,
+            "priority": 0,
+            "base_instructions": "",
+            "supports_reasoning_summaries": true,
+            "default_reasoning_summary": "none",
+            "support_verbosity": false,
+            "apply_patch_tool_type": "freeform",
+            "truncation_policy": {
+                "mode": "bytes",
+                "limit": 10000
+            },
+            "context_window": 262144,
+            "max_context_window": 262144,
+            "effective_context_window_percent": 95,
+            "supports_parallel_tool_calls": true,
+            "experimental_supported_tools": [],
+            "input_modalities": [
+                "text",
+                "image"
+            ]
+        },
+        {
+            "slug": "doubao-seed-evolving",
+            "display_name": "Doubao-Seed-Evolving",
+            "description": "Volcengine Doubao Seed Evolving: weekly-updated model for coding and agent scenarios with 1M context",
+            "default_reasoning_level": "high",
+            "supported_reasoning_levels": [
+                {
+                    "effort": "low",
+                    "description": "Light reasoning"
+                },
+                {
+                    "effort": "high",
+                    "description": "Enhanced reasoning"
+                }
+            ],
+            "shell_type": "shell_command",
+            "visibility": "list",
+            "supported_in_api": true,
+            "priority": 1,
+            "base_instructions": "",
+            "supports_reasoning_summaries": true,
+            "default_reasoning_summary": "none",
+            "support_verbosity": false,
+            "apply_patch_tool_type": "freeform",
+            "truncation_policy": {
+                "mode": "bytes",
+                "limit": 10000
+            },
+            "context_window": 1048576,
+            "max_context_window": 1048576,
+            "effective_context_window_percent": 95,
+            "supports_parallel_tool_calls": true,
+            "experimental_supported_tools": [],
+            "input_modalities": [
+                "text"
+            ]
+        },
+        {
+            "slug": "kimi-k3",
+            "display_name": "Kimi-K3",
+            "description": "Moonshot Kimi K3: 1M context, native vision understanding, software engineering and deep reasoning",
+            "default_reasoning_level": "high",
+            "supported_reasoning_levels": [
+                {
+                    "effort": "low",
+                    "description": "Light reasoning"
+                },
+                {
+                    "effort": "high",
+                    "description": "Enhanced reasoning"
+                }
+            ],
+            "shell_type": "shell_command",
+            "visibility": "list",
+            "supported_in_api": true,
+            "priority": 2,
+            "base_instructions": "",
+            "supports_reasoning_summaries": true,
+            "default_reasoning_summary": "none",
+            "support_verbosity": false,
+            "apply_patch_tool_type": "freeform",
+            "truncation_policy": {
+                "mode": "bytes",
+                "limit": 10000
+            },
+            "context_window": 1048576,
+            "max_context_window": 1048576,
+            "effective_context_window_percent": 95,
+            "supports_parallel_tool_calls": true,
+            "experimental_supported_tools": [],
+            "input_modalities": [
+                "text",
+                "image"
+            ]
+        },
+        {
+            "slug": "deepseek-v4-pro",
+            "display_name": "DeepSeek-V4-Pro",
+            "description": "DeepSeek V4 Pro: enhanced agent capabilities, rich world knowledge, deep thinking by default",
+            "default_reasoning_level": "high",
+            "supported_reasoning_levels": [
+                {
+                    "effort": "low",
+                    "description": "Light reasoning"
+                },
+                {
+                    "effort": "high",
+                    "description": "Deep reasoning"
+                }
+            ],
+            "shell_type": "shell_command",
+            "visibility": "list",
+            "supported_in_api": true,
+            "priority": 3,
+            "base_instructions": "",
+            "supports_reasoning_summaries": true,
+            "default_reasoning_summary": "none",
+            "support_verbosity": false,
+            "apply_patch_tool_type": "freeform",
+            "truncation_policy": {
+                "mode": "bytes",
+                "limit": 10000
+            },
+            "context_window": 131072,
+            "max_context_window": 131072,
+            "effective_context_window_percent": 95,
+            "supports_parallel_tool_calls": true,
+            "experimental_supported_tools": [],
+            "input_modalities": [
+                "text"
+            ]
+        },
+        {
+            "slug": "glm-5.3",
+            "display_name": "GLM-5.3",
+            "description": "Z.ai GLM 5.3: flagship model with strong programming and cybersecurity capabilities, 1M context",
+            "default_reasoning_level": "max",
+            "supported_reasoning_levels": [
+                {
+                    "effort": "low",
+                    "description": "Light reasoning"
+                },
+                {
+                    "effort": "high",
+                    "description": "Enhanced reasoning"
+                },
+                {
+                    "effort": "max",
+                    "description": "Deep reasoning"
+                }
+            ],
+            "shell_type": "shell_command",
+            "visibility": "list",
+            "supported_in_api": true,
+            "priority": 4,
+            "base_instructions": "",
+            "supports_reasoning_summaries": true,
+            "default_reasoning_summary": "none",
+            "support_verbosity": false,
+            "apply_patch_tool_type": "freeform",
+            "truncation_policy": {
+                "mode": "bytes",
+                "limit": 10000
+            },
+            "context_window": 1048576,
+            "max_context_window": 1048576,
+            "effective_context_window_percent": 95,
+            "supports_parallel_tool_calls": true,
+            "experimental_supported_tools": [],
+            "input_modalities": [
+                "text"
+            ]
+        }
+    ]
+}

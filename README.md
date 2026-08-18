@@ -93,7 +93,6 @@ chezmoi add --encrypt ~/.config/codex/auth.json
 | **Python** | `uvs` (sync), `uvr` (run), `uvdev` (FastAPI) - via pipx |
 | **Node.js** | nvm (version management), pnpm (package manager) |
 | **Neovim** | LazyVim + Catppuccin + AI/codeium, docker, json, markdown, python, toml, yaml extras |
-| **Claude Code** | AI coding assistant with provider switcher (ccs) |
 | **Docker** | lazydocker (TUI) |
 | **Command Runner** | just (command recipes) |
 
@@ -152,7 +151,7 @@ chezmoi update               # Pull latest from git
 │   ├── zsh/
 │   │   ├── aliases.zsh         # Editor, Claude aliases
 │   │   ├── env.zsh             # Environment variables
-│   │   ├── functions.zsh       # Shell functions (t, lg, y, ccs, etc.)
+│   │   ├── functions.zsh       # Shell functions (t, lg, y, etc.)
 │   │   ├── keybindings.zsh     # vi-mode keybindings
 │   │   ├── tool-hooks.zsh      # zoxide, direnv, fzf init
 │   │   ├── modern-tools.zsh    # eza, bat, carapace
@@ -194,7 +193,6 @@ Quick reference for custom functions:
 | `y [path]` | Yazi file manager (cd on quit) |
 | `s` | lazyssh (SSH server picker) |
 | `d` | dmux (tmux session manager) |
-| `ccs <provider>` | Switch Claude Code provider |
 | `mkd <dir>` | Create directory and enter it |
 | `o [file]` | Open file/directory (cross-platform) |
 | `server [port]` | Start HTTP server (default: 8000) |
