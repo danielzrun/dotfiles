@@ -11,21 +11,12 @@ model_catalog_json = "~/.codex/models.json"
     source = "https://github.com/wshobson/agents.git"
     source_type = "git"
 
-[mcp_servers]
-  [mcp_servers.serena]
-    args = ["start-mcp-server", "--context=codex", "--project-from-cwd"]
-    command = "serena"
-
 [model_providers]
   [model_providers.arkcli-agent-plan]
     base_url = "https://ark.cn-beijing.volces.com/api/plan/v3"
     env_key = "ARK_BEARER_TOKEN"
     name = "Volcano Engine (Agent Plan)"
     wire_api = "responses"
-
-[notice]
-  [notice.model_migrations]
-    "gpt-5.4" = "gpt-5.6-terra"
 
 [plugins]
   [plugins."python-development@claude-code-workflows"]
@@ -34,29 +25,3 @@ model_catalog_json = "~/.codex/models.json"
 [tui]
   [tui.model_availability_nux]
     "gpt-5.6-sol" = 4
-
-[hooks.state]
-
-[hooks.state."/Users/daniel/.codex/hooks.json:pre_tool_use:0:0"]
-trusted_hash = "sha256:87d00c3d1da273084ef78cfa652171ae68a0b9c8b5173c72401b57cb211d948c"
-
-[hooks.state."/Users/daniel/.codex/hooks.json:permission_request:0:0"]
-trusted_hash = "sha256:bc0efc639daa3f4b37873dd9bb8cc6a9e29c8464c913277818468ec83b57460b"
-
-[hooks.state."/Users/daniel/.codex/hooks.json:post_tool_use:0:0"]
-trusted_hash = "sha256:41c3885eb9a04661292f7f12f89d4a73edefb797325a0a008f816260959880a7"
-
-[hooks.state."/Users/daniel/.codex/hooks.json:session_start:0:0"]
-trusted_hash = "sha256:b3f5225e7af207b0cd4037ec074f50fa05a0e03f7c102c3bc09f457a09f49b4a"
-
-[hooks.state."/Users/daniel/.codex/hooks.json:user_prompt_submit:0:0"]
-trusted_hash = "sha256:d4b5223e76341661677fdb273ebc3f40367eb1652886037e3c4a99c67b85394a"
-
-[hooks.state."/Users/daniel/.codex/hooks.json:subagent_start:0:0"]
-trusted_hash = "sha256:87ba16ed0807b3f0b7b7260decb6608e60cd06d5274d13157443b4a9c34399c6"
-
-[hooks.state."/Users/daniel/.codex/hooks.json:subagent_stop:0:0"]
-trusted_hash = "sha256:c6ad6bd6ce8b1ec80c45ec22ab282aadc1395fc09b85d551c7c00fe3d5a2b911"
-
-[hooks.state."/Users/daniel/.codex/hooks.json:stop:0:0"]
-trusted_hash = "sha256:3f406b723425835bb58b9d27144b15899c4fdf316b8e0fb989439d47c20ad500"

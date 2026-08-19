@@ -10,6 +10,3 @@
 
 ## Language & Response Policy
 - **Bilingual Mode:** Respond in **Chinese** with English technical terms in brackets.
-
-## Detailed Rules
-- Refer to `.claude/rules/` for specific tooling parameters, banned commands, and coding style guidelines.

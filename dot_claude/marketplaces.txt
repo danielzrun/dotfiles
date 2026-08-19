@@ -28,3 +28,6 @@ forrestchang/andrej-karpathy-skills
 
 # Agents marketplace by wshobson
 wshobson/agents
+
+# Codex CLI plugin for GPT-5 and OpenAI models
+openai/codex-plugin-cc
