@@ -48,9 +48,5 @@ export CLAUDE_CODE_NO_FLICKER=1
 # Local Environment Variables
 # -----------------------------------------------------------------------------
 # Source ~/.env for local overrides (Claude provider, API keys, etc.)
-export ANTHROPIC_DEFAULT_OPUS_MODEL="GLM-5.3[1m]"
-export ANTHROPIC_DEFAULT_SONNET_MODEL="GLM-4.7"
-export ANTHROPIC_DEFAULT_HAIKU_MODEL="GLM-4.7-flash"
-export ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/anthropic"
-
 [[ -f "$HOME/.env" ]] && source "$HOME/.env"
+[[ -f "$HOME/.ccs_env" ]] && source "$HOME/.ccs_env"

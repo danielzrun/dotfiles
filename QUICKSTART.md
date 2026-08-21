@@ -4,6 +4,10 @@ English | [简体中文](QUICKSTART.zh-CN.md)
 
 Essential tools and their daily usage.
 
+> **Note**: This is a comprehensive tool reference guide. For installation instructions, see [README.md](README.md).
+>
+> This document provides quick reference for modern CLI tools and development utilities included in this dotfiles setup.
+
 ## Table of Contents
 
 - [Navigation & Search](#navigation--search)

@@ -31,6 +31,21 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply YOUR_GITHUB_USERNAME
 
 这些值存储在 `.chezmoi.toml.tmpl` 中，会在整个 dotfiles 中使用（例如 git 配置）。
 
+### 替代安装方法
+
+**使用 install.sh（非交互式）**：
+
+```bash
+# 首先克隆仓库
+git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/.local/share/chezmoi
+cd ~/.local/share/chezmoi
+
+# 运行安装脚本
+./install.sh
+```
+
+此方法跳过提示并使用预配置的值。对于自动化设置或不需要自定义的有经验用户来说，这是更快的选择。
+
 ### ⚠️ 重要提示：Fork 用户必须重新配置加密
 
 本仓库使用 [age](https://github.com/FiloSottile/age) 加密敏感文件（配置存储在 `.chezmoi.toml.tmpl` 中）。
@@ -242,7 +257,11 @@ git add . && git commit -m "message"
 
 ## 文档
 
-- [快速入门指南](QUICKSTART.md) / [Quick Start Guide](QUICKSTART.md)
+- **[Quick Start Guide](QUICKSTART.md)** - 必备工具和日常使用参考
+- **[安装指南](#快速开始)** - 首次用户设置说明
+
+## 参考
+
 - [chezmoi 文档](https://www.chezmoi.io/)
 - [LazyVim](https://www.lazyvim.org/)
 - [dotfiles 工具](https://dotfiles.github.io/utilities/)

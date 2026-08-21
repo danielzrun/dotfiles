@@ -31,6 +31,21 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply YOUR_GITHUB_USERNAME
 
 These values are stored in `.chezmoi.toml.tmpl` and used throughout your dotfiles (e.g., git config).
 
+### Alternative Installation Method
+
+**Using install.sh (Non-interactive)**:
+
+```bash
+# Clone repository first
+git clone https://github.com/YOUR_USERNAME/dotfiles.git ~/.local/share/chezmoi
+cd ~/.local/share/chezmoi
+
+# Run installation script
+./install.sh
+```
+
+This method skips prompts and uses pre-configured values. It's faster for automated setups or experienced users who don't need customization.
+
 ### ⚠️ Important: Fork Users Must Reconfigure Encryption
 
 This repository uses [age](https://github.com/FiloSottile/age) encryption for sensitive files (stored in `.chezmoi.toml.tmpl`).
@@ -241,7 +256,8 @@ git add . && git commit -m "message"
 
 ## Documentation
 
-- [Quick Start Guide](QUICKSTART.md) / [快速入门](QUICKSTART.zh-CN.md)
+- **[Quick Start Guide](QUICKSTART.md)** - Essential tools and daily usage reference
+- **[Installation Guide](#quick-start)** - Setup instructions for first-time users
 
 ## References
 

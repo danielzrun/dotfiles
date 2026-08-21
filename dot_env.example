@@ -5,5 +5,5 @@
 # Copy this file to ~/.env and fill in your actual values
 # =============================================================================
 
-export ANTHROPIC_AUTH_TOKEN="your-zhipu-token"
+export ZHIPU_AUTH_TOKEN="your-zhipu-token"
 export ARK_BEARER_TOKEN="your-volcano-ark-token"

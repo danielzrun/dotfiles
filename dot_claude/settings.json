@@ -81,21 +81,13 @@
     ],
     "defaultMode": "plan"
   },
-  "model": "opus",
-  "modelOverrides": {
-    "claude-opus-5": "glm-5.3",
-    "claude-sonnet-5": "glm-5.2",
-    "claude-sonnet-4-5": "glm-4.7",
-    "claude-haiku-4-5": "glm-4.7-flash"
-  },
+  "model": "sonnet",
   "statusLine": {
     "type": "command",
     "command": "bash -c '\"$HOME/.bun/bin/bun\" \"$(ls -td ~/.claude/plugins/cache/claude-hud/claude-hud/*/ 2>/dev/null | head -1)src/index.ts\"'"
   },
   "enabledPlugins": {
     "claude-hud@claude-hud": true,
-    "claude-code-setup@claude-plugins-official": true,
-    "claude-md-management@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true
   },

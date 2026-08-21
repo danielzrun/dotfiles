@@ -54,9 +54,9 @@ Key template variables:
 
 ├── .chezmoitemplates/     # Reusable template snippets
 │   └── zsh/              # Shell configuration modules (python.zsh, modern-tools.zsh)
-├── .chezmoiscripts/      # Installation and setup scripts
-│   ├── run_onchange_after_darwin-install-packages.sh.tmpl  # Auto-installs CLI tools
-│   └── run_once_darwin-install-casks.sh.tmpl              # Optional GUI apps installer
+├── run_once_*.sh.tmpl    # One-time setup scripts (platform-specific)
+├── run_onchange_after_*.tmpl   # Cross-platform automation (tools, packages, plugins)
+├── run_onchange_after_darwin-*.tmpl  # macOS-specific automation (GUI apps, defaults)
 ├── dot_config/           # XDG config directory structure
 │   ├── brew/
 │   │   ├── Brewfile       # Core CLI tools and lightweight utilities
@@ -68,7 +68,7 @@ Key template variables:
 │   └── ...
 ├── dot_zshrc.tmpl        # Main shell configuration
 └── install.sh            # Initial installation script
-```bash
+```
 
 ### Automation Pattern
 
