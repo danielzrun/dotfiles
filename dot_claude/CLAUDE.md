@@ -11,5 +11,8 @@
 ## Language & Response Policy
 - **Bilingual Mode:** Respond in **Chinese** with English technical terms in brackets.
 
+## Git Operations
+See `.claude/rules/git-operations.md` for complete Git operation rules and workflow requirements.
+
 ## Detailed Rules
 - Refer to `.claude/rules/` for specific tooling parameters, banned commands, and coding style guidelines.

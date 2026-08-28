@@ -6,7 +6,7 @@ globs: **/*.{ts,js,py,go,rs,md}
 ## 🎨 Code & Comments Standards
 
 ### Code Style
-- **Consistency:** Maintain consistent indentation and formatting following the specific language style guide (e.g., Prettier, gofmt,ruff).
+- **Consistency:** Maintain consistent indentation and formatting following the specific language style guide (e.g., Prettier, gofmt, ruff).
 - **Formatting:** Auto-format files where possible.
 
 ### Comments
