@@ -236,6 +236,16 @@ chezmoi update               # 从 git 拉取最新
 - `~/.config/claude/marketplaces.txt` - 插件市场源
 - `~/.config/claude/plugins/` - 已安装插件目录
 
+### 模型配置
+- **GLM 5.3 模型**: 升级到 GLM-5.3 以获得增强的性能和功能
+  - Opus: `glm-5.3[1m]` - 复杂任务最高质量
+  - Sonnet: `glm-5.3[1m]` - 日常开发均衡性能
+  - Haiku: `glm-5.3-flash[1m]` - 简单查询快速响应
+- **长对话优化**:
+  - 1M tokens 自动上下文压缩，支持扩展会话
+  - 禁用非必要流量以降低 API 开销
+  - 延长 API 超时（50分钟）以支持复杂多步任务
+
 ## 自定义
 
 **编辑管理的文件**：
@@ -259,6 +269,7 @@ git add . && git commit -m "message"
 
 - **[Quick Start Guide](QUICKSTART.md)** - 必备工具和日常使用参考
 - **[安装指南](#快速开始)** - 首次用户设置说明
+- **[Claude 模型指南](CLAUDE_MODELS.md)** - GLM-5.3 模型配置和优化
 
 ## 参考
 

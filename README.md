@@ -235,6 +235,16 @@ Quick reference for custom functions:
 - `~/.config/claude/marketplaces.txt` - Plugin marketplace sources
 - `~/.config/claude/plugins/` - Installed plugins directory
 
+### Model Configuration
+- **GLM 5.3 Models**: Upgraded to GLM-5.3 for enhanced performance and capabilities
+  - Opus: `glm-5.3[1m]` - Highest quality for complex tasks
+  - Sonnet: `glm-5.3[1m]` - Balanced performance for daily development
+  - Haiku: `glm-5.3-flash[1m]` - Fast responses for simple queries
+- **Long Conversation Optimization**:
+  - Auto context compaction at 1M tokens for extended sessions
+  - Disabled non-essential traffic to reduce API overhead
+  - Extended API timeout (50min) for complex multi-step tasks
+
 ## Customization
 
 **Edit managed files**:
@@ -258,6 +268,7 @@ git add . && git commit -m "message"
 
 - **[Quick Start Guide](QUICKSTART.md)** - Essential tools and daily usage reference
 - **[Installation Guide](#quick-start)** - Setup instructions for first-time users
+- **[Claude Models Guide](CLAUDE_MODELS.en.md)** - GLM-5.3 model configuration and optimization
 
 ## References
 
