@@ -8,9 +8,9 @@ export CLAUDE_PROVIDER="default"
 # =============================================================================
 if [[ "$CLAUDE_PROVIDER" == "zhipu" || "$CLAUDE_PROVIDER" == "default" ]]; then
     export ANTHROPIC_AUTH_TOKEN="$ZHIPU_AUTH_TOKEN"
-    export ANTHROPIC_DEFAULT_OPUS_MODEL="GLM-5.3[1m]"
-    export ANTHROPIC_DEFAULT_SONNET_MODEL="GLM-4.7"
-    export ANTHROPIC_DEFAULT_HAIKU_MODEL="GLM-4.7-flash"
+    export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-5.3[1m]"
+    export ANTHROPIC_DEFAULT_SONNET_MODEL="glm-5.3[1m]"
+    export ANTHROPIC_DEFAULT_HAIKU_MODEL="glm-5.3-flash[1m]"
     export ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/anthropic"
 fi
 
