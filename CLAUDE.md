@@ -4,8 +4,8 @@ Guidance for Claude Code working in this repository.
 
 ## Overview
 
-chezmoi-managed dotfiles for macOS development, opinionated toward Python/FastAPI,
-modern CLI tools, and Vim workflows. `.tmpl` files use Go template syntax.
+chezmoi-managed dotfiles for macOS development, opinionated toward Python/FastAPI and
+modern CLI tools. `.tmpl` files use Go template syntax.
 
 ## Common Commands
 
@@ -34,7 +34,6 @@ chezmoi update               # pull remote changes and apply
 │   │   ├── Brewfile          # CLI tools (auto-synced)
 │   │   └── Brewfile.casks    # GUI apps (interactive/manual)
 │   ├── git/                  # config.tmpl
-│   ├── nvim/                 # LazyVim
 │   ├── ghostty/
 │   ├── starship.toml
 │   └── ...
@@ -68,12 +67,6 @@ uv replaces pip/poetry/pyenv — use uv, not pip. Aliases in
 (`promptStringOnce` data in `.chezmoi.toml.tmpl`; email defaults to
 `daniel123.xiang@gmail.com`). Only conditional: credential helper —
 darwin → `osxkeychain`, linux → `store`.
-
-### Neovim (LazyVim)
-
-`lua/config/lazy.lua` bootstraps lazy.nvim. Overrides in `lua/plugins/`:
-`ui.lua` (Catppuccin), `markdown.lua.tmpl`, `terminal.lua`, `git-conflict.lua`,
-`autoread.lua`.
 
 ### Key Tooling Decisions
 

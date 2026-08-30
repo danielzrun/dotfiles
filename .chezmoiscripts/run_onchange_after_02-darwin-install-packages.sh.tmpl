@@ -1,8 +1,6 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-# =============================================================================
-# Homebrew Package Installation (macOS only)
-# =============================================================================
+# --- Homebrew Package Installation (macOS only) ---
 # This script runs when Brewfile hash changes (via run_onchange_ prefix)
 # Hash: {{ include "dot_config/brew/Brewfile" | sha256sum }}
 

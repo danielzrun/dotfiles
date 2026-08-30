@@ -1,8 +1,6 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-# =============================================================================
-# macOS System Defaults for Development
-# =============================================================================
+# --- macOS System Defaults for Development ---
 # Runs only once on first chezmoi apply (via run_once_ prefix)
 
 set -euo pipefail
@@ -12,9 +10,7 @@ echo "🔧 Configuring macOS defaults..."
 # Prevent System Preferences from overriding our changes
 osascript -e 'tell application "System Preferences" to quit'
 
-# -----------------------------------------------------------------------------
-# System UI/UX
-# -----------------------------------------------------------------------------
+# --- System UI/UX ---
 
 echo "--- Optimizing system interaction..."
 
@@ -30,9 +26,7 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 # Instant window resizing (eliminates lag)
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
-# -----------------------------------------------------------------------------
-# Keyboard & Input
-# -----------------------------------------------------------------------------
+# --- Keyboard & Input ---
 
 echo "--- Optimizing keyboard response..."
 
@@ -49,9 +43,7 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# -----------------------------------------------------------------------------
-# Finder
-# -----------------------------------------------------------------------------
+# --- Finder ---
 
 echo "--- Optimizing Finder..."
 
@@ -73,9 +65,7 @@ defaults write com.apple.finder _FXSortFoldersFirst -bool true
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 
-# -----------------------------------------------------------------------------
-# Dock
-# -----------------------------------------------------------------------------
+# --- Dock ---
 
 echo "--- Optimizing Dock..."
 
@@ -99,9 +89,7 @@ defaults write com.apple.dock showhidden -bool true
 # Use scale effect (faster than genie)
 defaults write com.apple.dock mineffect -string "scale"
 
-# -----------------------------------------------------------------------------
-# Chrome
-# -----------------------------------------------------------------------------
+# --- Chrome ---
 
 echo "--- Optimizing Chrome..."
 
@@ -111,16 +99,12 @@ defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false
 # Skip print preview, go straight to print dialog
 defaults write com.google.Chrome DisablePrintPreview -bool true
 
-# -----------------------------------------------------------------------------
-# Screenshots
-# -----------------------------------------------------------------------------
+# --- Screenshots ---
 
 # Save screenshots as PNG (lossless quality)
 defaults write com.apple.screencapture type -string "png"
 
-# -----------------------------------------------------------------------------
-# Apply Changes
-# -----------------------------------------------------------------------------
+# --- Apply Changes ---
 
 echo "🔄 Restarting affected services..."
 for app in "Dock" "Finder" "SystemUIServer"; do

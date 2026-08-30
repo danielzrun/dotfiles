@@ -1,7 +1,5 @@
 #!/bin/bash
-# =============================================================================
-# Essential Tools Installation
-# =============================================================================
+# --- Essential Tools Installation ---
 # This script runs when its content changes (via run_onchange_ prefix)
 # Use this for tools that should be kept up-to-date with config changes
 # Hash: {{ include ".chezmoiscripts/run_onchange_after_01-install-tools.sh.tmpl" | sha256sum }}
@@ -90,8 +88,6 @@ fi
 {{ if eq .chezmoi.os "linux" -}}
 # Detect system architecture
 ARCH=$(uname -m)
-# Neovim: aarch64 -> arm64
-[ "$ARCH" = "aarch64" ] && NVIM_ARCH="arm64" || NVIM_ARCH="$ARCH"
 # Yazi: uses aarch64 (no conversion needed)
 YAZI_ARCH="$ARCH"
 
@@ -102,29 +98,6 @@ if ! command -v starship >/dev/null 2>&1; then
     sudo curl -sS https://starship.rs/install.sh | sh -s -- -y
 else
     echo "✓ starship already installed"
-fi
-
-# Install neovim latest (Linux only)
-LATEST_VERSION=$(curl -s https://api.github.com/repos/neovim/neovim/releases/latest | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/' | sed 's/v//')
-CURRENT_VERSION=$(command -v nvim >/dev/null 2>&1 && nvim --version | grep -oP 'NVIM v\K[0-9.]+' || echo "none")
-
-if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
-    echo ""
-    if [ "$CURRENT_VERSION" != "none" ]; then
-        echo "  Updating neovim $CURRENT_VERSION -> $LATEST_VERSION..."
-    else
-        echo "  Installing neovim $LATEST_VERSION..."
-    fi
-    sudo apt-get remove -y neovim 2>/dev/null || true
-    # Remove old installation
-    rm -rf ~/.local/nvim-*
-    # Download and extract
-    curl -sL "https://github.com/neovim/neovim/releases/latest/download/nvim-linux-${NVIM_ARCH}.tar.gz" | tar -xzf - -C ~/.local
-    # Find extracted directory (all neovim builds use nvim-linux64)
-    NVIM_DIR=$(find ~/.local -maxdepth 1 -type d -name "nvim-*" | head -1)
-    rm -f ~/.local/bin/nvim
-    ln -sf ${NVIM_DIR}/bin/nvim ~/.local/bin/nvim
-    echo "  ✓ neovim $LATEST_VERSION installed"
 fi
 
 # Install yazi (terminal file manager)

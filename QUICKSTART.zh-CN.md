@@ -438,22 +438,6 @@ y [path]               # 打开 yazi（退出时 cd 到目录）
 # Enter - 打开
 ```
 
-### Neovim (LazyVim)
-
-**启用扩展**: codeium (AI), mini-surround, docker, json, markdown, python, toml, yaml
-
-```vim
-# 系统剪贴板
-Cmd+C / Cmd+V           # 复制/粘贴（普通/插入模式）
-
-# 快速操作
-<space> + e             # 文件浏览器
-<space> + f             # 查找文件
-<space> + b             # 缓冲区
-<space> + gd            # 跳转到定义
-:spell                  # 切换拼写检查
-```
-
 ### ghostty (终端模拟器)
 
 ```bash

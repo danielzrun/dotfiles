@@ -1,6 +1,4 @@
-# =============================================================================
-# Modern Unix Tools Integration
-# =============================================================================
+# --- Modern Unix Tools Integration ---
 
 # Starship prompt
 if command -v starship >/dev/null 2>&1; then

@@ -1,13 +1,8 @@
-# =============================================================================
-# Homebrew Bundle - Core Development Tools
-# =============================================================================
+# --- Homebrew Bundle - Core Development Tools ---
 # This Brewfile contains lightweight CLI tools and essential utilities.
 # Large GUI applications are in Brewfile.casks (install separately).
-# =============================================================================
 
-# -----------------------------------------------------------------------------
-# Shell & Prompt
-# -----------------------------------------------------------------------------
+# --- Shell & Prompt ---
 brew "starship"      # Modern prompt
 brew "sheldon"       # Fast shell plugin manager
 brew "carapace"      # Advanced shell completions
@@ -15,9 +10,7 @@ brew "zoxide"        # Smart directory jumper
 brew "fzf"           # Fuzzy finder
 brew "direnv"        # Per-directory environment variables
 
-# -----------------------------------------------------------------------------
-# Modern Unix Replacements
-# -----------------------------------------------------------------------------
+# --- Modern Unix Replacements ---
 brew "ripgrep"       # Fast code search (grep)
 brew "fd"            # Fast file finder (find)
 brew "bat"           # Syntax-highlighted cat
@@ -25,49 +18,37 @@ brew "eza"           # Modern ls
 brew "sd"            # Modern sed
 brew "procs"         # Modern ps with colors
 
-# -----------------------------------------------------------------------------
-# Git Tools
-# -----------------------------------------------------------------------------
+# --- Git Tools ---
 brew "git"           # Version control
 brew "git-delta"     # Better git diff viewer
 brew "difftastic"    # Structural diff tool (for lazygit)
 brew "gh"            # GitHub CLI
 brew "lazygit"       # Git TUI (Vim keybindings)
 brew "git-filter-repo"  # Rewrite Git history
-brew "Adembc/homebrew-tap/lazyssh"       # SSH manager from Adembc tap
+brew "lazyssh"       # SSH server picker (TUI)
 
-# -----------------------------------------------------------------------------
-# Docker Tools
-# -----------------------------------------------------------------------------
+# --- Docker Tools ---
 brew "lazydocker"    # Docker TUI
 
-# -----------------------------------------------------------------------------
-# Kubernetes Tools
-# -----------------------------------------------------------------------------
-brew "derailed/k9s/k9s"     # Kubernetes TUI
-brew "argocd"               # Argo CD CLI
-brew "helm"                 # Kubernetes package manager
+# --- Kubernetes Tools ---
+brew "k9s"            # Kubernetes TUI
+brew "argocd"         # Argo CD CLI
+brew "helm"           # Kubernetes package manager
 
-# -----------------------------------------------------------------------------
-# JSON Tools
-# -----------------------------------------------------------------------------
+# --- JSON Tools ---
 brew "jq"            # JSON processor
 brew "jaq"           # jq clone in Rust (faster)
 brew "fx"            # Interactive JSON viewer
 brew "jless"         # JSON pager with vim keybindings
 brew "jnv"           # Interactive JSON filter
 
-# -----------------------------------------------------------------------------
-# Data Tools
-# -----------------------------------------------------------------------------
+# --- Data Tools ---
 brew "visidata"      # Terminal spreadsheet viewer
 brew "qsv"           # Fast CSV toolkit
 brew "lnav"          # Log file navigator
 brew "hl"            # Log viewer/highlighter
 
-# -----------------------------------------------------------------------------
-# File & Media Tools
-# -----------------------------------------------------------------------------
+# --- File & Media Tools ---
 brew "yazi"          # Terminal file manager
 brew "ffmpeg"        # Video/audio processing
 brew "yt-dlp"        # Video/media downloader
@@ -76,65 +57,42 @@ brew "poppler"       # PDF rendering library
 brew "imagemagick"   # Image processing
 brew "resvg"         # SVG renderer
 
-# -----------------------------------------------------------------------------
-# HTTP/Network Tools
-# -----------------------------------------------------------------------------
+# --- HTTP/Network Tools ---
 brew "xh"            # httpie clone in Rust (faster)
 brew "gping"         # Ping with graph
 brew "bore-cli"      # Tunnel localhost to public URL
 
-# -----------------------------------------------------------------------------
-# Clean Tools
-# -----------------------------------------------------------------------------
+# --- Clean Tools ---
 brew "mole"          # Clean tool
 
-# -----------------------------------------------------------------------------
-# Development Tools
-# -----------------------------------------------------------------------------
+# --- Development Tools ---
 brew "ast-grep"      # Code search/rewrite by AST
 brew "hyperfine"     # Command-line benchmarking
 brew "just"          # Command runner (like make, but easier)
 brew "tldr"          # Simplified man pages
 
-# -----------------------------------------------------------------------------
-# System Monitoring
-# -----------------------------------------------------------------------------
+# --- System Monitoring ---
 brew "btop"          # Modern system monitor
 
-# -----------------------------------------------------------------------------
-# Security
-# -----------------------------------------------------------------------------
+# --- Security ---
 brew "age"           # File encryption
 
-# -----------------------------------------------------------------------------
-# Python Development (uv + FastAPI)
-# -----------------------------------------------------------------------------
+# --- Python Development (uv + FastAPI) ---
 brew "python@3.14"
 brew "pipx"          # Install and run Python applications in isolated environments
 
-# -----------------------------------------------------------------------------
-# Node.js Development
-# -----------------------------------------------------------------------------
+# --- Node.js Development ---
 brew "node"          # Node.js runtime
 brew "pnpm"          # Fast, disk space efficient package manager
 
-# -----------------------------------------------------------------------------
-# Editor / IDE
-# -----------------------------------------------------------------------------
-brew "neovim"        # Modern Vim
+# --- Editor / IDE ---
 brew "duti"          # Set default file associations
 
-# -----------------------------------------------------------------------------
-# Terminal
-# -----------------------------------------------------------------------------
+# --- Terminal ---
 brew "tmux"          # Terminal multiplexer
 
-# -----------------------------------------------------------------------------
-# Fonts
-# -----------------------------------------------------------------------------
+# --- Fonts ---
 cask "font-symbols-only-nerd-font"
 
-# =============================================================================
 # NOTE: Large GUI applications (Ghostty, Zed, etc.) are in Brewfile.casks
 # To install: brew bundle --file=~/.config/brew/Brewfile.casks
-# =============================================================================

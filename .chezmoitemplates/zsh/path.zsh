@@ -1,6 +1,4 @@
-# =============================================================================
-# PATH Configuration
-# =============================================================================
+# --- PATH Configuration ---
 # Add to PATH in order of priority
 
 # Local binaries (highest priority)

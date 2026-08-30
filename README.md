@@ -4,14 +4,13 @@ English | [简体中文](README.zh-CN.md)
 
 Cross-platform dotfiles managed with [chezmoi](https://www.chezmoi.io/).
 
-Optimized for Python/FastAPI and Node.js development with modern CLI tools, Neovim workflows, and AI assistance.
+Optimized for Python/FastAPI and Node.js development with modern CLI tools and AI assistance.
 
 **Supports**: macOS (Apple Silicon + Intel) and Linux (Ubuntu/Debian)
 
 ## Features
 
 - **Modern CLI Stack**: ripgrep, zoxide, eza, bat, fd, fzf, delta, sd, carapace
-- **Neovim**: LazyVim with custom keymaps and auto-clipboard sync
 - **Python**: uv-based workflow with FastAPI aliases (installed via pipx)
 - **Node.js**: nvm + pnpm setup
 - **AI**: Claude Code assistant with provider switching
@@ -107,7 +106,6 @@ chezmoi add --encrypt ~/.config/codex/auth.json
 |---------------|-------|
 | **Python** | `uvs` (sync), `uvr` (run), `uvdev` (FastAPI) - via pipx |
 | **Node.js** | nvm (version management), pnpm (package manager) |
-| **Neovim** | LazyVim + Catppuccin + AI/codeium, docker, json, markdown, python, toml, yaml extras |
 | **Docker** | lazydocker (TUI) |
 | **Command Runner** | just (command recipes) |
 
@@ -178,7 +176,6 @@ chezmoi update               # Pull latest from git
 ├── dot_zshrc.tmpl              # Shell config
 ├── dot_zprofile.tmpl           # Login shell config
 ├── dot_config/
-│   ├── nvim/                   # Neovim (LazyVim)
 │   ├── tmux/tmux.conf.tmpl     # tmux config (Ctrl+A prefix)
 │   ├── yazi/                   # Yazi file manager
 │   ├── git/config.tmpl         # Conditional git email
@@ -273,6 +270,5 @@ git add . && git commit -m "message"
 ## References
 
 - [chezmoi documentation](https://www.chezmoi.io/)
-- [LazyVim](https://www.lazyvim.org/)
 - [dotfiles utilities](https://dotfiles.github.io/utilities/)
 - [uv documentation](https://docs.astral.sh/uv/)

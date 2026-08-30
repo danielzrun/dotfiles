@@ -1,8 +1,6 @@
 {{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
-# =============================================================================
-# Debian-based Apt Package Installation
-# =============================================================================
+# --- Debian-based Apt Package Installation ---
 # This script runs when Aptfile hash changes (via run_onchange_ prefix)
 # Supports: Debian, Ubuntu, Linux Mint, Pop!_OS, and other deb-based distros
 # Hash: {{ include "dot_config/debian/Aptfile" | sha256sum }}

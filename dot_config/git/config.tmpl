@@ -1,13 +1,11 @@
-# =============================================================================
-# Git Configuration
-# =============================================================================
+# --- Git Configuration ---
 
 [user]
     name = {{ .name }}
     email = {{ .email }}
 
 [core]
-    editor = nvim
+    editor = vim
     excludesfile = ~/.config/git/ignore
     ignorecase = false
     pager = delta
@@ -55,15 +53,11 @@
 [merge]
     conflictstyle = zdiff3
     stat = true
-    tool = nvimdiff
+    tool = difftastic
 
 [mergetool]
     prompt = false
     keepBackup = false
-
-# Neovim-based terminal merge tool
-[mergetool "nvimdiff"]
-    cmd = nvim "$MERGED"
 
 # Difftastic: Syntax-aware merge tool for semantic comparison
 [mergetool "difftastic"]

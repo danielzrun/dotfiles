@@ -1,8 +1,6 @@
 {{- if eq .chezmoi.os "linux" -}}
 #!/bin/bash
-# =============================================================================
-# Debian-based Essential Packages Installation
-# =============================================================================
+# --- Debian-based Essential Packages Installation ---
 # Runs only once on first chezmoi apply (via run_once_ prefix)
 # Installs zsh, git, nvm required for dotfiles setup
 # Supports: Debian, Ubuntu, Linux Mint, Pop!_OS, and other deb-based distros

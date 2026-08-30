@@ -1,8 +1,6 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# =============================================================================
-# Starship Prompt Configuration - Minimal
-# =============================================================================
+# --- Starship Prompt Configuration - Minimal ---
 
 # Git status
 [git_status]

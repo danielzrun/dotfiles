@@ -1,18 +1,12 @@
-# =============================================================================
-# Environment Variables
-# =============================================================================
+# --- Environment Variables ---
 
-# -----------------------------------------------------------------------------
-# XDG Base Directory Specification
-# -----------------------------------------------------------------------------
+# --- XDG Base Directory Specification ---
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
-# -----------------------------------------------------------------------------
-# Homebrew
-# -----------------------------------------------------------------------------
+# --- Homebrew ---
 # Initialize Homebrew environment (sets HOMEBREW_PREFIX, PATH, MANPATH, etc.)
 # macOS Apple Silicon
 if [[ -d "/opt/homebrew" ]]; then
@@ -27,16 +21,12 @@ fi
 export HOMEBREW_NO_AUTO_UPDATE=1      # Disable auto-update (update manually with `brew update`)
 export HOMEBREW_NO_ENV_HINTS=1        # Hide environment hints
 
-# -----------------------------------------------------------------------------
-# Core Environment
-# -----------------------------------------------------------------------------
+# --- Core Environment ---
 export LANG=en_US.UTF-8
-export EDITOR="nvim"
+export EDITOR="vim"
 export VISUAL="$EDITOR"
 
-# -----------------------------------------------------------------------------
-# Tools
-# -----------------------------------------------------------------------------
+# --- Tools ---
 # Starship prompt (log level: error, info, debug, trace)
 export STARSHIP_LOG=error
 # Carapace completion engine
@@ -44,9 +34,7 @@ export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 # Claude Code display settings
 export CLAUDE_CODE_NO_FLICKER=1
 
-# -----------------------------------------------------------------------------
-# Local Environment Variables
-# -----------------------------------------------------------------------------
+# --- Local Environment Variables ---
 # Source ~/.env for local overrides (Claude provider, API keys, etc.)
 [[ -f "$HOME/.env" ]] && source "$HOME/.env"
 [[ -f "$HOME/.ccs_env" ]] && source "$HOME/.ccs_env"

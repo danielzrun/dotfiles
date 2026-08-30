@@ -1,42 +1,28 @@
-# =============================================================================
-# .zshrc - Interactive shell configuration
-# =============================================================================
+# --- .zshrc - Interactive shell configuration ---
 # Executed for each new interactive shell
 # Used for: aliases, plugins, prompts, key bindings
-# =============================================================================
 
 # Tie PATH (colon-separated scalar) to path (array) so they stay in sync,
 # remove duplicate entries (-U), and export to child processes (-x)
 typeset -TUx PATH path
 
-# -----------------------------------------------------------------------------
-# Completion System
-# -----------------------------------------------------------------------------
+# --- Completion System ---
 # Initialize zsh completion system before loading plugins
 # Must be called before plugins that use compdef
-# -----------------------------------------------------------------------------
 autoload -Uz compinit && compinit
 
-# -----------------------------------------------------------------------------
-# Tool Hooks Initialization
-# -----------------------------------------------------------------------------
+# --- Tool Hooks Initialization ---
 # Initialize tools that need eval hooks (zoxide, direnv, fzf)
 # Must load after compinit for completions to work
-# -----------------------------------------------------------------------------
 {{ template "zsh/tool-hooks.zsh" . }}
 
-# -----------------------------------------------------------------------------
-# Sheldon Plugin Manager
-# -----------------------------------------------------------------------------
+# --- Sheldon Plugin Manager ---
 # Fast, configurable shell plugin manager
 # Config: ~/.config/sheldon/plugins.toml (managed by chezmoi)
 # Documentation: https://sheldon.cli.rs
-# -----------------------------------------------------------------------------
 eval "$(sheldon source)"
 
-# -----------------------------------------------------------------------------
-# Shell Options
-# -----------------------------------------------------------------------------
+# --- Shell Options ---
 
 # Window Title
 # Set window title to current directory instead of hostname
@@ -69,9 +55,7 @@ setopt SHARE_HISTORY
 unset zle_bracketed_paste
 {{- end }}
 
-# -----------------------------------------------------------------------------
-# Modules & Functions
-# -----------------------------------------------------------------------------
+# --- Modules & Functions ---
 # Core shell behavior
 {{ template "zsh/vi-mode.zsh" . }}
 {{ template "zsh/keybindings.zsh" . }}

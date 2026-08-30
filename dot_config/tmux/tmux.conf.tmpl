@@ -1,9 +1,6 @@
-# =============================================================================
-# Tmux Configuration
-# =============================================================================
+# --- Tmux Configuration ---
 
-# General Settings
-# -----------------------------------------------------------------------------
+# --- General Settings ---
 
 # Enable 256 colors and true color support
 set -g default-terminal "screen-256color"
@@ -30,8 +27,7 @@ set -g pane-base-index 1
 set-window-option -g pane-base-index 1
 set-option -g renumber-windows on
 
-# Key Bindings
-# -----------------------------------------------------------------------------
+# --- Key Bindings ---
 
 # Prefix key (Ctrl+a instead of Ctrl+b)
 unbind C-b
@@ -63,18 +59,16 @@ bind , run-shell ' \
     tmux command-prompt -p "Lock Name:" "rename-window \"%%\" ; set-window-option @window_locked 1 ; set-window-option automatic-rename off ; set-window-option allow-rename off ; display-message \"Window locked\""; \
   fi'
 
-# Plugins
-# -----------------------------------------------------------------------------
+# --- Plugins ---
 
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'christoomey/vim-tmux-navigator'
 
-# UI Theme (Catppuccin)
+# --- UI Theme (Catppuccin) ---
 set -g @plugin 'catppuccin/tmux'
 set -g @catppuccin_flavour 'mocha'
 
-# Plugin Configuration
-# -----------------------------------------------------------------------------
+# --- Plugin Configuration ---
 
 # Catppuccin status bar configuration
 set -g @catppuccin_status_fill "icon"
@@ -89,5 +83,4 @@ set -g status-left ""
 set -g status-right "#[fg=#{@thm_mauve}][#H] #{E:@catppuccin_status_session}"
 
 # Initialize TPM (must be at the bottom)
-# -----------------------------------------------------------------------------
 run '{{ .chezmoi.homeDir }}/.config/tmux/plugins/tpm/tpm'

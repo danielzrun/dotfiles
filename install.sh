@@ -1,7 +1,5 @@
 #!/bin/sh
-# =============================================================================
-# Chezmoi Installation Script
-# =============================================================================
+# --- Chezmoi Installation Script ---
 
 # Install chezmoi if not already present
 if ! command -v chezmoi >/dev/null 2>&1; then

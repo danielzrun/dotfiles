@@ -1,12 +1,8 @@
-# =============================================================================
-# Direnv Global Configuration
-# =============================================================================
+# --- Direnv Global Configuration ---
 # This file is loaded before .envrc files
 # Docs: https://direnv.net/man/direnv.toml.1.html
 
-# =============================================================================
-# Python Environment
-# =============================================================================
+# --- Python Environment ---
 # Auto-detect and activate Python virtual environments
 layout_python() {
     local python=${1:-python3}
@@ -47,9 +43,7 @@ layout_uv() {
     layout_python "$@"
 }
 
-# =============================================================================
-# Node.js / React Environment
-# =============================================================================
+# --- Node.js / React Environment ---
 # Auto-detect and use Node.js versions
 layout_node() {
     local node_version=${1:-}
@@ -98,9 +92,7 @@ layout_node() {
     PATH_add node_modules/.bin
 }
 
-# =============================================================================
-# Global Environment Variables
-# =============================================================================
+# --- Global Environment Variables ---
 # Set common environment variables for all projects
 
 # Enable colors in terminals

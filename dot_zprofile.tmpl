@@ -1,15 +1,10 @@
-# =============================================================================
-# .zprofile - Environment variables and PATH configuration
-# =============================================================================
+# --- .zprofile - Environment variables and PATH configuration ---
 # Executed once at login shell startup
 # Used for: environment variables, PATH, one-time initializations
-# =============================================================================
 
 # Environment variables (LANG, EDITOR, XDG, Homebrew, etc.)
 {{ template "zsh/env.zsh" . }}
 
-# -----------------------------------------------------------------------------
-# PATH Configuration
-# -----------------------------------------------------------------------------
+# --- PATH Configuration ---
 # Local binaries, pnpm, and other PATH additions
 {{ template "zsh/path.zsh" . }}

@@ -1,6 +1,4 @@
-# ====================================================================
-# Zsh Key Bindings - Optimized for vi-mode with Emacs conveniences
-# ====================================================================
+# --- Zsh Key Bindings - Optimized for vi-mode with Emacs conveniences ---
 
 # Keep useful Emacs-style bindings in vi-mode
 bindkey '^A' beginning-of-line       # Ctrl+A - Jump to line start

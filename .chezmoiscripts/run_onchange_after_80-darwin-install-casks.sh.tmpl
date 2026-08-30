@@ -1,8 +1,6 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
-# =============================================================================
-# Install Large GUI Applications
-# =============================================================================
+# --- Install Large GUI Applications ---
 # This script runs when Brewfile.casks changes (via run_onchange_ prefix)
 # Hash: {{ include "dot_config/brew/Brewfile.casks" | sha256sum }}
 #
@@ -10,7 +8,6 @@
 # - Speed up daily package syncing
 # - Allow selective installation on new machines
 # - Reduce bandwidth usage during automated syncs
-# =============================================================================
 
 CASKS_FILE="{{ .chezmoi.sourceDir }}/dot_config/brew/Brewfile.casks"
 

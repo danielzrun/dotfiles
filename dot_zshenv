@@ -1,6 +1,4 @@
-# =============================================================================
-# PATH Configuration
-# =============================================================================
+# --- PATH Configuration ---
 # Set PATH for all shells (login, non-login, interactive, non-interactive)
 # This file is sourced by zsh before .zprofile and .zshrc
 

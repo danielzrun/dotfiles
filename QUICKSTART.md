@@ -438,22 +438,6 @@ y [path]               # Open yazi (cd to directory on quit)
 # Enter - Open
 ```
 
-### Neovim (LazyVim)
-
-**Enabled Extras**: codeium (AI), mini-surround, docker, json, markdown, python, toml, yaml
-
-```vim
-# System clipboard
-Cmd+C / Cmd+V           # Copy/Paste (normal/insert mode)
-
-# Quick actions
-<space> + e             # File explorer
-<space> + f             # Find files
-<space> + b             # Buffers
-<space> + gd            # Go to definition
-:spell                  # Toggle spell check
-```
-
 ### ghostty (Terminal Emulator)
 
 ```bash

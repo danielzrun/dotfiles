@@ -1,9 +1,6 @@
-# =============================================================================
-# pipx - Python Applications
-# =============================================================================
+# --- pipx - Python Applications ---
 # Add Python packages to install globally with pipx.
 # One package name per line. Comments start with #.
-# =============================================================================
 
 # Development Tools
 uv

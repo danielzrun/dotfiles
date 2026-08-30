@@ -1,9 +1,6 @@
-# =============================================================================
-# Local Environment Variables
-# =============================================================================
+# --- Local Environment Variables ---
 # This file contains sensitive configuration that should NOT be committed to git
 # Copy this file to ~/.env and fill in your actual values
-# =============================================================================
 
 export ZHIPU_AUTH_TOKEN="your-zhipu-token"
 export ARK_BEARER_TOKEN="your-volcano-ark-token"

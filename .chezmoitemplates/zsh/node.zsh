@@ -1,6 +1,4 @@
-# =============================================================================
-# Node.js Package Managers & Version Control
-# =============================================================================
+# --- Node.js Package Managers & Version Control ---
 
 # nvm (Node Version Manager)
 export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"

@@ -4,14 +4,13 @@
 
 使用 [chezmoi](https://www.chezmoi.io/) 管理的跨平台 dotfiles 配置。
 
-专为 Python/FastAPI 和 Node.js 开发优化，配备现代 CLI 工具、Neovim 工作流和 AI 辅助。
+专为 Python/FastAPI 和 Node.js 开发优化，配备现代 CLI 工具和 AI 辅助。
 
 **支持平台**: macOS (Apple Silicon + Intel) 和 Linux (Ubuntu/Debian)
 
 ## 功能特性
 
 - **现代 CLI 工具链**: ripgrep, zoxide, eza, bat, fd, fzf, delta, sd, carapace
-- **Neovim**: LazyVim 配置，自定义快捷键和剪贴板同步
 - **Python**: 基于 uv 的工作流和 FastAPI 别名（通过 pipx 安装）
 - **Node.js**: nvm + pnpm 配置
 - **AI 辅助**: Claude Code 编程助手，支持提供商切换
@@ -107,7 +106,6 @@ chezmoi add --encrypt ~/.config/codex/auth.json
 |---------------|-------|
 | **Python** | `uvs` (同步), `uvr` (运行), `uvdev` (FastAPI) - 通过 pipx |
 | **Node.js** | nvm (版本管理), pnpm (包管理器) |
-| **Neovim** | LazyVim + Catppuccin + AI/codeium, docker, json, markdown, python, toml, yaml 扩展 |
 | **Claude Code** | AI 编程助手 |
 | **Docker** | lazydocker (TUI) |
 | **命令运行器** | just (命令配方) |
@@ -179,7 +177,6 @@ chezmoi update               # 从 git 拉取最新
 ├── dot_zshrc.tmpl              # Shell 配置
 ├── dot_zprofile.tmpl           # 登录 Shell 配置
 ├── dot_config/
-│   ├── nvim/                   # Neovim (LazyVim)
 │   ├── tmux/tmux.conf.tmpl     # tmux 配置（Ctrl+A 前缀）
 │   ├── yazi/                   # Yazi 文件管理器
 │   ├── git/config.tmpl         # 条件 git 邮箱
@@ -274,6 +271,5 @@ git add . && git commit -m "message"
 ## 参考
 
 - [chezmoi 文档](https://www.chezmoi.io/)
-- [LazyVim](https://www.lazyvim.org/)
 - [dotfiles 工具](https://dotfiles.github.io/utilities/)
 - [uv 文档](https://docs.astral.sh/uv/)

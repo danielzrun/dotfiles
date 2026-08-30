@@ -1,9 +1,6 @@
-# =============================================================================
-# Tool Hooks Initialization
-# =============================================================================
+# --- Tool Hooks Initialization ---
 # These tools require eval hooks and must be loaded after compinit
 # to ensure their completions are properly registered
-# =============================================================================
 
 # Zoxide (smart directory jumper)
 if command -v zoxide >/dev/null 2>&1; then

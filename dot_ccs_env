@@ -3,9 +3,7 @@
 
 export CLAUDE_PROVIDER="default"
 
-# =============================================================================
-# Zhipu AI Configuration
-# =============================================================================
+# --- Zhipu AI Configuration ---
 if [[ "$CLAUDE_PROVIDER" == "zhipu" || "$CLAUDE_PROVIDER" == "default" ]]; then
     export ANTHROPIC_AUTH_TOKEN="$ZHIPU_AUTH_TOKEN"
     export ANTHROPIC_DEFAULT_OPUS_MODEL="glm-5.3[1m]"
@@ -14,9 +12,7 @@ if [[ "$CLAUDE_PROVIDER" == "zhipu" || "$CLAUDE_PROVIDER" == "default" ]]; then
     export ANTHROPIC_BASE_URL="https://open.bigmodel.cn/api/anthropic"
 fi
 
-# =============================================================================
-# Ark AI Configuration
-# =============================================================================
+# --- Ark AI Configuration ---
 if [[ "$CLAUDE_PROVIDER" == "ark" ]]; then
     export ANTHROPIC_AUTH_TOKEN="$ARK_BEARER_TOKEN"
     export ANTHROPIC_DEFAULT_OPUS_MODEL="Doubao-Seed-Evolving[1m]"
