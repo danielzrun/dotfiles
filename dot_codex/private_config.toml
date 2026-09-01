@@ -23,5 +23,7 @@ model_catalog_json = "~/.codex/models.json"
     enabled = true
 
 [tui]
-  [tui.model_availability_nux]
-    "gpt-5.6-sol" = 4
+    status_line = ["model-with-reasoning", "context-remaining", "current-dir"]
+    status_line_use_colors = true
+      [tui.model_availability_nux]
+        "gpt-5.6-sol" = 4
