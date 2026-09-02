@@ -1,7 +1,7 @@
 # --- Aliases ---
 
 # --- Editor ---
-alias v="vim"
+alias v="nvim"
 
 # --- Utils ---
 alias cc="claude"
@@ -26,3 +26,12 @@ alias gd="git diff"
 alias gb="git branch"
 alias gco="git checkout"
 alias glog="git log --oneline --graph --decorate"
+
+# -----------------------------------------------------------------------------
+# pnpm (package manager)
+# -----------------------------------------------------------------------------
+alias p="pnpm"
+alias pi="pnpm install"
+alias padd="pnpm add"
+alias pdm="pnpm dev"
+alias puild="pnpm build"

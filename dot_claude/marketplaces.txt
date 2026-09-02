@@ -31,3 +31,9 @@ wshobson/agents
 
 # Codex CLI plugin for GPT-5 and OpenAI models
 openai/codex-plugin-cc
+
+# Ponytail plugin marketplace by DietrichGebert
+DietrichGebert/ponytail
+
+# Caveman plugin marketplace by JuliusBrussee
+JuliusBrussee/caveman

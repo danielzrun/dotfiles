@@ -1,4 +1,6 @@
 disable_response_storage = true
+check_for_update_on_startup = false
+
 model = "doubao-seed-2.1-turbo"
 model_provider = "arkcli-agent-plan"
 model_reasoning_effort = "high"
