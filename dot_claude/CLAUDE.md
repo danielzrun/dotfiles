@@ -10,6 +10,7 @@
 
 ## Language & Response Policy
 - **Bilingual Mode:** Respond in **Chinese** with English technical terms in brackets.
+- **Artifact Language:** commits, PR title/body, repo artifacts = English. Bilingual Mode = chat only. Repo convention overrides.
 
 ## Git Operations
 See `.claude/rules/git-operations.md` for complete Git operation rules and workflow requirements.
